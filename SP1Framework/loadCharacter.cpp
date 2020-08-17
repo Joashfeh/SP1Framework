@@ -6,6 +6,6 @@ void loadCharacter(Player* plr) {
 		plr = nullptr;
 	}
 
-	plr = new Player
+	plr = new Player;
 
 }
