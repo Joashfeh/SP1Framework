@@ -2,7 +2,9 @@
 //
 //
 #include "game.h"
+#include "Map.h"
 #include "Framework\console.h"
+#include "Player.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -13,11 +15,14 @@ SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
 
 // Game specific variables here
+Map* map = new Map(1, 1);
+Player plr(*map);
+
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
-Console g_Console(80, 25, "SP1 Framework");
+Console g_Console(65, 25, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -43,6 +48,7 @@ void init( void )
     // remember to set your keyboard handler, so that your functions can be notified of input events
     g_Console.setKeyboardHandler(keyboardHandler);
     g_Console.setMouseHandler(mouseHandler);
+
 }
 
 //--------------------------------------------------------------
@@ -234,22 +240,22 @@ void moveCharacter()
     if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y--;       
+        plr.Pos.row -= 1;
     }
     if (g_skKeyEvent[K_LEFT].keyDown && g_sChar.m_cLocation.X > 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.X--;        
+        plr.Pos.col -= 1;
     }
     if (g_skKeyEvent[K_DOWN].keyDown && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.Y++;        
+        plr.Pos.row += 2;
     }
     if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
-        g_sChar.m_cLocation.X++;        
+        plr.Pos.col += 2;
     }
     if (g_skKeyEvent[K_SPACE].keyReleased)
     {
@@ -324,17 +330,25 @@ void renderMap()
 {
     // Set up sample colours, and output shadings
     const WORD colors[] = {
-        0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-        0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
+        0, 255
     };
 
+    int row = plr.Pos.row - 12;
+    int col = plr.Pos.col - 24;
+
     COORD c;
-    for (int i = 0; i < 12; ++i)
-    {
-        c.X = 5 * i;
-        c.Y = i + 1;
-        colour(colors[i]);
-        g_Console.writeToBuffer(c, " °±²Û", colors[i]);
+    for (int y = 0; y < 25; ++y) {
+        for(int x = 0; x < 65; ++x) {
+            c.X = x;
+            c.Y = y;
+
+            colour(colors[0]);
+            if (map->toDisplay[row][col] == 0) g_Console.writeToBuffer(c, " ", colors[0]);
+            if (map->toDisplay[row][col] == 1) g_Console.writeToBuffer(c, " ", colors[1]);
+
+            
+            
+        }
     }
 }
 
@@ -347,12 +361,6 @@ void renderCharacter()
         charColor = 0x0A;
     }
     COORD c = g_sChar.m_cLocation;
-    g_Console.writeToBuffer(c, (char)1, charColor);
-    c.Y += 1;
-    g_Console.writeToBuffer(c, (char)1, charColor);
-    c.X += 1;
-    g_Console.writeToBuffer(c, (char)1, charColor);
-    c.Y -= 1;
     g_Console.writeToBuffer(c, (char)1, charColor);
 }
 
@@ -411,8 +419,10 @@ void renderInputEvents()
     }
 
     // mouse events    
+    // g_mouseEvent.mousePosition.X
+    // g_mouseEvent.mousePosition.Y 
     ss.str("");
-    ss << "Mouse position (" << g_mouseEvent.mousePosition.X << ", " << g_mouseEvent.mousePosition.Y << ")";
+    ss << "Player position (" << plr.Pos.col << ", " << plr.Pos.row << ")";
     g_Console.writeToBuffer(g_mouseEvent.mousePosition, ss.str(), 0x59);
     ss.str("");
     switch (g_mouseEvent.eventFlags)
