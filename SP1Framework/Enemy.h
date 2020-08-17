@@ -1,6 +1,6 @@
 #pragma once
 class Enemy
 {
-	//EDIT
+	//EDIT2
 };
 
