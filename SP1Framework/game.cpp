@@ -5,6 +5,8 @@
 #include "Map.h"
 #include "Framework\console.h"
 #include "Player.h"
+#include "renderCharacter.h"
+#include "renderMap.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -15,8 +17,8 @@ SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
 
 // Game specific variables here
-Map* map = new Map(1, 1);
-Player plr(*map);
+Map* map;
+Player* plr;
 
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
@@ -216,6 +218,10 @@ void update(double dt)
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
+        case S_BATTLE:
+            break;
+        case S_GAMEOVER:
+            break;
     }
 }
 
@@ -250,12 +256,12 @@ void moveCharacter()
     if (g_skKeyEvent[K_DOWN].keyDown && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
     {
         //Beep(1440, 30);
-        plr.Pos.row += 2;
+        plr.Pos.row += 1;
     }
     if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
     {
         //Beep(1440, 30);
-        plr.Pos.col += 2;
+        plr.Pos.col += 1;
     }
     if (g_skKeyEvent[K_SPACE].keyReleased)
     {
@@ -297,7 +303,7 @@ void render()
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
-    g_Console.clearBuffer(0x1F);
+    g_Console.clearBuffer(0);
 }
 
 void renderToScreen()
@@ -323,45 +329,7 @@ void renderSplashScreen()  // renders the splash screen
 void renderGame()
 {
     renderMap();        // renders the map to the buffer first
-    renderCharacter();  // renders the character into the buffer
-}
-
-void renderMap()
-{
-    // Set up sample colours, and output shadings
-    const WORD colors[] = {
-        0, 255
-    };
-
-    int row = plr.Pos.row - 12;
-    int col = plr.Pos.col - 24;
-
-    COORD c;
-    for (int y = 0; y < 25; ++y) {
-        for(int x = 0; x < 65; ++x) {
-            c.X = x;
-            c.Y = y;
-
-            colour(colors[0]);
-            if (map->toDisplay[row][col] == 0) g_Console.writeToBuffer(c, " ", colors[0]);
-            if (map->toDisplay[row][col] == 1) g_Console.writeToBuffer(c, " ", colors[1]);
-
-            
-            
-        }
-    }
-}
-
-void renderCharacter()
-{
-    // Draw the location of the character
-    WORD charColor = 0x0C;
-    if (g_sChar.m_bActive)
-    {
-        charColor = 0x0A;
-    }
-    COORD c = g_sChar.m_cLocation;
-    g_Console.writeToBuffer(c, (char)1, charColor);
+    renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
 }
 
 void renderFramerate()

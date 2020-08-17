@@ -6,8 +6,10 @@ class Player :
 {
 public:
     
-    Player(Map &Map);
+    Player();
     void Attack(Entity* ptrEntity);
     void Defend();
+
+    void spawn(Map* map);
 };
 

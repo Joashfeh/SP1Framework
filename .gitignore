@@ -3,5 +3,8 @@ Release/
 *.opensdf
 *.sdf
 *.suo
+*.vs
+*.opendb
+*.opensdf
 *.user
 ipch/

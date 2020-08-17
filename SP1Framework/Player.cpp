@@ -1,23 +1,23 @@
 #include "Player.h"
 
-Player::Player(Map &Map)
-{
+Player::Player() {
+	HP = 100;
+}
+
+void Player::Attack(Entity* ptrEntity) {
+	
+}
+
+void Player::Defend() {
+}
+
+void Player::spawn(Map* map) {
 	for (int row = 0; row < 96; row++) {
-		for (int col = 0; col < 192; col++) {
-			if (Map.toDisplay[row][col] == 2) {
+		for (int col = 0; col < 96; col++) {
+			if (map->fullMap[row][col] == 2) {
 				this->Pos.row = row;
 				this->Pos.col = col;
 			}
 		}
 	}
-	HP = 100;
-}
-
-void Player::Attack(Entity* ptrEntity)
-{
-	
-}
-
-void Player::Defend()
-{
 }

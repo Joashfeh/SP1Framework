@@ -2,6 +2,7 @@
 #define _GAME_H
 
 #include "Framework\timer.h"
+#include "Framework\console.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -40,14 +41,10 @@ enum EGAMESTATES
 {
     S_SPLASHSCREEN,
     S_GAME,
+    S_SHOP,
+    S_BATTLE,
+    S_GAMEOVER,
     S_COUNT
-};
-
-// struct for the game character
-struct SGameChar
-{
-    COORD m_cLocation;
-    bool  m_bActive;
 };
 
 void init        ( void );      // initialize your variables, allocate memory, etc
@@ -61,10 +58,8 @@ void updateGame();          // gameplay logic
 void moveCharacter();       // moves the character, collision detection, physics, etc
 void processUserInput();    // checks if you should change states or do something else with the game, e.g. pause, exit
 void clearScreen();         // clears the current screen and draw from scratch 
-void renderSplashScreen();  // renders the splash screen
 void renderGame();          // renders the game stuff
-void renderMap();           // renders the map to the buffer first
-void renderCharacter();     // renders the character into the buffer
+void renderSplashScreen();  // renders the splash screen
 void renderFramerate();     // renders debug information, frame rate, elapsed time, etc
 void renderToScreen();      // dump the contents of the buffer to the screen, one frame worth of game
 void renderInputEvents();   // renders the status of input events

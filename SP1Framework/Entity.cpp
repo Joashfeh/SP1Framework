@@ -15,8 +15,8 @@ int Entity::getHP()
 
 void Entity::setPos(int r, int c)
 {
-	Position TempPos(r, c);
-	Pos = TempPos;
+	Pos.row = r;
+	Pos.col = c;
 }
 
 Position Entity::getPos()

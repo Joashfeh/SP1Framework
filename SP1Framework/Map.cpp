@@ -28,21 +28,15 @@ Map::Map(int f, int floorType) : map{ nullptr } {
 		}
 	}
 
-	for (int row = 0; row < 6; row++) {
-		for (int col = 0; col < 6; col++) {
-			for (int row2 = 0; row2 < 16; row2++) {
-				for (int col2 = 0; col2 < 16; col2++) {
-					for (int row3 = 0; row3 < 96; row3++) {
-						for (int col3 = 0; col3 < 192; (col3 += 2)) {
-							toDisplay[row3][col3] = (map[row][col]->area[row2][col2]);
-							toDisplay[row3][col3 + 1] = (map[row][col]->area[row2][col2]);
-						}
-					}
+	for (int mapRow = 0; mapRow < 6; mapRow++) {
+		for (int mapCol = 0; mapCol < 6; mapCol++) {
+			for (int areaRow = 0; areaRow < 16; areaRow++) {
+				for (int areaCol = 0; areaCol < 16; areaCol++) {
+					fullMap[areaRow + mapRow * 16][areaCol + mapCol * 16] = map[mapRow][mapCol]->area[areaRow][areaCol];
 				}
 			}
 		}
 	}
-
 }
 
 Map::~Map() {
