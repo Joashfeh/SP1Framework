@@ -247,22 +247,22 @@ void moveCharacter()
 {
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    if (g_skKeyEvent[K_UP].keyDown && (map.display[plr.Pos.row - 1][plr.Pos.col] == 0 || map.display[plr.Pos.row - 1][plr.Pos.col] == 9))
+    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1')
     {
         //Beep(1440, 30);
         plr.Pos.row -= 1;
     }
-    if (g_skKeyEvent[K_LEFT].keyDown && (map.display[plr.Pos.row][plr.Pos.col - 1] == 0 || map.display[plr.Pos.row][plr.Pos.col - 1] == 9))
+    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1')
     {
         //Beep(1440, 30);
         plr.Pos.col -= 1;
     }
-    if (g_skKeyEvent[K_DOWN].keyDown && (map.display[plr.Pos.row + 1][plr.Pos.col] == 0 || map.display[plr.Pos.row + 1][plr.Pos.col] == 9))
+    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1')
     {
         //Beep(1440, 30);
         plr.Pos.row += 1;
     }
-    if (g_skKeyEvent[K_RIGHT].keyDown && (map.display[plr.Pos.row][plr.Pos.col + 1] == 0 || map.display[plr.Pos.row][plr.Pos.col + 1] == 9))
+    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1')
     {
         //Beep(1440, 30);
         plr.Pos.col += 1;

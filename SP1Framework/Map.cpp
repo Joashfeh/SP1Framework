@@ -3,7 +3,7 @@
 Map::Map() {
 }
 
-Map::Map(int f, int floorType) : map{ nullptr } {
+Map::Map(LEVEL f, int floorType) : map{ nullptr } {
 
 	int row = 1;
 	int col = 1;
@@ -153,9 +153,18 @@ void Map::generateDungeon() {
 			display[row][displayCol] = fullMap[row][col];
 			display[row][displayCol + 1] = fullMap[row][col];
 			displayCol += 2;
-		} 
+		}
 		displayCol = 0;
 	}
 
+}
+
+void Map::displayMap() {
+	for (int i = 0; i < 96; i++) {
+		for (int k = 0; k < 96; k++) {
+			std::cout << fullMap[i][k];
+		}
+		std::cout << std::endl;
+	}
 }
 

@@ -5,7 +5,6 @@
 void renderMap(Console& g_Console, Player& plr, Map& map)
 {
 
-
     // Set up sample colours, and output shadings
     const WORD colors[] = {
         0, 255
@@ -17,12 +16,12 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
 
     for (int row = plr.Pos.row - 12; row < plr.Pos.row + 12; row++) {
         for (int col = plr.Pos.col - 32; col < plr.Pos.col + 32; col++) {
-            
+
             switch (map.display[row][col]) {
-            case 0:
+            case MAPTILE::EMPTYTILE:
                 g_Console.writeToBuffer(c, '*', colors[0]);
                 break;
-            case 1:
+            case MAPTILE::WALL:
                 g_Console.writeToBuffer(c, ' ', colors[1]);
                 break;
             }
