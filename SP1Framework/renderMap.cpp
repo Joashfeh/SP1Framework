@@ -5,8 +5,6 @@
 void renderMap(Console& g_Console, Player& plr, Map& map)
 {
 
-    int row = plr.Pos.row - 12;
-    int col = plr.Pos.col - 32;
 
     // Set up sample colours, and output shadings
     const WORD colors[] = {
@@ -14,18 +12,24 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
     };
 
     COORD c;
-    for (int y = 0; y < 24; ++y) {
-        for (int x = 0; x < 64; ++x) {
-            c.X = x;
-            c.Y = y;
+    c.X = 0;
+    c.Y = 0;
 
-            if (map.fullMap[row][col] == 0) g_Console.writeToBuffer(c, ' ');
-            if (map.fullMap[row][col] == 1) g_Console.writeToBuffer(c, '*');
+    for (int row = plr.Pos.row - 12; row < plr.Pos.row + 12; row++) {
+        for (int col = plr.Pos.col - 32; col < plr.Pos.col + 32; col++) {
+            
+            switch (map.display[row][col]) {
+            case 0:
+                g_Console.writeToBuffer(c, '*', colors[0]);
+                break;
+            case 1:
+                g_Console.writeToBuffer(c, ' ', colors[1]);
+                break;
+            }
 
-            col++;
-
+            c.X++;   
         }
-        col = plr.Pos.col - 32;
-        row++;
+        c.X = 0;
+        c.Y++;
     }
 }

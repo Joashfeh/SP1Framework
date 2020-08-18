@@ -16,7 +16,7 @@ void Player::spawn(Map* map) {
 		for (int col = 0; col < 96; col++) {
 			if (map->fullMap[row][col] == 2) {
 				this->Pos.row = row;
-				this->Pos.col = col;
+				this->Pos.col = col*2;
 			}
 		}
 	}

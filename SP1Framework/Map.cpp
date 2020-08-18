@@ -1,7 +1,6 @@
 #include "Map.h"
 
 Map::Map() {
-
 }
 
 Map::Map(int f, int floorType) : map{ nullptr } {
@@ -41,6 +40,13 @@ Map::Map(int f, int floorType) : map{ nullptr } {
 			}
 		}
 	}
+
+	for (int row = 0; row < 96; row++) {
+		for (int col = 0; col < 96; col++) {
+			display[row][col * 2] = fullMap[row][col * 2];
+		}
+	}
+
 }
 
 Map::~Map() {
@@ -138,6 +144,17 @@ void Map::generateDungeon() {
 				}
 			}
 		}
+	}
+
+	int displayCol = 0;
+
+	for (int row = 0; row < 96; row++) {
+		for (int col = 0; col < 96; col++) {
+			display[row][displayCol] = fullMap[row][col];
+			display[row][displayCol + 1] = fullMap[row][col];
+			displayCol += 2;
+		} 
+		displayCol = 0;
 	}
 
 }

@@ -25,7 +25,7 @@ SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
-Console g_Console(80, 30, "SP1 Framework");
+Console g_Console(65, 25, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function
@@ -301,31 +301,6 @@ void render()
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
 }
 
-void renderMap()
-{
-
-    int plrRow = plr.Pos.row - 12;
-    int plrCol = plr.Pos.col - 32;
-
-    // Set up sample colours, and output shadings
-    const WORD colors[] = {
-        0, 255
-    };
-
-    COORD cprintCOORD;
-    for (int y = 0; y < 25; ++y) {
-        for (int x = 0; x < 65; ++x) {
-            cprintCOORD.X = x;
-            cprintCOORD.Y = y;
-
-            if (map.fullMap[plrRow][plrCol] == 0) g_Console.writeToBuffer(cprintCOORD, ' ');
-            if (map.fullMap[plrRow][plrCol] == 1) g_Console.writeToBuffer(cprintCOORD, '*');
-
-            plrCol++;
-        }
-    }
-}
-
 void clearScreen()
 {
     // Clears the buffer with this colour attribute
@@ -354,7 +329,7 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
-    renderMap();        // renders the map to the buffer first
+    renderMap(g_Console, plr, map);        // renders the map to the buffer first
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
 }
 
@@ -380,78 +355,78 @@ void renderFramerate()
 // this is an example of how you would use the input events
 void renderInputEvents()
 {
-    //// keyboard events
-    //COORD startPos = {50, 2};
-    //std::ostringstream ss;
-    //std::string key;
-    //for (int i = 0; i < K_COUNT; ++i)
-    //{
-    //    ss.str("");
-    //    switch (i)
-    //    {
-    //    case K_UP: key = "UP";
-    //        break;
-    //    case K_DOWN: key = "DOWN";
-    //        break;
-    //    case K_LEFT: key = "LEFT";
-    //        break;
-    //    case K_RIGHT: key = "RIGHT";
-    //        break;
-    //    case K_SPACE: key = "SPACE";
-    //        break;
-    //    default: continue;
-    //    }
-    //    if (g_skKeyEvent[i].keyDown)
-    //        ss << key << " pressed";
-    //    else if (g_skKeyEvent[i].keyReleased)
-    //        ss << key << " released";
-    //    else
-    //        ss << key << " not pressed";
+    // keyboard events
+    COORD startPos = {50, 2};
+    std::ostringstream ss;
+    std::string key;
+    for (int i = 0; i < K_COUNT; ++i)
+    {
+        ss.str("");
+        switch (i)
+        {
+        case K_UP: key = "UP";
+            break;
+        case K_DOWN: key = "DOWN";
+            break;
+        case K_LEFT: key = "LEFT";
+            break;
+        case K_RIGHT: key = "RIGHT";
+            break;
+        case K_SPACE: key = "SPACE";
+            break;
+        default: continue;
+        }
+        if (g_skKeyEvent[i].keyDown)
+            ss << key << " pressed";
+        else if (g_skKeyEvent[i].keyReleased)
+            ss << key << " released";
+        else
+            ss << key << " not pressed";
 
-    //    COORD c = { startPos.X, startPos.Y + i };
-    //    g_Console.writeToBuffer(c, ss.str(), 0x17);
-    //}
+        COORD c = { startPos.X, startPos.Y + i };
+        g_Console.writeToBuffer(c, ss.str(), 0x17);
+    }
 
-    //// mouse events    
-    //// g_mouseEvent.mousePosition.X
-    //// g_mouseEvent.mousePosition.Y 
-    //ss.str("");
-    //ss << "Player position (" << plr.Pos.col << ", " << plr.Pos.row << ")";
-    //g_Console.writeToBuffer(g_mouseEvent.mousePosition, ss.str(), 0x59);
-    //ss.str("");
-    //switch (g_mouseEvent.eventFlags)
-    //{
-    //case 0:
-    //    if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
-    //    {
-    //        ss.str("Left Button Pressed");
-    //        g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 1, ss.str(), 0x59);
-    //    }
-    //    else if (g_mouseEvent.buttonState == RIGHTMOST_BUTTON_PRESSED)
-    //    {
-    //        ss.str("Right Button Pressed");
-    //        g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 2, ss.str(), 0x59);
-    //    }
-    //    else
-    //    {
-    //        ss.str("Some Button Pressed");
-    //        g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 3, ss.str(), 0x59);
-    //    }
-    //    break;
-    //case DOUBLE_CLICK:
-    //    ss.str("Double Clicked");
-    //    g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 4, ss.str(), 0x59);
-    //    break;        
-    //case MOUSE_WHEELED:
-    //    if (g_mouseEvent.buttonState & 0xFF000000)
-    //        ss.str("Mouse wheeled down");
-    //    else
-    //        ss.str("Mouse wheeled up");
-    //    g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 5, ss.str(), 0x59);
-    //    break;
-    //default:        
-    //    break;
-    //}
+    // mouse events    
+    // g_mouseEvent.mousePosition.X
+    // g_mouseEvent.mousePosition.Y 
+    ss.str("");
+    ss << "Player position (" << plr.Pos.col << ", " << plr.Pos.row << ")";
+    g_Console.writeToBuffer(g_mouseEvent.mousePosition, ss.str(), 0x59);
+    ss.str("");
+    switch (g_mouseEvent.eventFlags)
+    {
+    case 0:
+        if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+        {
+            ss.str("Left Button Pressed");
+            g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 1, ss.str(), 0x59);
+        }
+        else if (g_mouseEvent.buttonState == RIGHTMOST_BUTTON_PRESSED)
+        {
+            ss.str("Right Button Pressed");
+            g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 2, ss.str(), 0x59);
+        }
+        else
+        {
+            ss.str("Some Button Pressed");
+            g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 3, ss.str(), 0x59);
+        }
+        break;
+    case DOUBLE_CLICK:
+        ss.str("Double Clicked");
+        g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 4, ss.str(), 0x59);
+        break;        
+    case MOUSE_WHEELED:
+        if (g_mouseEvent.buttonState & 0xFF000000)
+            ss.str("Mouse wheeled down");
+        else
+            ss.str("Mouse wheeled up");
+        g_Console.writeToBuffer(g_mouseEvent.mousePosition.X, g_mouseEvent.mousePosition.Y + 5, ss.str(), 0x59);
+        break;
+    default:        
+        break;
+    }
     
 }
 
