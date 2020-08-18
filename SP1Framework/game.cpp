@@ -262,7 +262,7 @@ void moveCharacter()
         //Beep(1440, 30);
         plr.Pos.row += 1;
     }
-    if (g_skKeyEvent[K_RIGHT].keyDown && (map.display[plr.Pos.row][plr.Pos.col + 1] == 0 || map.display[plr.Pos.row][plr.Pos.col + 1] == 0))
+    if (g_skKeyEvent[K_RIGHT].keyDown && (map.display[plr.Pos.row][plr.Pos.col + 1] == 0 || map.display[plr.Pos.row][plr.Pos.col + 1] == 9))
     {
         //Beep(1440, 30);
         plr.Pos.col += 1;
