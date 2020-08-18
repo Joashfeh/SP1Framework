@@ -8,12 +8,14 @@
 #include "renderCharacter.h"
 #include "renderMap.h"
 #include "generateMap.h"
+#include "keyEvents.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
+
 SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
 
@@ -242,35 +244,37 @@ void updateGame()       // gameplay logic
 }
 
 void moveCharacter()
-{    
+{
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    if (g_skKeyEvent[K_UP].keyDown && g_sChar.m_cLocation.Y > 1)
+    if (g_skKeyEvent[K_UP].keyDown && (map.display[plr.Pos.row - 1][plr.Pos.col] == 0 || map.display[plr.Pos.row - 1][plr.Pos.col] == 9))
     {
         //Beep(1440, 30);
         plr.Pos.row -= 1;
     }
-    if (g_skKeyEvent[K_LEFT].keyDown && g_sChar.m_cLocation.X > 1)
+    if (g_skKeyEvent[K_LEFT].keyDown && (map.display[plr.Pos.row][plr.Pos.col - 1] == 0 || map.display[plr.Pos.row][plr.Pos.col - 1] == 9))
     {
         //Beep(1440, 30);
         plr.Pos.col -= 1;
     }
-    if (g_skKeyEvent[K_DOWN].keyDown && g_sChar.m_cLocation.Y < g_Console.getConsoleSize().Y - 1)
+    if (g_skKeyEvent[K_DOWN].keyDown && (map.display[plr.Pos.row + 1][plr.Pos.col] == 0 || map.display[plr.Pos.row + 1][plr.Pos.col] == 9))
     {
         //Beep(1440, 30);
         plr.Pos.row += 1;
     }
-    if (g_skKeyEvent[K_RIGHT].keyDown && g_sChar.m_cLocation.X < g_Console.getConsoleSize().X - 1)
+    if (g_skKeyEvent[K_RIGHT].keyDown && (map.display[plr.Pos.row][plr.Pos.col + 1] == 0 || map.display[plr.Pos.row][plr.Pos.col + 1] == 0))
     {
         //Beep(1440, 30);
         plr.Pos.col += 1;
     }
     if (g_skKeyEvent[K_SPACE].keyReleased)
     {
-        g_sChar.m_bActive = !g_sChar.m_bActive;        
+        g_sChar.m_bActive = !g_sChar.m_bActive;
     }
 
 }
+
+
 void processUserInput()
 {
     // quits the game if player hits the escape key
@@ -429,6 +433,7 @@ void renderInputEvents()
     }
     
 }
+
 
 
 

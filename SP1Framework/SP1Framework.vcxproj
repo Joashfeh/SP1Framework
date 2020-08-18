@@ -91,6 +91,7 @@
     <ClCompile Include="loadMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="keyEvents.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="renderCharacter.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="loadCharacter.h" />
     <ClInclude Include="loadMap.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="keyEvents.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="renderCharacter.h" />

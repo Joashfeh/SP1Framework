@@ -11,7 +11,7 @@ Area::Area() {
 Area::Area(unsigned short flags, int doorSize, int roomType) {
 	for (int i = 0; i < 16; i++) {
 		for (int k = 0; k < 16; k++) {
-			area[i][k] = 0;
+			area[i][k] = 9; // mobs can spawn
 		}
 	}
 
