@@ -3,6 +3,21 @@
 #include <stdlib.h>
 #include <time.h>
 
+enum LEVEL {
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN,
+	EIGHT,
+	NINE,
+	TEN,
+	ELEVEN,
+	TWELVE
+};
+
 class Map {
 public:
 	int floor;
