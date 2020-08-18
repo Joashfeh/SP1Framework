@@ -1,5 +1,7 @@
 #pragma once
-#include "game.h"
+#include "Framework\console.h"
+#include "Player.h"
+#include "Map.h"
 
 enum MAPTILE {
 	EMPTYTILE = 0,

@@ -85,6 +85,7 @@
     <ClCompile Include="Framework\console.cpp" />
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="generateMap.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="loadCharacter.cpp" />
     <ClCompile Include="loadMap.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="Framework\console.h" />
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="generateMap.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="loadCharacter.h" />
     <ClInclude Include="loadMap.h" />

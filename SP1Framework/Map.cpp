@@ -1,5 +1,9 @@
 #include "Map.h"
 
+Map::Map() {
+
+}
+
 Map::Map(int f, int floorType) : map{ nullptr } {
 
 	int row = 1;
@@ -119,5 +123,22 @@ void Map::generateDungeon() {
 			break;
 		}
 	}
+
+	for (int row = 0; row < 6; row++) {
+		for (int col = 0; col < 6; col++) {
+			if (map[row][col] == nullptr) map[row][col] = new Area();
+		}
+	}
+
+	for (int mapRow = 0; mapRow < 6; mapRow++) {
+		for (int mapCol = 0; mapCol < 6; mapCol++) {
+			for (int areaRow = 0; areaRow < 16; areaRow++) {
+				for (int areaCol = 0; areaCol < 16; areaCol++) {
+					fullMap[areaRow + mapRow * 16][areaCol + mapCol * 16] = map[mapRow][mapCol]->area[areaRow][areaCol];
+				}
+			}
+		}
+	}
+
 }
 
