@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
 #include "Map.h"
+#include "Entity.h"
 using namespace std;
 
-class Enemy
+class Enemy : public Entity
 {
 public:
 	Enemy();
