@@ -16,7 +16,7 @@ Area::Area(unsigned short flags, int doorSize, int roomType) {
 
 	for (int i = 0; i < 16; i++) {
 		for (int k = 0; k < 16; k++) {
-			area[i][k] = '9'; // mobs can spawn
+			area[i][k] = '0'; // mobs can spawn
 		}
 	}
 
@@ -41,6 +41,8 @@ Area::Area(unsigned short flags, int doorSize, int roomType) {
 	}
 
 	if (roomType == 2) { // Exit Room
+
+		area[8][7] = 'L';
 
 	}
 
