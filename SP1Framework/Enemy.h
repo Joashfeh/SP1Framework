@@ -7,7 +7,8 @@ using namespace std;
 class Enemy : public Entity
 {
 public:
-	//const int enemycount = 3; // Max 3 mobs per level
+	//const int enemycount = 3; // Max 3 mobs per level <- should be static
+	static int enemyCount;
 
 	Enemy();
 	void Attack(Entity* ptrEntity);

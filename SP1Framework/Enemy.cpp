@@ -3,6 +3,8 @@
 
 
 
+int Enemy::enemyCount = 0;
+
 Enemy::Enemy()
 {
 }

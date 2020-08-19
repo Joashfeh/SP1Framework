@@ -1,6 +1,7 @@
 #ifndef _GAME_H
 #define _GAME_H
 
+#include "Position.h"
 #include "Framework\timer.h"
 #include "Framework\console.h"
 
