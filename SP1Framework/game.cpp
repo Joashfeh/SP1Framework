@@ -32,13 +32,6 @@ EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 // Console object
 Console g_Console(65, 24, "SP1 Framework");
 
-//--------------------------------------------------------------
-// Purpose  : Initialisation function
-//            Initialize variables, allocate memory, load data from file, etc. 
-//            This is called once before entering into your main loop
-// Input    : void
-// Output   : void
-//--------------------------------------------------------------
 void init( void )
 {
     generateMap(map, plr);
@@ -69,6 +62,7 @@ void init( void )
 //--------------------------------------------------------------
 void shutdown( void )
 {
+
     // Reset to white text on black background
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
 
@@ -345,7 +339,7 @@ void renderFramerate()
 
     // displays the elapsed time
     ss.str("");
-    ss << g_dDeltaTime << "secs";
+    ss << g_dElapsedTime << "secs";
     c.X = 0;
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str(), 0x59);
@@ -433,19 +427,19 @@ void moveCharacter()
 {
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1')
+    if (g_skKeyEvent[K_UP].keyDown)
     {   
         g_sChar.moving.UP = true;
     }
-    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1')
+    if (g_skKeyEvent[K_RIGHT].keyDown)
     {
         g_sChar.moving.RIGHT = true;
     }
-    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1')
+    if (g_skKeyEvent[K_DOWN].keyDown)
     {
         g_sChar.moving.DOWN = true;
     }
-    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1')
+    if (g_skKeyEvent[K_LEFT].keyDown)
     {
         g_sChar.moving.LEFT = true;
     }

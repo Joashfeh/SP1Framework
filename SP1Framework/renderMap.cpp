@@ -29,7 +29,7 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
                 outputChar = 176;
                 break;
             case MAPTILE::ENEMYSPAWN:
-                outputChar = 254;
+                outputChar = 158;
                 colour = COLOURS::BLACKDARKGREY;
                 break;
             case MAPTILE::LADDER:
