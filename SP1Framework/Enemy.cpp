@@ -15,7 +15,7 @@ void Enemy::setenemystats(Map level, int enemycounthere)
 		case 1: //Dummy1
 			break;
 		default:
-			break
+			break;
 		}
 		HP = 15;
 		Damage = 10;

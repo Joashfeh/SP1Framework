@@ -72,7 +72,7 @@ void Area::display() {
 
 void Area::loadMap(int terrainNo) {
 	std::string snewMapFileName;
-	snewMapFileName = "terrain_data/Terrain";
+	snewMapFileName = "Terrain_data/Terrain";
 
 	if (terrainNo < 10)
 		snewMapFileName += "0";
