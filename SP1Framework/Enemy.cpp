@@ -19,7 +19,6 @@ void Enemy::setenemystats(LEVEL f, int get_a) //
 		}
 		HP = 15;
 		Damage = 10;
-		Defence = 5;
 
 	default:
 		// Default case | Should'nt be called
