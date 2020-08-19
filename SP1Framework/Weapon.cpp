@@ -1,20 +1,47 @@
 #include "Weapon.h"
+#include <fstream>
 #include <string>
 
-std::string Weapon[7] =
-{
-	"weapon1",
-	"weapon2",
-	"weapon3",
-	"weapon4",
-	"weapon5"
-};
-
-Weapon::Weapon(std::string name) {
+Weapon::Weapon(int id) {
 	
 }
 
 Weapon::~Weapon()
 {
+
+}
+
+void Weapon::loadWeapon(int id) {
+	std::string weaponDir;
+	weaponDir = "Weapon_data/weapon_0";
+
+	weaponDir += std::to_string(id);
+	weaponDir += ".txt";
+
+	std::ifstream weaponData(weaponDir, std::ios::in);
+	if (!weaponData)
+		return;
+
+	for (int i = 0; i < 4; i++) {
+		std::string a;
+		std::getline(weaponData, a);
+
+		switch (i) {
+		case 0:
+			name = a;
+			break;
+		case 1:
+			dmg = stoi(a);
+			break;
+		case 2:
+			cost = stoi(a);
+			break;
+		case 3:
+			crit = stoi(a);
+			break;
+		}	
+	}
+
+	weaponData.close();
 
 }
