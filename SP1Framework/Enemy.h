@@ -10,7 +10,8 @@ public:
 	const int enemycount = 3; // Max 3 mobs per level
 
 	Enemy();
-	void setenemystats(Map type); // Sets enemy stats based on type of enemy | Enemy type stored in this function
+	void setenemystats(Map level, int enemycounthere); // Sets enemy stats based on type of enemy | Enemy type stored in this function
+	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
 
