@@ -4,12 +4,13 @@ Enemy::Enemy()
 {
 }
 
-void Enemy::setenemystats(Map level, int enemycounthere)
+void Enemy::setenemystats(LEVEL f, int get_a)
 {
-	switch (level.floor)
+	switch (f)
 	{
 	case ONE: // SAMPLE CASE
 
+<<<<<<< HEAD
 		switch (enemycounthere)
 		{
 		case 1: //Dummy1
@@ -20,6 +21,10 @@ void Enemy::setenemystats(Map level, int enemycounthere)
 		HP = 15;
 		Damage = 10;
 		Defence = 5;
+=======
+
+		
+>>>>>>> 03d7a3a6dec2dae0d5ad9dc4ea46128769c251be
 	default:
 		// Default case | Should'nt be called
 		break;
