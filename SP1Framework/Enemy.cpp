@@ -4,7 +4,7 @@ Enemy::Enemy()
 {
 }
 
-void Enemy::setenemystats(LEVEL f, int get_a)
+void Enemy::setenemystats(LEVEL f, int get_a) //
 {
 	switch (f)
 	{

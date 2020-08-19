@@ -5,3 +5,5 @@
 Enemy* entity_ptrs[3];
 
 void enemyDeclare(Map& map);
+
+void loadEnemy();

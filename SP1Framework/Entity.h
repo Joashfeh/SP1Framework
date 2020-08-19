@@ -3,7 +3,7 @@
 class Entity
 {
 public:
-	int HP, Damage, Defence;
+	int HP, Damage;
 	Position Pos;
 
 	Entity();

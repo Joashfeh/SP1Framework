@@ -7,10 +7,10 @@ using namespace std;
 class Enemy : public Entity
 {
 public:
-	const int enemycount = 3; // Max 3 mobs per level
+	//const int enemycount = 3; // Max 3 mobs per level
 
 	Enemy();
-	void setenemystats(LEVEL f, int get_a); // Sets enemy stats based on type of enemy | Enemy type stored in this function
+	void setenemystats(LEVEL f, int get_a); // Sets enemy stats based on level and enemy type.
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };

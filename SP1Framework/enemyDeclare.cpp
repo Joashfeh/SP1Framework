@@ -10,3 +10,7 @@ void enemyDeclare(Map& map)
         }
     }
 }
+
+void loadEnemy()
+{
+}
