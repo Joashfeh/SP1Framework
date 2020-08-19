@@ -101,6 +101,7 @@
   <ItemGroup>
     <ClInclude Include="Area.h" />
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="colours.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enemyDeclare.h" />
     <ClInclude Include="Entity.h" />

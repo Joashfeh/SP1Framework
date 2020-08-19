@@ -1,15 +1,13 @@
 #include "renderCharacter.h"
+#include "colours.h"
 
 void renderCharacter(SGameChar &g_sChar, Console &g_Console)
 {
     // Draw the location of the character
-    WORD charColor = 0x0C;
-    if (g_sChar.m_bActive)
-    {
-        charColor = 0x0A;
-    }
+    COLOURS charColor = COLOURS::BLACKMIDDLEBLUE;
+    char playerChar = 254;
     COORD c = g_sChar.m_cLocation;
-    g_Console.writeToBuffer(c, (char)1, charColor);
+    g_Console.writeToBuffer(c, playerChar, charColor);
 }
 
 void moveChar(SGameChar& g_sChar, Player& plr, Map& map) {

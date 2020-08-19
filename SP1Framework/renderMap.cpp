@@ -1,14 +1,13 @@
 #include "renderMap.h"
 #include "Player.h"
 #include "Map.h"
+#include "colours.h"
 
 void renderMap(Console& g_Console, Player& plr, Map& map)
 {
 
     // Set up sample colours, and output shadings
-    const WORD colors[] = {
-        0, 255
-    };
+    
 
     COORD c;
     c.X = 0;
@@ -17,15 +16,23 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
     for (int row = plr.Pos.row - 12; row < plr.Pos.row + 12; row++) {
         for (int col = plr.Pos.col - 32; col < plr.Pos.col + 32; col++) {
 
+            COLOURS colour = COLOURS::DEFAULT;
+            char outputChar = ' ';
+
             switch (map.display[row][col]) {
             case MAPTILE::EMPTYTILE:
-                g_Console.writeToBuffer(c, ' ', colors[0]);
+                outputChar = ' ';
                 break;
             case MAPTILE::WALL:
-                g_Console.writeToBuffer(c, (char)176);
+                outputChar = 176;
+                break;
+            case MAPTILE::ENEMYSPAWN:
+                outputChar = 254;
+                colour = COLOURS::DARKPURPLE;
                 break;
             }
 
+            g_Console.writeToBuffer(c, outputChar, colour);
             c.X++;   
         }
         c.X = 0;
