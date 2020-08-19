@@ -87,6 +87,7 @@
     <ClCompile Include="Framework\timer.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="generateMap.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="loadCharacter.cpp" />
     <ClCompile Include="main.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="renderCharacter.cpp" />
     <ClCompile Include="renderMap.cpp" />
+    <ClCompile Include="shopInterface.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +111,7 @@
     <ClInclude Include="Framework\timer.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="generateMap.h" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="loadCharacter.h" />
     <ClInclude Include="Map.h" />
@@ -117,6 +120,7 @@
     <ClInclude Include="Position.h" />
     <ClInclude Include="renderCharacter.h" />
     <ClInclude Include="renderMap.h" />
+    <ClInclude Include="shopInterface.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

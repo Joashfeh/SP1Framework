@@ -9,6 +9,7 @@
 #include "renderMap.h"
 #include "generateMap.h"
 #include "keyEvents.h"
+#include "shopInterface.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -116,6 +117,8 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
         break;
     case S_GAME: gameplayKBHandler(keyboardEvent); // handle gameplay keyboard event 
         break;
+    case S_SHOP: gameplayKBHandler(keyboardEvent);
+        break;
     }
 }
 
@@ -164,7 +167,8 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     case VK_UP: key = K_UP; break;
     case VK_DOWN: key = K_DOWN; break;
     case VK_LEFT: key = K_LEFT; break; 
-    case VK_RIGHT: key = K_RIGHT; break; 
+    case VK_RIGHT: key = K_RIGHT; break;
+    case 0x43: key = K_SHOP; break;
     case VK_SPACE: key = K_SPACE; break;
     case VK_ESCAPE: key = K_ESCAPE; break; 
     }
@@ -227,6 +231,8 @@ void update(double dt)
             break;
         case S_BATTLE:
             break;
+        case S_SHOP: updateShop();
+             break;
         case S_GAMEOVER:
             break;
     }
@@ -251,7 +257,14 @@ void processUserInput()
 {
     // quits the game if player hits the escape key
     if (g_skKeyEvent[K_ESCAPE].keyReleased)
-        g_bQuitGame = true;    
+        g_bQuitGame = true;
+    if (g_skKeyEvent[K_SHOP].keyDown)
+    {
+        if (g_eGameState == S_GAME)
+            g_eGameState = S_SHOP;
+        else if (g_eGameState == S_SHOP)
+            g_eGameState = S_GAME;
+    }
 }
 
 //--------------------------------------------------------------
@@ -270,6 +283,8 @@ void render()
     case S_SPLASHSCREEN: renderSplashScreen();
         break;
     case S_GAME: renderGame();
+        break;
+    case S_SHOP: renderShop();
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
@@ -469,6 +484,14 @@ void moveCharacter()
 
 }
 
+void renderShop()
+{
+    renderShopinterface(g_Console);
+}
 
+void updateShop()
+{
+    processUserInput();
 
+}
 
