@@ -4,11 +4,19 @@ Enemy::Enemy()
 {
 }
 
-void Enemy::setenemystats(Map type)
+void Enemy::setenemystats(Map level, int enemycounthere)
 {
-	switch (type.floor)
+	switch (level.floor)
 	{
 	case ONE: // SAMPLE CASE
+
+		switch (enemycounthere)
+		{
+		case 1: //Dummy1
+			break;
+		default:
+			break
+		}
 		HP = 15;
 		Damage = 10;
 		Defence = 5;
@@ -17,6 +25,11 @@ void Enemy::setenemystats(Map type)
 		break;
 	}
 }
+
+/*int Enemy::return_enemy_count()
+{
+	return enemycount;
+}*/
 
 Enemy::~Enemy()
 {

@@ -12,9 +12,13 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include "Entity.h"
+#include "Enemy.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
+
+Entity* entity_ptrs[3];
 
 SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
