@@ -4,6 +4,10 @@ Enemy::Enemy()
 {
 }
 
+void Enemy::Attack(Entity* ptrEntity)
+{
+}
+
 void Enemy::setenemystats(LEVEL f, int get_a) //
 {
 	switch (f)
