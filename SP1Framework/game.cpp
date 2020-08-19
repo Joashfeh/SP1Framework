@@ -29,7 +29,7 @@ SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
-Console g_Console(65, 25, "SP1 Framework");
+Console g_Console(65, 24, "SP1 Framework");
 
 //--------------------------------------------------------------
 // Purpose  : Initialisation function

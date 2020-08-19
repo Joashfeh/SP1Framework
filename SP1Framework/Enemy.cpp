@@ -10,8 +10,7 @@ void Enemy::setenemystats(LEVEL f, int get_a)
 	{
 	case ONE: // SAMPLE CASE
 
-<<<<<<< HEAD
-		switch (enemycounthere)
+		switch (f)
 		{
 		case 1: //Dummy1
 			break;
@@ -21,10 +20,7 @@ void Enemy::setenemystats(LEVEL f, int get_a)
 		HP = 15;
 		Damage = 10;
 		Defence = 5;
-=======
 
-		
->>>>>>> 03d7a3a6dec2dae0d5ad9dc4ea46128769c251be
 	default:
 		// Default case | Should'nt be called
 		break;
