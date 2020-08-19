@@ -110,9 +110,6 @@
     <ClInclude Include="renderCharacter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="loadMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="loadCharacter.h">
       <Filter>Header Files</Filter>
     </ClInclude>

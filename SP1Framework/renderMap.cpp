@@ -19,10 +19,10 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
 
             switch (map.display[row][col]) {
             case MAPTILE::EMPTYTILE:
-                g_Console.writeToBuffer(c, '*', colors[0]);
+                g_Console.writeToBuffer(c, ' ', colors[0]);
                 break;
             case MAPTILE::WALL:
-                g_Console.writeToBuffer(c, ' ', colors[1]);
+                g_Console.writeToBuffer(c, (char)176);
                 break;
             }
 
