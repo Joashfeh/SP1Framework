@@ -30,7 +30,7 @@ SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
 
 // Console object
-Console g_Console(65, 24, "SP1 Framework");
+Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
@@ -116,22 +116,6 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
     }
 }
 
-//--------------------------------------------------------------
-// Purpose  : This is the handler for the mouse input. Whenever there is a mouse event, this function will be called.
-//            Ideally, you should pass the key event to a specific function to handle the event.
-//            This is because in some states, some keys would be disabled. Hence, to reduce your code complexity, 
-//            it would be wise to split your keyboard input handlers separately.
-//            
-//            For the mouse event, if the mouse is not moved, no event will be sent, hence you should not reset the mouse status.
-//            However, if the mouse goes out of the window, you would not be able to know either. 
-//
-//            The MOUSE_EVENT_RECORD struct has more attributes that you can use, if you are adventurous enough.
-//
-//            In this case, we are not handling any mouse event in the Splashscreen state
-//            
-// Input    : const MOUSE_EVENT_RECORD& mouseEvent - reference to a mouse event struct
-// Output   : void
-//--------------------------------------------------------------
 void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
 {    
     switch (g_eGameState)
@@ -143,15 +127,6 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
     }
 }
 
-//--------------------------------------------------------------
-// Purpose  : This is the keyboard handler in the game state. Whenever there is a keyboard event in the game state, this function will be called.
-//            
-//            Add more keys to the enum in game.h if you need to detect more keys
-//            To get other VK key defines, right click on the VK define (e.g. VK_UP) and choose "Go To Definition" 
-//            For Alphanumeric keys, the values are their ascii values (uppercase).
-// Input    : const KEY_EVENT_RECORD& keyboardEvent
-// Output   : void
-//--------------------------------------------------------------
 void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
 {
     // here, we map the key to our enums
@@ -177,15 +152,6 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     }    
 }
 
-//--------------------------------------------------------------
-// Purpose  : This is the mouse handler in the game state. Whenever there is a mouse event in the game state, this function will be called.
-//            
-//            If mouse clicks are detected, the corresponding bit for that mouse button will be set.
-//            mouse wheel, 
-//            
-// Input    : const KEY_EVENT_RECORD& keyboardEvent
-// Output   : void
-//--------------------------------------------------------------
 void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
 {
     if (mouseEvent.dwEventFlags & MOUSE_MOVED) // update the mouse position if there are no events
@@ -261,14 +227,6 @@ void processUserInput()
     }
 }
 
-//--------------------------------------------------------------
-// Purpose  : Render function is to update the console screen
-//            At this point, you should know exactly what to draw onto the screen.
-//            Just draw it!
-//            To get an idea of the values for colours, look at console.h and the URL listed there
-// Input    : void
-// Output   : void
-//--------------------------------------------------------------
 void render()
 {
     clearScreen();      // clears the current screen and draw from scratch 

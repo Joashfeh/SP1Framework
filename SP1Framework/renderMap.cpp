@@ -13,8 +13,8 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
     c.X = 0;
     c.Y = 0;
 
-    for (int row = plr.Pos.row - 12; row < plr.Pos.row + 12; row++) {
-        for (int col = plr.Pos.col - 32; col < plr.Pos.col + 32; col++) {
+    for (int row = plr.Pos.row - 20; row < plr.Pos.row + 20; row++) {
+        for (int col = plr.Pos.col - 60; col < plr.Pos.col + 60; col++) {
 
             COLOURS colour;
             colour = COLOURS::DEFAULT;
