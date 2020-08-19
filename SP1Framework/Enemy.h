@@ -12,7 +12,7 @@ public:
 
 	Enemy();
 	void Attack(Entity* ptrEntity);
-	void setenemystats(LEVEL f, int get_a); // Sets enemy stats based on level and enemy type.
+	void setenemystats(LEVEL f, int get_b); // Sets enemy stats based on level and enemy type.
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
