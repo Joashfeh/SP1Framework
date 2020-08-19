@@ -11,7 +11,7 @@ public:
     int cost;
     int crit;
 
-    Weapon(std::string name);
+    Weapon(int id);
     ~Weapon();
 
     void loadWeapon(int id);
