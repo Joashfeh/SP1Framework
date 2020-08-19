@@ -1,12 +1,7 @@
 #pragma once
 #include "Map.h"
 #include "Player.h"
-
-
-struct Enemies {
-    Position pos;
-};
-
+#include "Enemy.h"
 
 void generateMap(Map& map, Player& plr);
 void spawnEnemies(Map& map);

@@ -28,8 +28,7 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
                 break;
             case MAPTILE::ENEMYSPAWN:
                 outputChar = 254;
-                colour = COLOURS::DARKPURPLE;
-                break;
+                colour = COLOURS::BLACKDARKGREY;
             }
 
             g_Console.writeToBuffer(c, outputChar, colour);
