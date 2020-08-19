@@ -5,11 +5,16 @@ class Weapon :
     public Item
 {
 public:
+    
+    std::string name;
     int dmg;
     int cost;
+    int crit;
 
     Weapon(std::string name);
     ~Weapon();
+
+    void loadWeapon(int id);
 
 };
 
