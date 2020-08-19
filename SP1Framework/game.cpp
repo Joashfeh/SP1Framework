@@ -88,7 +88,7 @@ void shutdown( void )
 void getInput( void )
 {
     // resets all the keyboard events
-    // memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
+    memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
     g_Console.readConsoleInput();    
 }
@@ -240,38 +240,7 @@ void updateGame()       // gameplay logic
 {
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
-                        // sound can be played here too.
-}
-
-void moveCharacter()
-{
-    // Updating the location of the character based on the key release
-    // providing a beep sound whenver we shift the character
-    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1')
-    {
-        //Beep(1440, 30);
-        plr.Pos.row -= 1;
-    }
-    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1')
-    {
-        //Beep(1440, 30);
-        plr.Pos.col -= 1;
-    }
-    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1')
-    {
-        //Beep(1440, 30);
-        plr.Pos.row += 1;
-    }
-    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1')
-    {
-        //Beep(1440, 30);
-        plr.Pos.col += 1;
-    }
-    if (g_skKeyEvent[K_SPACE].keyReleased)
-    {
-        g_sChar.m_bActive = !g_sChar.m_bActive;
-    }
-
+    moveChar(g_sChar, plr, map);                    // sound can be played here too.
 }
 
 
@@ -348,9 +317,13 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
+    c.X = g_Console.getConsoleSize().X - 9;
+    c.Y++;
+    g_Console.writeToBuffer(c, g_sChar.dir);
+
     // displays the elapsed time
     ss.str("");
-    ss << g_dElapsedTime << "secs";
+    ss << g_dDeltaTime << "secs";
     c.X = 0;
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str(), 0x59);
@@ -432,6 +405,61 @@ void renderInputEvents()
         break;
     }
     
+}
+
+void moveCharacter()
+{
+    // Updating the location of the character based on the key release
+    // providing a beep sound whenver we shift the character
+    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1' && g_sChar.moving != true)
+    {   
+        g_sChar.moving = true;
+        g_sChar.dir = UP;
+    }
+    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1' && g_sChar.moving != true)
+    {
+        g_sChar.moving = true;
+        g_sChar.dir = RIGHT;
+    }
+    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1' && g_sChar.moving != true)
+    {
+        g_sChar.moving = true;
+        g_sChar.dir = DOWN;
+    }
+    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1' && g_sChar.moving != true)
+    {
+        g_sChar.moving = true;
+        g_sChar.dir = LEFT;
+    }
+
+    if (g_skKeyEvent[K_UP].keyReleased)
+    {
+        g_sChar.moving = false;
+        g_sChar.dir = NONE;
+    }
+    if (g_skKeyEvent[K_RIGHT].keyReleased)
+    {
+        g_sChar.moving = false;
+        g_sChar.dir = NONE;
+    }
+    if (g_skKeyEvent[K_DOWN].keyReleased)
+    {
+        g_sChar.moving = false;
+        g_sChar.dir = NONE;
+    }
+    if (g_skKeyEvent[K_LEFT].keyReleased)
+    {
+        g_sChar.moving = false;
+        g_sChar.dir = NONE;
+    }
+
+
+
+    if (g_skKeyEvent[K_SPACE].keyReleased)
+    {
+        g_sChar.m_bActive = !g_sChar.m_bActive;
+    }
+
 }
 
 
