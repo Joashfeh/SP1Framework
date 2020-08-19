@@ -11,20 +11,37 @@ void renderCharacter(SGameChar &g_sChar, Console &g_Console)
 }
 
 void moveChar(SGameChar& g_sChar, Player& plr, Map& map) {
-    switch (g_sChar.dir) {
-    case UP:
+
+    switch (g_sChar.moving.UP) {
+    case true:
         if (map.display[plr.Pos.row - 1][plr.Pos.col] != '1') plr.Pos.row -= 1;
         break;
-    case RIGHT:
-        if (map.display[plr.Pos.row][plr.Pos.col + 1] != '1') plr.Pos.col += 1;
-        break;
-    case DOWN:
-        if (map.display[plr.Pos.row + 1][plr.Pos.col] != '1') plr.Pos.row += 1;
-        break;
-    case LEFT:
-        if (map.display[plr.Pos.row][plr.Pos.col - 1] != '1') plr.Pos.col -= 1;
-        break;
-    case NONE:
+    case false:
         break;
     }
+
+    switch (g_sChar.moving.RIGHT) {
+    case true:
+        if (map.display[plr.Pos.row][plr.Pos.col + 1] != '1') plr.Pos.col += 1;
+        break;
+    case false:
+        break;
+    }
+
+    switch (g_sChar.moving.DOWN) {
+    case true:
+        if (map.display[plr.Pos.row + 1][plr.Pos.col] != '1') plr.Pos.row += 1;
+        break;
+    case false:
+        break;
+    }
+
+    switch (g_sChar.moving.LEFT) {
+    case true:
+        if (map.display[plr.Pos.row][plr.Pos.col - 1] != '1') plr.Pos.col -= 1;
+        break;
+    case false:
+        break;
+    }
+    
 }

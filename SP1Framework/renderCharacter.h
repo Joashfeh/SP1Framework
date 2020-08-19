@@ -4,21 +4,18 @@
 #include "Map.h"
 #include "Framework\timer.h"
 
-enum DIRECTION {
-    UP = 'U',
-    RIGHT = 'R',
-    DOWN = 'D',
-    LEFT = 'L',
-    NONE = 'N'
+struct DIRECTION {
+    bool UP;
+    bool RIGHT;
+    bool DOWN;
+    bool LEFT;
 };
-
 // struct for the game character
 struct SGameChar
 {
     COORD m_cLocation;
-    DIRECTION dir = NONE;
+    DIRECTION moving;
     bool  m_bActive;
-    bool  moving;
 };
 
 void renderCharacter(SGameChar& g_sChar, Console& g_Console);     // renders the character into the buffer

@@ -339,9 +339,9 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
 
-    c.X = g_Console.getConsoleSize().X - 9;
-    c.Y++;
-    g_Console.writeToBuffer(c, g_sChar.dir);
+    //c.X = g_Console.getConsoleSize().X - 9;
+    //c.Y++;
+    // g_Console.writeToBuffer(c, g_sChar.dir);
 
     // displays the elapsed time
     ss.str("");
@@ -433,46 +433,38 @@ void moveCharacter()
 {
     // Updating the location of the character based on the key release
     // providing a beep sound whenver we shift the character
-    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1' && g_sChar.moving != true)
+    if (g_skKeyEvent[K_UP].keyDown && map.display[plr.Pos.row - 1][plr.Pos.col] != '1')
     {   
-        g_sChar.moving = true;
-        g_sChar.dir = UP;
+        g_sChar.moving.UP = true;
     }
-    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1' && g_sChar.moving != true)
+    if (g_skKeyEvent[K_RIGHT].keyDown && map.display[plr.Pos.row][plr.Pos.col + 1] != '1')
     {
-        g_sChar.moving = true;
-        g_sChar.dir = RIGHT;
+        g_sChar.moving.RIGHT = true;
     }
-    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1' && g_sChar.moving != true)
+    if (g_skKeyEvent[K_DOWN].keyDown && map.display[plr.Pos.row + 1][plr.Pos.col] != '1')
     {
-        g_sChar.moving = true;
-        g_sChar.dir = DOWN;
+        g_sChar.moving.DOWN = true;
     }
-    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1' && g_sChar.moving != true)
+    if (g_skKeyEvent[K_LEFT].keyDown && map.display[plr.Pos.row][plr.Pos.col - 1] != '1')
     {
-        g_sChar.moving = true;
-        g_sChar.dir = LEFT;
+        g_sChar.moving.LEFT = true;
     }
 
     if (g_skKeyEvent[K_UP].keyReleased)
     {
-        g_sChar.moving = false;
-        g_sChar.dir = NONE;
+        g_sChar.moving.UP = false;
     }
     if (g_skKeyEvent[K_RIGHT].keyReleased)
     {
-        g_sChar.moving = false;
-        g_sChar.dir = NONE;
+        g_sChar.moving.RIGHT = false;
     }
     if (g_skKeyEvent[K_DOWN].keyReleased)
     {
-        g_sChar.moving = false;
-        g_sChar.dir = NONE;
+        g_sChar.moving.DOWN = false;
     }
     if (g_skKeyEvent[K_LEFT].keyReleased)
     {
-        g_sChar.moving = false;
-        g_sChar.dir = NONE;
+        g_sChar.moving.LEFT = false;
     }
 
 

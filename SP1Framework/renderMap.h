@@ -12,3 +12,4 @@ enum MAPTILE {
 };
 
 void renderMap(Console& g_Console, Player& plr, Map& map);           // renders the map to the buffer first
+
