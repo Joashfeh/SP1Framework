@@ -4,12 +4,16 @@ class Armor :
     public Item
 {
 public:
-    int dmgreduc;
-    int armorhealth;
+
+    std::string name;
+    int dmgReduc;
+    int armorHealth;
     int cost;
 
     Armor(std::string name);
     ~Armor();
+
+    void loadArmor(int id)
 
 };
 
