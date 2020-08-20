@@ -6,6 +6,7 @@ void spawnEnemies(Map& map) {
     for (int i = 0; i < 3; i++) {
         if (arr[i] == nullptr) {
             arr[i] = new Enemy;
+            arr[i]->loadEnemy(map.floor, i);
             int x = rand() % 192;
             int y = rand() % 96;
 

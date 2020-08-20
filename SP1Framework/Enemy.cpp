@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Player.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -16,7 +17,7 @@ void Enemy::Attack(Entity* ptrEntity)
 {
 }
 
-void Enemy::setenemystats(LEVEL f, int get_a) //
+void Enemy::setenemystats(int get_a) //
 {
 	string enemyDir;
 	enemyDir = "Enemy_Data/level_";
@@ -55,8 +56,9 @@ void Enemy::setenemystats(LEVEL f, int get_a) //
 	enemyDataDamage.close();
 }
 
-void Enemy::loadEnemy()
+void Enemy::loadEnemy(LEVEL L, int get_a)
 {
+	
 }
 
 /*int Enemy::return_enemy_count()

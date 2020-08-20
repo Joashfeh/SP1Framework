@@ -6,7 +6,7 @@ void enemyDeclare(Map& map)
     {
         for (int b = 0; b < 3; b++)
         {
-            entity_ptrs[a][b]->setenemystats(map.floor, a);
+            entity_ptrs[a][b]->setenemystats(a);
         }
     }
 }

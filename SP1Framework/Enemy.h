@@ -12,8 +12,8 @@ public:
 
 	Enemy();
 	void Attack(Entity* ptrEntity);
-	void setenemystats(LEVEL f, int get_a); // Sets enemy stats based on level and enemy type.
-	void loadEnemy();
+	void setenemystats(int get_a); // Sets enemy stats based on level and enemy type.
+	void loadEnemy(LEVEL L, int get_a); // Load current enemy for level.
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
