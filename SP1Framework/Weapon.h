@@ -7,11 +7,17 @@ class Weapon :
 public:
     
     std::string name;
+
     int dmg;
     int cost;
     int crit;
 
-    Weapon(int id);
+    Weapon::Weapon(int id) {
+
+        int dmg;
+        int cost;
+        int crit;
+    }
     ~Weapon();
 
     void loadWeapon(int id);
