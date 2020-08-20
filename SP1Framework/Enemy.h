@@ -1,3 +1,4 @@
+
 #pragma once
 #include <string>
 #include "Map.h"
@@ -17,4 +18,3 @@ public:
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
-

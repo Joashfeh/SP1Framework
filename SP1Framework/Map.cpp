@@ -1,15 +1,14 @@
 #include "Map.h"
 
 Map::Map() {
-	floor = ONE;
+	floor = 0;
 }
 
-Map::Map(LEVEL f, int floorType) : map{ nullptr } {
+Map::~Map() {
+	// do nothing for now
+}
 
-	int row = 1;
-	int col = 1;
-	this->floor = f;
-
+void Map::generateDungeon(int floor, int floorType) {
 	if (floorType == 0) {
 		map[4][3] = new Area(0b0001, 2, 0);
 		map[3][3] = new Area(0b0101, 2, 0);
@@ -22,112 +21,81 @@ Map::Map(LEVEL f, int floorType) : map{ nullptr } {
 		map[1][3] = new Area(0b1000, 2, 2);
 	}
 
-	if (floorType == 1) {
-		generateDungeon();
-	}
+	else {
 
-	for (int row = 0; row < 6; row++) {
-		for (int col = 0; col < 6; col++) {
-			if (map[row][col] == nullptr) map[row][col] = new Area();
-		}
-	}
+		int row = 1;
+		int col = 1;
 
-	for (int mapRow = 0; mapRow < 6; mapRow++) {
-		for (int mapCol = 0; mapCol < 6; mapCol++) {
-			for (int areaRow = 0; areaRow < 16; areaRow++) {
-				for (int areaCol = 0; areaCol < 16; areaCol++) {
-					fullMap[areaRow + mapRow * 16][areaCol + mapCol * 16] = map[mapRow][mapCol]->area[areaRow][areaCol];
-				}
-			}
-		}
-	}
+		col = rand() % 4 + 1;
 
-	for (int row = 0; row < 96; row++) {
-		for (int col = 0; col < 96; col++) {
-			display[row][col * 2] = fullMap[row][col * 2];
-		}
-	}
+		int rb = (int)(pow(2, rand() % 2 + 1));
+		int rbl = (int)(pow(2, rand() % 3 + 1));
+		int bl = (int)(pow(2, rand() % 2 + 2));
 
-}
+		std::cout << row << col << std::endl;
 
-Map::~Map() {
-	// do nothing for now
-}
+		if (col == 1) map[1][col] = new Area((rb & 0b0110), 1, 0); // possible doors: right, bottom
+		if (col == 2 || col == 3) map[1][col] = new Area((rbl & 0b1110), 1, 0); // possible doors: right, bottom, left
+		if (col == 4) map[1][col] = new Area((bl & 0b1100), 1, 0); // possible doors: bottom, left
 
-void Map::generateDungeon() {
+		Area* ptr;
+		ptr = map[1][col];
 
-	int row = 1;
-	int col = 1;
+		while (1) {
 
-	col = rand() % 4 + 1;
+			rb = (int)(pow(2, rand() % 2 + 1));
+			rbl = (int)(pow(2, rand() % 3 + 1));
+			bl = (int)(pow(2, rand() % 2 + 2));
 
-	int rb = (int)(pow(2, rand() % 2 + 1));
-	int rbl = (int)(pow(2, rand() % 3 + 1));
-	int bl = (int)(pow(2, rand() % 2 + 2));
+			if (row < 4) {
+				if (ptr->flags & 0b0010) { // if right
+					if (col == 3) {
+						if (map[row][col + 1] == nullptr) map[row][++col] = new Area(0b1100, 1, 1);
+					}
 
-	std::cout << row << col << std::endl;
-
-	if (col == 1) map[1][col] = new Area((rb & 0b0110), 1, 0); // possible doors: right, bottom
-	if (col == 2 || col == 3) map[1][col] = new Area((rbl & 0b1110), 1, 0); // possible doors: right, bottom, left
-	if (col == 4) map[1][col] = new Area((bl & 0b1100), 1, 0); // possible doors: bottom, left
-
-	Area* ptr;
-	ptr = map[1][col];
-
-	while (1) {
-
-		rb = (int)(pow(2, rand() % 2 + 1));
-		rbl = (int)(pow(2, rand() % 3 + 1));
-		bl = (int)(pow(2, rand() % 2 + 2));
-
-		if (row < 4) {
-			if (ptr->flags & 0b0010) { // if right
-				if (col == 3) {
-					if (map[row][col + 1] == nullptr) map[row][++col] = new Area(0b1100, 1, 1);
+					if (col < 3) {
+						if (map[row][col + 1] == nullptr) map[row][++col] = new Area(((rb & 0b0110) | 0b1000), 1, 1);
+					}
 				}
 
-				if (col < 3) {
-					if (map[row][col + 1] == nullptr) map[row][++col] = new Area(((rb & 0b0110) | 0b1000), 1, 1);
+				if (ptr->flags & 0b1000) { // if left
+					if (col == 2) {
+						if (map[row][col - 1] == nullptr) map[row][--col] = new Area(0b0110, 1, 1);
+					}
+
+					if (col > 2) {
+						if (map[row][col - 1] == nullptr) map[row][--col] = new Area(((bl & 0b1100) | 0b0010), 1, 1);
+					}
 				}
 			}
 
-			if (ptr->flags & 0b1000) { // if left
-				if (col == 2) {
-					if (map[row][col - 1] == nullptr) map[row][--col] = new Area(0b0110, 1, 1);
+			if (ptr->flags & 0b0100) { // if down
+				if (row == 3) {
+					if (col == 1) map[++row][col] = new Area(0b0011, 1, 1);
+					if (col == 4) map[++row][col] = new Area(0b1001, 1, 1);
+					else if (col == 2 || col == 3) {
+						int i = rand() % 2;
+						if (i == 0) map[++row][col] = new Area(0b1001, 1, 1);
+						if (i == 1) map[++row][col] = new Area(0b0011, 1, 1);
+					}
 				}
 
-				if (col > 2) {
-					if (map[row][col - 1] == nullptr) map[row][--col] = new Area(((bl & 0b1100) | 0b0010), 1, 1);
-				}
-			}
-		}
-
-		if (ptr->flags & 0b0100) { // if down
-			if (row == 3) {
-				if (col == 1) map[++row][col] = new Area(0b0011, 1, 1);
-				if (col == 4) map[++row][col] = new Area(0b1001, 1, 1);
-				else if (col == 2 || col == 3) {
-					int i = rand() % 2;
-					if (i == 0) map[++row][col] = new Area(0b1001, 1, 1);
-					if (i == 1) map[++row][col] = new Area(0b0011, 1, 1);
+				if (row <= 2) {
+					if (map[row + 1][col] == nullptr) {
+						if (col == 4) map[++row][col] = new Area(((bl & 0b1100) | 0b0001), 1, 1);
+						if (col == 1) map[++row][col] = new Area(((rb & 0b0110) | 0b0001), 1, 1);
+						else if (col == 2 || col == 3) map[++row][col] = new Area(((rbl & 0b1110) | 0b0001), 1, 1);
+					}
 				}
 			}
 
-			if (row <= 2) {
-				if (map[row + 1][col] == nullptr) {
-					if (col == 4) map[++row][col] = new Area(((bl & 0b1100) | 0b0001), 1, 1);
-					if (col == 1) map[++row][col] = new Area(((rb & 0b0110) | 0b0001), 1, 1);
-					else if (col == 2 || col == 3) map[++row][col] = new Area(((rbl & 0b1110) | 0b0001), 1, 1);
-				}
+			ptr = map[row][col];
+
+			if (row == 4) {
+				if (ptr->flags & 0b0010) map[row][++col] = new Area(0b1000, 1, 2);
+				if (ptr->flags & 0b1000) map[row][--col] = new Area(0b0010, 1, 2);
+				break;
 			}
-		}
-
-		ptr = map[row][col];
-
-		if (row == 4) {
-			if (ptr->flags & 0b0010) map[row][++col] = new Area(0b1000, 1, 2);
-			if (ptr->flags & 0b1000) map[row][--col] = new Area(0b0010, 1, 2);
-			break;
 		}
 	}
 
