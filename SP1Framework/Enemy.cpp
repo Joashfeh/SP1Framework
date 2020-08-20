@@ -16,7 +16,7 @@ void Enemy::Attack(Entity* ptrEntity)
 {
 }
 
-void Enemy::setenemystats(LEVEL f, int get_b) //
+void Enemy::setenemystats(int f, int get_b) //
 {
 	string enemyDir;
 	enemyDir = "Enemy_Data/level_";

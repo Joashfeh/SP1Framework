@@ -25,8 +25,8 @@ void spawnEnemies(Map& map) {
     }
 }
 
-void generateMap(Map& map, Player& plr) {
-	map.generateDungeon();
+void generateMap(Map& map, Player& plr, int floor) {
+	map.generateDungeon(floor, 1);
     spawnEnemies(map);
 	plr.spawn(&map);
 }

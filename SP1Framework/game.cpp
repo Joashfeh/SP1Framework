@@ -34,7 +34,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr);
+    generateMap(map, plr, 2);
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
 
