@@ -13,7 +13,7 @@ public:
     Armor(std::string name);
     ~Armor();
 
-    void loadArmor(int id)
+    void loadArmor(int id);
 
 };
 
