@@ -5,7 +5,7 @@ void renderCharacter(SGameChar &g_sChar, Console &g_Console)
 {
     // Draw the location of the character
     COLOURS charColor = COLOURS::BLACKMIDDLEBLUE;
-    char playerChar = 254;
+    unsigned char playerChar = 254;
     COORD c = g_sChar.m_cLocation;
     g_Console.writeToBuffer(c, playerChar, charColor);
 }

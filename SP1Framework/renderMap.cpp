@@ -19,7 +19,7 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
             COLOURS colour;
             colour = COLOURS::DEFAULT;
 
-            char outputChar = ' ';
+            unsigned char outputChar = ' ';
 
             switch (map.display[row][col]) {
             case MAPTILE::EMPTYTILE:

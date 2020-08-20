@@ -1,6 +1,7 @@
 #include "Map.h"
 
 Map::Map() {
+	floor = ONE;
 }
 
 Map::Map(LEVEL f, int floorType) : map{ nullptr } {
