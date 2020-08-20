@@ -1,4 +1,3 @@
-
 #pragma once
 #include <string>
 #include "Map.h"
@@ -10,6 +9,7 @@ class Enemy : public Entity
 public:
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
+	bool inRange;
 
 	Enemy();
 	void Attack(Entity* ptrEntity);

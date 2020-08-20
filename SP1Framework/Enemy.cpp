@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Player.h"
+#include "enemyDeclare.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -9,8 +10,8 @@ using namespace std;
 
 int Enemy::enemyCount = 0;
 
-Enemy::Enemy()
-{
+Enemy::Enemy() {
+	inRange = false;
 }
 
 void Enemy::Attack(Entity* ptrEntity)
