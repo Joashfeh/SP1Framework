@@ -10,7 +10,14 @@ void renderCharacter(SGameChar &g_sChar, Console &g_Console)
     g_Console.writeToBuffer(c, playerChar, charColor);
 }
 
-void moveChar(SGameChar& g_sChar, Player& plr, Map& map) {
+void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
+
+    g_sChar.frameTimer += dt;
+
+    if (g_sChar.frameTimer < 0.075)
+        return;
+
+    g_sChar.frameTimer = 0;
 
     switch (g_sChar.moving.UP) {
     case true:

@@ -15,9 +15,10 @@ struct SGameChar
 {
     COORD m_cLocation;
     DIRECTION moving;
+    double frameTimer;
     bool  m_bActive;
     bool canBattle;
 };
 
 void renderCharacter(SGameChar& g_sChar, Console& g_Console);     // renders the character into the buffer
-void moveChar(SGameChar &g_sChar, Player &plr, Map& map);
+void moveChar(SGameChar &g_sChar, Player &plr, Map& map, double dt);

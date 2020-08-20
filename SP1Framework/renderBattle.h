@@ -6,5 +6,5 @@
 #include "battleInterface.h"
 #include "Player.h"
 
-void renderBattle(double& g_dElapsedTime, Console& g_Console, Player& plr);
+void renderBattle(double& g_dElapsedTime, Console& g_Console, Player& plr, Enemy& Enemy);
 void battleKBHandler(const KEY_EVENT_RECORD& keyboardEvent, SKeyEvent* g_skKeyEvent);

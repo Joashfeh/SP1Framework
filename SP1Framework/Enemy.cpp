@@ -12,6 +12,9 @@ int Enemy::enemyCount = 0;
 
 Enemy::Enemy() {
 	inRange = false;
+	HP = 0;
+	Damage = 0;
+	Defense = 0;
 }
 
 void Enemy::Attack(Entity* ptrEntity)

@@ -1,7 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity()
-{
+Entity::Entity() {
+	frameTimer = 0;
 }
 
 Entity::~Entity()

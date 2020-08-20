@@ -1,11 +1,13 @@
 #include "renderBattle.h"
 
-void renderBattle(double& g_dElapsedTime, Console& g_Console, Player& plr) {
+void renderBattle(double& dt, Console& g_Console, Player& plr, Enemy& enemy) {
 
-    loadCharacter(g_Console, 5, 15, plr);
+    loadCharacter(g_Console, 5, 15, plr, dt);
+    triggerRenderPlayerDamage();
     renderCharacterDamage(g_Console, plr);
     battleInterface(g_Console);
     renderPlayerStats(g_Console, plr);
+    renderEnemyStats(g_Console, enemy);
 }
 
 void battleKBHandler(const KEY_EVENT_RECORD& keyboardEvent, SKeyEvent* g_skKeyEvent) {

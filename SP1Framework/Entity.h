@@ -4,6 +4,7 @@ class Entity
 {
 public:
 	int HP, Damage, Defense;
+	double frameTimer;
 	Position Pos;
 
 	Entity();

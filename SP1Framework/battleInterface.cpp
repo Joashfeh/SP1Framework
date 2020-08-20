@@ -83,3 +83,29 @@ void renderPlayerStats(Console& g_Console, Player& plr) {
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
 }
+
+void renderEnemyStats(Console& g_Console, Enemy& enemy) {
+    COORD outputCoord;
+    outputCoord.X = 95;
+    outputCoord.Y = 1;
+
+    displayBoxes(g_Console, outputCoord, 23, 7);
+
+    outputCoord.X = 97;
+    outputCoord.Y = 2;
+
+    std::ostringstream outputString;
+    outputString << "Health : " << enemy.HP;
+    g_Console.writeToBuffer(outputCoord, outputString.str());
+
+    outputString.str("");
+    outputCoord.Y += 2;
+    outputString << "Attack : " << enemy.Damage;
+    g_Console.writeToBuffer(outputCoord, outputString.str());
+
+    outputString.str("");
+    outputCoord.Y += 2;
+    outputString << "Defense : " << enemy.Defense;
+    g_Console.writeToBuffer(outputCoord, outputString.str());
+
+}

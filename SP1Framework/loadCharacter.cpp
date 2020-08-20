@@ -3,37 +3,25 @@
 #include <fstream>
 #include <string>
 
-int g_iCurrentFrame{ 0 };
-static int g_iFrameNumber{ 0 };
-int g_iMaxFrames{ 0 };
 int charSprite = 1;
 
-void loadCharacter(Console& console, short x, short y, Player& plr) {
+void loadCharacter(Console& console, short x, short y, Player& plr, double dt) {
 	COORD c;
 	c.X = x;
 	c.Y = y;
 
-	loadCharacter(console, c, plr);
+	loadCharacter(console, c, plr, dt);
 }
 
-void loadCharacter(Console &console, COORD c, Player& plr) {
+void loadCharacter(Console& console, COORD c, Player& plr, double dt) {
 
 	int x = c.X;
 	int y = c.Y;
 
-	switch (g_iFrameNumber) {
-	case 0:
-		charSprite = 1;
-		break;
-	case 8:
-		charSprite = 2;
-		break;
-	default:
-		break;
-	}
+	plr.frameTimer += dt;
 
-	g_iCurrentFrame++;
-	++g_iFrameNumber %= 16;
+	if (plr.frameTimer > 0.5 && charSprite == 1) { charSprite = 2; plr.frameTimer = 0; }
+	if (plr.frameTimer > 0.5 && charSprite == 2) { charSprite = 1; plr.frameTimer = 0; }
 
 	std::string spriteNo = "Sprite_data/Player_0";
 	spriteNo += std::to_string(charSprite);

@@ -47,6 +47,7 @@ void init( void )
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
     g_sChar.canBattle = false;
+    g_sChar.frameTimer = 0;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
 
@@ -234,7 +235,7 @@ void updateGame()       // gameplay logic
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
-    moveChar(g_sChar, plr, map);                    // sound can be played here too.
+    moveChar(g_sChar, plr, map, g_dDeltaTime);                    // sound can be played here too.
 }
 
 
@@ -263,7 +264,7 @@ void render()
         break;
     case S_SHOP: renderShop();
         break;
-    case S_BATTLE: renderBattle(g_dElapsedTime, g_Console, plr);
+    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *enemies[0]);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
