@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="battleInterface.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="enemyDeclare.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -95,7 +96,9 @@
     <ClCompile Include="keyEvents.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="renderBattle.cpp" />
     <ClCompile Include="renderCharacter.cpp" />
+    <ClCompile Include="renderCharacterDamage.cpp" />
     <ClCompile Include="renderMap.cpp" />
     <ClCompile Include="shopInterface.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -103,6 +106,7 @@
   <ItemGroup>
     <ClInclude Include="Area.h" />
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="battleInterface.h" />
     <ClInclude Include="colours.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enemyDeclare.h" />
@@ -118,7 +122,9 @@
     <ClInclude Include="keyEvents.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="renderBattle.h" />
     <ClInclude Include="renderCharacter.h" />
+    <ClInclude Include="renderCharacterDamage.h" />
     <ClInclude Include="renderMap.h" />
     <ClInclude Include="shopInterface.h" />
     <ClInclude Include="Weapon.h" />

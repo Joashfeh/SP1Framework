@@ -15,6 +15,7 @@
 #include <sstream>
 #include "Entity.h"
 #include "Enemy.h"
+#include "renderBattle.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -45,6 +46,7 @@ void init( void )
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
+    g_sChar.canBattle = false;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
 
@@ -209,14 +211,25 @@ void splashScreenWait()    // waits for time to pass in splash screen
 void updateGame()       // gameplay logic
 {
     for (int i = 0; i < 3; i++) {
+        int plrRow = plr.Pos.row;
+        int plrCol = plr.Pos.col;
+
         int enemyRow = enemies[i]->Pos.row;
         int enemyCol = enemies[i]->Pos.col;
-        if (enemyRow + plr.Pos.row < 2 && enemyCol + plr.Pos.col < 2)
+        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 5)
             enemies[i]->inRange = true;
         else enemies[i]->inRange = false;
     }
 
-    if (enemies[0]->inRange || enemies[1]->inRange || enemies[0]->inRange)
+    if (enemies[0]->inRange || enemies[1]->inRange || enemies[2]->inRange)
+        g_sChar.canBattle = true;
+    else g_sChar.canBattle = false;
+
+    if (g_skKeyEvent[K_SPACE].keyDown)
+    {
+        if (g_sChar.canBattle == true)
+            g_eGameState = S_BATTLE;
+    }
 
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
@@ -249,6 +262,8 @@ void render()
     case S_GAME: renderGame();
         break;
     case S_SHOP: renderShop();
+        break;
+    case S_BATTLE: renderBattle(g_dElapsedTime, g_Console, plr);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
