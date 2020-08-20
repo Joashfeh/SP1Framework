@@ -56,9 +56,9 @@ void Enemy::setenemystats(int get_a) //
 	enemyDataDamage.close();
 }
 
-void Enemy::loadEnemy(LEVEL L, int get_a)
+Enemy Enemy::loadEnemy(int level, int get_a)
 {
-	
+	return Enemy();
 }
 
 /*int Enemy::return_enemy_count()
