@@ -2,13 +2,15 @@
 
 void enemyDeclare(Map& map)
 {
-    for (int a = 0; a < 12; a++)
+    for (int a = 0; a < 3; a++)
     {
-        for (int b = 0; b < 3; b++)
-        {
-            entity_ptrs[a][b]->setenemystats(a);
-        }
+        entity_ptrs[a]->setenemystats(a);
     }
+}
+
+Enemy* get_ptr(int enemy)
+{
+    return entity_ptrs[enemy];
 }
 
 /*void loadEnemy()

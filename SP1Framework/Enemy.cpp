@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Player.h"
+#include "enemyDeclare.h"
 #include <iostream>
 #include <fstream>
 #include <string>
