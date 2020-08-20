@@ -6,11 +6,11 @@ void enemyDeclare(Map& map)
     {
         for (int b = 0; b < 3; b++)
         {
-            entity_ptrs[b]->setenemystats(map.floor, b);
+            entity_ptrs[a][b]->setenemystats(a);
         }
     }
 }
 
-void loadEnemy()
+/*void loadEnemy()
 {
-}
+}*/

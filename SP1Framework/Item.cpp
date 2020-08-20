@@ -2,7 +2,7 @@
 
 Item::Item() {
 	id = 0;
-	gold = 0;
+	//gold = 0;
 }
 
 Item::Item(std::string itemName)

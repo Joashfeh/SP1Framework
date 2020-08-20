@@ -1,3 +1,4 @@
+
 #pragma once
 #include <string>
 #include "Map.h"
@@ -12,8 +13,8 @@ public:
 
 	Enemy();
 	void Attack(Entity* ptrEntity);
-	void setenemystats(int f, int get_b); // Sets enemy stats based on level and enemy type.
+	void setenemystats(int get_a); // Sets enemy stats based on level and enemy type.
+	Enemy loadEnemy(int level, int get_a); // Load current enemy for level.
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
-

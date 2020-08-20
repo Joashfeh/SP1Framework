@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Player.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -16,14 +17,12 @@ void Enemy::Attack(Entity* ptrEntity)
 {
 }
 
-void Enemy::setenemystats(int f, int get_b) //
+void Enemy::setenemystats(int get_a) //
 {
 	string enemyDir;
 	enemyDir = "Enemy_Data/level_";
+	enemyDir += to_string(get_a + 1);
 
-
-
-	enemyDir += to_string(get_b);
 
 	// Set Health
 	string enemyDirHP = enemyDir;
@@ -38,6 +37,7 @@ void Enemy::setenemystats(int f, int get_b) //
 
 	// STOI: https://www.geeksforgeeks.org/converting-strings-numbers-cc/
 	HP = stoi(enemyset);
+
 
 	// Set Damage
 	string enemyDirDamage = enemyDir;
@@ -54,6 +54,11 @@ void Enemy::setenemystats(int f, int get_b) //
 
 	enemyDataHP.close();
 	enemyDataDamage.close();
+}
+
+Enemy Enemy::loadEnemy(int level, int get_a)
+{
+	return Enemy();
 }
 
 /*int Enemy::return_enemy_count()
