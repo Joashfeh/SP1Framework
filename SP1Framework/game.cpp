@@ -18,6 +18,7 @@
 #include "renderBattle.h"
 #include "renderMainMenu.h"
 #include "updateMainMenu.h"
+#include "updateBattle.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -29,6 +30,9 @@ SMouseEvent g_mouseEvent;
 Map map;
 Player plr;
 Enemy* enemies[3] = { nullptr, nullptr, nullptr };
+
+Enemy* battleEnemy;
+int battleTurn = 1;
 
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
@@ -199,7 +203,7 @@ void update(double dt)
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
-        case S_BATTLE:
+        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, plr, *battleEnemy, battleTurn);
             break;
         case S_SHOP: updateShop();
              break;
@@ -223,9 +227,14 @@ void updateGame()       // gameplay logic
 
         int enemyRow = enemies[i]->Pos.row;
         int enemyCol = enemies[i]->Pos.col;
-        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3)
+        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3) {
             enemies[i]->inRange = true;
-        else enemies[i]->inRange = false;
+            battleEnemy = enemies[i];
+        }
+        else {
+            enemies[i]->inRange = false;
+            battleEnemy = nullptr;
+        }
     }
 
     if (enemies[0]->inRange || enemies[1]->inRange || enemies[2]->inRange)
@@ -236,7 +245,7 @@ void updateGame()       // gameplay logic
     {
         if (g_sChar.canBattle == true) {
             g_eGameState = S_BATTLE;
-            plr.Attack(enemies[0], g_Console);
+            battleEnemy = enemies[0];
         }         
     }
 

@@ -21,6 +21,7 @@ enum COLOURS
 	PURPLE = (short)0xDD,
 	YELLOW = (short)0xEE,
 	WHITE = (short)0xFF,
+	WHITE2 = 15,
 	WHITERED = (short)0xFC,
 	WHITEDARKGREY = (short)0xF8,
 	MIDDILEBLUEDARKRED = (short)0x94,
