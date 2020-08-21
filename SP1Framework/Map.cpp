@@ -10,6 +10,8 @@ Map::~Map() {
 
 void Map::generateDungeon(int floor, int floorType) {
 
+	this->floor = floor;
+
 	for (int row = 0; row < 6; row++) {
 		for (int col = 0; col < 6; col++) {
 			if (map[row][col] != nullptr) {
