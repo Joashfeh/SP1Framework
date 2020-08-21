@@ -7,6 +7,7 @@ using namespace std;
 class Enemy : public Entity
 {
 public:
+	string enemy_name;
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
 	bool inRange;

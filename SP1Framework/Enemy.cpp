@@ -12,6 +12,7 @@ int Enemy::enemyCount = 0;
 
 Enemy::Enemy() {
 	inRange = false;
+	enemy_name = " ";
 	HP = 0;
 	Damage = 0;
 	Defense = 0;
@@ -136,6 +137,30 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		if (line_no == get_i + 1)
 		{
 			Defense = stoi(enemyset);
+		}
+	}
+
+	// Set Name //
+
+	string enemyDirName = enemyDir;
+	enemyDirName += "/name_data.txt";
+
+
+	// Open the file
+	std::ifstream enemyDataName(enemyDirName, std::ios::in);
+	if (!enemyDataName)
+		return Enemy();
+
+	enemyset = " "; // Clear enemyset
+	line_no = 0;
+
+	// Load the file
+	while (line_no != get_i + 1 && getline(enemyDataName, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			enemy_name = enemyset;
 		}
 	}
 
