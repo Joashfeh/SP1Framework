@@ -67,7 +67,7 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	enemyDir += to_string(level + 1);
 
 
-	// Set Health
+	// Set Health //
 	string enemyDirHP = enemyDir;
 	enemyDirHP += "/health_data.txt";
 
@@ -90,7 +90,7 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		}
 	}
 
-	// Set Damage
+	// Set Damage //
 
 	string enemyDirDamage = enemyDir;
 	enemyDirDamage += "/attack_data.txt";
@@ -114,10 +114,34 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		}
 	}
 
-	Damage = stoi(enemyset);
+
+	// Set Defence //
+
+	string enemyDirDefence = enemyDir;
+	enemyDirDefence += "/defence_data.txt";
+
+
+	// Open the file
+	std::ifstream enemyDataDefence(enemyDirDefence, std::ios::in);
+	if (!enemyDataDefence)
+		return Enemy();
+
+	enemyset = " "; // Clear enemyset
+	line_no = 0;
+
+	// Load the file
+	while (line_no != get_i + 1 && getline(enemyDataDefence, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			Defense = stoi(enemyset);
+		}
+	}
 
 	enemyDataHP.close();
 	enemyDataDamage.close();
+	enemyDataDefence.close();
 	return Enemy();
 }
 
