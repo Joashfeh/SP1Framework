@@ -76,10 +76,17 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		return Enemy();
 
 	string enemyset;
-	getline(enemyDataHP, enemyset);
+	int line_no = 0;
+	while (line_no != get_i + 1 && getline(enemyDataHP, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			HP = stoi(enemyset);
+		}
+	}
 
 	// STOI: https://www.geeksforgeeks.org/converting-strings-numbers-cc/
-	HP = stoi(enemyset);
 
 
 	// Set Damage
@@ -91,7 +98,15 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		return Enemy();
 
 	enemyset = " "; // Clear enemyset
-	getline(enemyDataDamage, enemyset);
+	line_no = 0;
+	while (line_no != get_i + 1 && getline(enemyDataDamage, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			Damage = stoi(enemyset);
+		}
+	}
 
 	Damage = stoi(enemyset);
 
