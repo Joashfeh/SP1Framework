@@ -1,19 +1,19 @@
-#include "loadCharacter.h"
+#include "renderCharacterSprite.h"
 #include "colours.h"
 #include <fstream>
 #include <string>
 
 int charSprite = 1;
 
-void loadCharacter(Console& console, short x, short y, Player& plr, double dt) {
+void renderCharacterSprite(Console& console, short x, short y, Player& plr, double dt) {
 	COORD c;
 	c.X = x;
 	c.Y = y;
 
-	loadCharacter(console, c, plr, dt);
+	renderCharacterSprite(console, c, plr, dt);
 }
 
-void loadCharacter(Console& console, COORD c, Player& plr, double dt) {
+void renderCharacterSprite(Console& console, COORD c, Player& plr, double dt) {
 
 	int x = c.X;
 	int y = c.Y;

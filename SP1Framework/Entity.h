@@ -1,8 +1,12 @@
 #pragma once
 #include "Position.h"
+#include "colours.h"
+
 class Entity
 {
 public:
+	COLOURS renderColour;
+
 	int HP, Damage, Defense;
 	double frameTimer;
 	Position Pos;

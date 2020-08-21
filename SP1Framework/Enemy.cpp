@@ -11,6 +11,8 @@ using namespace std;
 int Enemy::enemyCount = 0;
 
 Enemy::Enemy() {
+	enemyCount++;
+
 	inRange = false;
 	HP = 0;
 	Damage = 0;
@@ -150,6 +152,6 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	return enemycount;
 }*/
 
-Enemy::~Enemy()
-{
+Enemy::~Enemy() {
+	enemyCount--;
 }

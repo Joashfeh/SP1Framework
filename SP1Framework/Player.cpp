@@ -3,7 +3,6 @@
 
 Player::Player() {
 	HP = 100;
-	renderColour = COLOURS::WHITE;
 }
 
 void Player::Attack(Entity* ptrEntity) {

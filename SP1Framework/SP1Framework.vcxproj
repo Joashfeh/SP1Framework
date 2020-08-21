@@ -89,7 +89,7 @@
     <ClCompile Include="generateMap.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="loadCharacter.cpp" />
+    <ClCompile Include="renderCharacterSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="keyEvents.cpp" />
@@ -98,6 +98,7 @@
     <ClCompile Include="renderBattle.cpp" />
     <ClCompile Include="renderCharacter.cpp" />
     <ClCompile Include="renderCharacterDamage.cpp" />
+    <ClCompile Include="renderEnemySprite.cpp" />
     <ClCompile Include="renderMap.cpp" />
     <ClCompile Include="shopInterface.cpp" />
     <ClCompile Include="Weapon.cpp" />
@@ -115,7 +116,8 @@
     <ClInclude Include="generateMap.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="loadCharacter.h" />
+    <ClInclude Include="renderCharacterSprite.h" />
+    <ClInclude Include="renderEnemySprite.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="keyEvents.h" />
     <ClInclude Include="Player.h" />

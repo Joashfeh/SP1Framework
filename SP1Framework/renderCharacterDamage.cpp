@@ -1,9 +1,9 @@
 #pragma once
 #include "renderCharacterDamage.h"
 
-int g_iDamageCurrentFrame{ 0 };
-static int g_iDamageFrameNumber{ 0 };
-int g_iDamageMaxFrames{ 0 };
+int g_iPlayerCurrentFrame{ 0 };
+static int g_iPlayerFrameNumber{ 0 };
+int g_iPlayerMaxFrames{ 0 };
 
 //Trigger
 bool g_bIsRenderDamagePlayer{ false };
@@ -13,7 +13,7 @@ void renderCharacterDamage(Console& console, Player& plr) {
 	if (g_bIsRenderDamagePlayer == false)
 		return;
 
-	switch (g_iDamageFrameNumber) {
+	switch (g_iPlayerFrameNumber) {
 	case 0:
 		plr.renderColour = COLOURS::RED;
 		break;
@@ -25,16 +25,16 @@ void renderCharacterDamage(Console& console, Player& plr) {
 	}
 
 	// End of render
-	if (g_iDamageCurrentFrame == g_iDamageMaxFrames)
+	if (g_iPlayerCurrentFrame == g_iPlayerMaxFrames)
 	{
 		//Reset values
-		g_iDamageCurrentFrame = 0;
-		g_iDamageFrameNumber = 0;
+		g_iPlayerCurrentFrame = 0;
+		g_iPlayerFrameNumber = 0;
 		g_bIsRenderDamagePlayer = false;
 	}
 
-	g_iDamageCurrentFrame++;
-	++g_iDamageFrameNumber %= 10;
+	g_iPlayerCurrentFrame++;
+	++g_iPlayerFrameNumber %= 10;
 }
 
 void triggerRenderPlayerDamage() {
@@ -43,5 +43,5 @@ void triggerRenderPlayerDamage() {
 		return;
 
 	g_bIsRenderDamagePlayer = true;
-	g_iDamageMaxFrames = 10;
+	g_iPlayerMaxFrames = 10;
 }

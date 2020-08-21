@@ -9,6 +9,16 @@ Map::~Map() {
 }
 
 void Map::generateDungeon(int floor, int floorType) {
+
+	for (int row = 0; row < 6; row++) {
+		for (int col = 0; col < 6; col++) {
+			if (map[row][col] != nullptr) {
+				delete map[row][col];
+			}
+			map[row][col] = nullptr;
+		}
+	}
+
 	if (floorType == 0) {
 		map[4][3] = new Area(0b0001, 2, 0);
 		map[3][3] = new Area(0b0101, 2, 0);

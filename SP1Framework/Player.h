@@ -6,8 +6,6 @@
 class Player :
     public Entity {
 public:
-    
-    COLOURS renderColour;
 
     Player();
     void Attack(Entity* ptrEntity);

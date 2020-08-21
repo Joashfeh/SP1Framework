@@ -232,6 +232,23 @@ void updateGame()       // gameplay logic
             g_eGameState = S_BATTLE;
     }
 
+    // check if player is on ladder
+
+    int ladderPosX;
+    int ladderPoxY;
+
+    for (int row = 0; row < 96; row++) {
+        for (int col = 0; col < 192; col++) {
+            if (map.display[row][col] == 'L') {
+                ladderPosX = col;
+                ladderPoxY = row;
+            }
+        }
+    }
+
+    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row)
+        generateMap(map, plr, enemies, ++map.floor);
+
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
