@@ -1,10 +1,8 @@
 #include "updateBattle.h"
 #include "keyEvents.h"
 
-int g_ibattleCurrentFrame{ 0 };
-static int g_iBattleFrameNumber{ 0 };
 bool activeAction{ false };
-int g_iBattleMaxFrames{ 0 };
+double battleFrame = 0;
 
 bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y) {
 	if (g_mouseEvent.mousePosition.X == x && g_mouseEvent.mousePosition.Y == y)
@@ -14,12 +12,30 @@ bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y) {
 		return false;
 }
 
-void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, Enemy& enemy, int& turn) {
-	if (activeAction)
-		return;
+void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_eGameState, Player& plr, Enemy& enemy, int& turn, double dt) {
 
-	switch (turn) {
+	if (activeAction) {
+		battleFrame += dt;
+
+		if (battleFrame > 1){
+			activeAction = false;
+			battleFrame = 0;
+		}
+			
+		return;
+	}
+
+	if (enemy.HP == 0) {
+		turn = 1;
+		g_eGameState = S_GAME;
+	}
+
+	switch (turn % 2) {
 	case 0: // Enemy Turn
+		enemy.Attack(&plr, g_Console);
+		turn++;
+
+		triggerBattleAction();
 		break;
 	case 1: // Player Turn
 		for (int row = 30; row < 38; row++) {
@@ -28,6 +44,9 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, En
 					if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
 						plr.Attack(&enemy, g_Console);
 						turn++;
+
+						triggerBattleAction();
+						break;
 					}
 				}
 			}
@@ -42,5 +61,4 @@ void triggerBattleAction() {
 		return;
 
 	activeAction = true;
-	activeAction = 20;
 }

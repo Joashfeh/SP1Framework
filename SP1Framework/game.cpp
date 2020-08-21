@@ -31,7 +31,7 @@ Map map;
 Player plr;
 Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 
-Enemy* battleEnemy;
+Enemy* battleEnemy = nullptr;
 int battleTurn = 1;
 
 SGameChar   g_sChar;
@@ -52,7 +52,9 @@ void init( void )
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
-    g_sChar.canBattle = false;
+    g_sChar.canBattle[0] = false;
+    g_sChar.canBattle[1] = false;
+    g_sChar.canBattle[2] = false;
     g_sChar.frameTimer = 0;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
@@ -63,13 +65,6 @@ void init( void )
 
 }
 
-//--------------------------------------------------------------
-// Purpose  : Reset before exiting the program
-//            Do your clean up of memory here
-//            This is called once just before the game exits
-// Input    : Void
-// Output   : void
-//--------------------------------------------------------------
 void shutdown( void )
 {
 
@@ -79,19 +74,6 @@ void shutdown( void )
     g_Console.clearBuffer();
 }
 
-//--------------------------------------------------------------
-// Purpose  : Get all the console input events
-//            This function sets up the keyboard and mouse input from the console.
-//            We will need to reset all the keyboard status, because no events will be sent if no keys are pressed.
-//
-//            Remember to set the handlers for keyboard and mouse events.
-//            The function prototype of the handler is a function that takes in a const reference to the event struct
-//            and returns nothing. 
-//            void pfKeyboardHandler(const KEY_EVENT_RECORD&);
-//            void pfMouseHandlerconst MOUSE_EVENT_RECORD&);
-// Input    : Void
-// Output   : void
-//--------------------------------------------------------------
 void getInput( void )
 {
     // resets all the keyboard events
@@ -100,19 +82,6 @@ void getInput( void )
     g_Console.readConsoleInput();    
 }
 
-//--------------------------------------------------------------
-// Purpose  : This is the handler for the keyboard input. Whenever there is a keyboard event, this function will be called.
-//            Ideally, you should pass the key event to a specific function to handle the event.
-//            This is because in some states, some keys would be disabled. Hence, to reduce your code complexity, 
-//            it would be wise to split your keyboard input handlers separately.
-//            
-//            The KEY_EVENT_RECORD struct has more attributes that you can use, if you are adventurous enough.
-//
-//            In this case, we are not handling any keyboard event in the Splashscreen state
-//            
-// Input    : const KEY_EVENT_RECORD& keyboardEvent - reference to a key event struct
-// Output   : void
-//--------------------------------------------------------------
 void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
 {    
     switch (g_eGameState)
@@ -205,7 +174,7 @@ void update(double dt)
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
-        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, plr, *battleEnemy, battleTurn);
+        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
         case S_SHOP: updateShop();
              break;
@@ -224,32 +193,43 @@ void splashScreenWait()    // waits for time to pass in splash screen
 void updateGame()       // gameplay logic
 {
     for (int i = 0; i < 3; i++) {
-        int plrRow = plr.Pos.row;
-        int plrCol = plr.Pos.col;
+        if (enemies[i] != nullptr) {
+            int plrRow = plr.Pos.row;
+            int plrCol = plr.Pos.col;
 
-        int enemyRow = enemies[i]->Pos.row;
-        int enemyCol = enemies[i]->Pos.col;
-        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3) {
-            enemies[i]->inRange = true;
-            battleEnemy = enemies[i];
-        }
-        else {
-            enemies[i]->inRange = false;
-            battleEnemy = nullptr;
+            int enemyRow = enemies[i]->Pos.row;
+            int enemyCol = enemies[i]->Pos.col;
+            if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3) {
+                enemies[i]->inRange = true;
+            }
+            else {
+                enemies[i]->inRange = false;
+            }
+
+            if (enemies[i]->HP == 0) {
+                map.display[enemies[i]->Pos.row][enemies[i]->Pos.col] = '0';
+                delete enemies[i];
+                enemies[i] = nullptr;
+                return;
+            }
+
+            if (enemies[i]->inRange)
+                g_sChar.canBattle[i] = true;
+
+            else if (!enemies[i]->inRange)
+                g_sChar.canBattle[i] = false;
+
+            if (g_skKeyEvent[K_SPACE].keyDown)
+            {
+                if (g_sChar.canBattle[i] == true) {
+                    g_eGameState = S_BATTLE;
+                    battleEnemy = enemies[i];
+                }
+            }
         }
     }
+    
 
-    if (enemies[0]->inRange || enemies[1]->inRange || enemies[2]->inRange)
-        g_sChar.canBattle = true;
-    else g_sChar.canBattle = false;
-
-    if (g_skKeyEvent[K_SPACE].keyDown)
-    {
-        if (g_sChar.canBattle == true) {
-            g_eGameState = S_BATTLE;
-            battleEnemy = enemies[0];
-        }         
-    }
 
     // check if player is on ladder
 
@@ -304,7 +284,7 @@ void render()
         break;
     case S_SHOP: renderShop();
         break;
-    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *enemies[0]);
+    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
@@ -454,10 +434,8 @@ void renderInputEvents()
     
 }
 
-void moveCharacter()
-{
-    // Updating the location of the character based on the key release
-    // providing a beep sound whenver we shift the character
+void moveCharacter() {
+
     if (g_skKeyEvent[K_UP].keyDown)
     {   
         g_sChar.moving.UP = true;
@@ -491,14 +469,6 @@ void moveCharacter()
     {
         g_sChar.moving.LEFT = false;
     }
-
-
-
-    if (g_skKeyEvent[K_SPACE].keyReleased)
-    {
-        g_sChar.m_bActive = !g_sChar.m_bActive;
-    }
-
 }
 
 void renderShop()

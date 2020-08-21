@@ -21,6 +21,10 @@ Enemy::Enemy() {
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
+	ptrEntity->HP -= this->Damage;
+	if (ptrEntity->HP < 0)
+		ptrEntity->HP = 0;
+
 	triggerRenderPlayerDamage();
 }
 

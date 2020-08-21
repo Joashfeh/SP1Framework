@@ -17,7 +17,7 @@ struct SGameChar
     DIRECTION moving;
     double frameTimer;
     bool  m_bActive;
-    bool canBattle;
+    bool  canBattle[3];
 };
 
 void renderCharacter(SGameChar& g_sChar, Console& g_Console);     // renders the character into the buffer

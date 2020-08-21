@@ -4,9 +4,15 @@
 
 Player::Player() {
 	HP = 100;
+	Damage = 10;
+	Defense = 30;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
+	ptrEntity->HP -= this->Damage;
+	if (ptrEntity->HP < 0)
+		ptrEntity->HP = 0;
+
 	triggerRenderEnemyDamage();
 }
 

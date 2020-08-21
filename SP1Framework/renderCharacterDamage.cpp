@@ -10,7 +10,7 @@ bool g_bIsRenderDamagePlayer{ false };
 
 void renderCharacterDamage(Console& console, Player& plr) {
 
-	if (g_bIsRenderDamagePlayer == false)
+	if (!g_bIsRenderDamagePlayer)
 		return;
 
 	switch (g_iPlayerFrameNumber) {
@@ -30,7 +30,7 @@ void renderCharacterDamage(Console& console, Player& plr) {
 	// End of render
 	if (g_iPlayerCurrentFrame == g_iPlayerMaxFrames)
 	{
-		//Reset values
+		// Reset values
 		g_iPlayerCurrentFrame = 0;
 		g_iPlayerFrameNumber = 0;
 		g_bIsRenderDamagePlayer = false;
