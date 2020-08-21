@@ -7,6 +7,7 @@ class Weapon :
 public:
     
     std::string name;
+
     int dmg;
     int cost;
     int crit;

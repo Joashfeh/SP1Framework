@@ -249,6 +249,8 @@ void updateGame()       // gameplay logic
     if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row)
         generateMap(map, plr, enemies, ++map.floor);
 
+    if (map.floor == 13)
+        g_eGameState = S_FINISH;
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
