@@ -99,8 +99,10 @@
     <ClCompile Include="renderCharacter.cpp" />
     <ClCompile Include="renderCharacterDamage.cpp" />
     <ClCompile Include="renderEnemySprite.cpp" />
+    <ClCompile Include="renderMainMenu.cpp" />
     <ClCompile Include="renderMap.cpp" />
     <ClCompile Include="shopInterface.cpp" />
+    <ClCompile Include="updateMainMenu.cpp" />
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +127,10 @@
     <ClInclude Include="renderBattle.h" />
     <ClInclude Include="renderCharacter.h" />
     <ClInclude Include="renderCharacterDamage.h" />
+    <ClInclude Include="renderMainMenu.h" />
     <ClInclude Include="renderMap.h" />
     <ClInclude Include="shopInterface.h" />
+    <ClInclude Include="updateMainMenu.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

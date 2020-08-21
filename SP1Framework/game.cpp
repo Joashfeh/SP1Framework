@@ -16,6 +16,8 @@
 #include "Entity.h"
 #include "Enemy.h"
 #include "renderBattle.h"
+#include "renderMainMenu.h"
+#include "updateMainMenu.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -41,7 +43,7 @@ void init( void )
     g_dElapsedTime = 0.0;    
 
     // sets the initial state for the game
-    g_eGameState = S_GAME;
+    g_eGameState = S_MAINSCREEN;
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
@@ -117,6 +119,8 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
         break;
     case S_SHOP: gameplayKBHandler(keyboardEvent);
         break;
+    case S_MAINSCREEN: gameplayKBHandler(keyboardEvent);
+        break;
     }
 }
 
@@ -190,6 +194,8 @@ void update(double dt)
     switch (g_eGameState)
     {
         case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
+            break;
+        case S_MAINSCREEN: updateMainMenu(g_skKeyEvent, g_eGameState);
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
@@ -278,6 +284,8 @@ void render()
     switch (g_eGameState)
     {
     case S_SPLASHSCREEN: renderSplashScreen();
+        break;
+    case S_MAINSCREEN: renderMainMenu(g_Console);
         break;
     case S_GAME: renderGame();
         break;

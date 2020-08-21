@@ -1,5 +1,5 @@
 #pragma once
-#include "game.h"
+#include "keyEvents.h"
 
 void updateMainMenu(SKeyEvent* g_kKeyInput, EGAMESTATES& g_eGameState);
 
