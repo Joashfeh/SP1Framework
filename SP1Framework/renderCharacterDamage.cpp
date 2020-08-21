@@ -15,10 +15,13 @@ void renderCharacterDamage(Console& console, Player& plr) {
 
 	switch (g_iPlayerFrameNumber) {
 	case 0:
-		plr.renderColour = COLOURS::RED;
+		plr.renderColour = COLOURS::WHITE;
 		break;
 	case 5:
-		plr.renderColour = COLOURS::WHITE;
+		plr.renderColour = COLOURS::RED;
+		break;
+	case 10:
+		plr.renderColour = COLOURS::RED;
 		break;
 	default:
 		break;
@@ -43,5 +46,5 @@ void triggerRenderPlayerDamage() {
 		return;
 
 	g_bIsRenderDamagePlayer = true;
-	g_iPlayerMaxFrames = 10;
+	g_iPlayerMaxFrames = 20;
 }

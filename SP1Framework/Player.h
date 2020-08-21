@@ -8,7 +8,7 @@ class Player :
 public:
 
     Player();
-    void Attack(Entity* ptrEntity);
+    void Attack(Entity* ptrEntity, Console& g_Console);
     void Defend();
 
     void spawn(Map* map);

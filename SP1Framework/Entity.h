@@ -1,6 +1,7 @@
 #pragma once
 #include "Position.h"
 #include "colours.h"
+#include "Framework/console.h"	
 
 class Entity
 {
@@ -13,7 +14,7 @@ public:
 
 	Entity();
 	~Entity();
-	virtual void Attack(Entity* ptrEntity) = 0;
+	virtual void Attack(Entity* ptrEntity, Console& g_Console) = 0;
 	//virtual void Defend() = 0;
 	int getHP();
 	void setPos(int r, int c);
