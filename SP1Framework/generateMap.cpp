@@ -1,11 +1,10 @@
 #include "generateMap.h"
 
-Enemy* arr[3] = { nullptr, nullptr, nullptr };
-
-void spawnEnemies(Map& map) {
+void spawnEnemies(Map& map, Enemy* arr[]) {
     for (int i = 0; i < 3; i++) {
         if (arr[i] == nullptr) {
             arr[i] = new Enemy;
+            arr[i]->loadEnemy(map.floor, i);
             int x = rand() % 192;
             int y = rand() % 96;
 
@@ -25,8 +24,8 @@ void spawnEnemies(Map& map) {
     }
 }
 
-void generateMap(Map& map, Player& plr) {
-	map.generateDungeon();
-    spawnEnemies(map);
+void generateMap(Map& map, Player& plr, Enemy* enemies[], int floor) {
+	map.generateDungeon(floor, 1);
+    spawnEnemies(map, enemies);
 	plr.spawn(&map);
 }

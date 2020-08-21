@@ -1,4 +1,6 @@
 #include "Enemy.h"
+#include "Player.h"
+#include "enemyDeclare.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -8,15 +10,15 @@ using namespace std;
 
 int Enemy::enemyCount = 0;
 
-Enemy::Enemy()
-{
+Enemy::Enemy() {
+	inRange = false;
 }
 
 void Enemy::Attack(Entity* ptrEntity)
 {
 }
 
-void Enemy::setenemystats(LEVEL f, int get_a) //
+void Enemy::setenemystats(int get_a) //
 {
 	string enemyDir;
 	enemyDir = "Enemy_Data/level_";
@@ -55,8 +57,9 @@ void Enemy::setenemystats(LEVEL f, int get_a) //
 	enemyDataDamage.close();
 }
 
-void Enemy::loadEnemy()
+Enemy Enemy::loadEnemy(int level, int get_a)
 {
+	return Enemy();
 }
 
 /*int Enemy::return_enemy_count()

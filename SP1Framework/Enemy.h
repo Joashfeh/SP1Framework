@@ -9,12 +9,12 @@ class Enemy : public Entity
 public:
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
+	bool inRange;
 
 	Enemy();
 	void Attack(Entity* ptrEntity);
-	void setenemystats(LEVEL f, int get_a); // Sets enemy stats based on level and enemy type.
-	void loadEnemy();
+	void setenemystats(int get_a); // Sets enemy stats based on level and enemy type.
+	Enemy loadEnemy(int level, int get_a); // Load current enemy for level.
 	//int return_enemy_count(); //Getter for enemycount
 	~Enemy();
 };
-

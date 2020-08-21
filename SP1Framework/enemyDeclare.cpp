@@ -1,14 +1,17 @@
 #include "enemyDeclare.h"
 
-void enemyDeclare(Map& map)
+void enemyDeclare(Map& map, Enemy* enemies[])
 {
-    for (int a = 0; a < 12; a++)
+    for (int a = 0; a < 3; a++)
     {
-        for (int b = 0; b < 3; b++)
-        {
-            entity_ptrs[a][b]->setenemystats(map.floor, a);
-        }
+        enemies[a]->setenemystats(a);
     }
+}
+
+Enemy* get_ptr(int enemy, Enemy* enemies[])
+{
+    return enemies[enemy];
+    //entity_ptrs[a]->setenemystats(a);
 }
 
 /*void loadEnemy()

@@ -25,6 +25,7 @@ SMouseEvent g_mouseEvent;
 // Game specific variables here
 Map map;
 Player plr;
+Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
@@ -34,7 +35,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr);
+    generateMap(map, plr, enemies, 2);
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
 
@@ -207,6 +208,17 @@ void splashScreenWait()    // waits for time to pass in splash screen
 
 void updateGame()       // gameplay logic
 {
+    for (int i = 0; i < 3; i++) {
+        int enemyRow = enemies[i]->Pos.row;
+        int enemyCol = enemies[i]->Pos.col;
+        if (enemyRow + plr.Pos.row < 2 && enemyCol + plr.Pos.col < 2)
+            enemies[i]->inRange = true;
+        else enemies[i]->inRange = false;
+    }
+
+    if (enemies[0]->inRange || enemies[1]->inRange || enemies[0]->inRange)
+
+
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
     moveChar(g_sChar, plr, map);                    // sound can be played here too.
