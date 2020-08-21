@@ -21,7 +21,8 @@ void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
 
     switch (g_sChar.moving.UP) {
     case true:
-        if (map.display[plr.Pos.row - 1][plr.Pos.col] != '1') plr.Pos.row -= 1;
+        if (map.display[plr.Pos.row - 1][plr.Pos.col] != '1' && map.display[plr.Pos.row - 1][plr.Pos.col] != '3') 
+            plr.Pos.row -= 1;
         break;
     case false:
         break;
@@ -29,7 +30,8 @@ void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
 
     switch (g_sChar.moving.RIGHT) {
     case true:
-        if (map.display[plr.Pos.row][plr.Pos.col + 1] != '1') plr.Pos.col += 1;
+        if (map.display[plr.Pos.row][plr.Pos.col + 1] != '1' && map.display[plr.Pos.row][plr.Pos.col + 1] != '3') 
+            plr.Pos.col += 1;
         break;
     case false:
         break;
@@ -37,7 +39,8 @@ void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
 
     switch (g_sChar.moving.DOWN) {
     case true:
-        if (map.display[plr.Pos.row + 1][plr.Pos.col] != '1') plr.Pos.row += 1;
+        if (map.display[plr.Pos.row + 1][plr.Pos.col] != '1' && map.display[plr.Pos.row + 1][plr.Pos.col] != '3') 
+            plr.Pos.row += 1;
         break;
     case false:
         break;
@@ -45,7 +48,8 @@ void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
 
     switch (g_sChar.moving.LEFT) {
     case true:
-        if (map.display[plr.Pos.row][plr.Pos.col - 1] != '1') plr.Pos.col -= 1;
+        if (map.display[plr.Pos.row][plr.Pos.col - 1] != '1' && map.display[plr.Pos.row][plr.Pos.col - 1] != '3') 
+            plr.Pos.col -= 1;
         break;
     case false:
         break;

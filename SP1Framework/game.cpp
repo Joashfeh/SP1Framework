@@ -338,7 +338,7 @@ void renderInputEvents()
     COORD startPos = {48, 2};
     std::ostringstream ss;
     std::string key;
-    for (int i = 0; i < K_COUNT; ++i)
+    /*for (int i = 0; i < K_COUNT; ++i)
     {
         ss.str("");
         switch (i)
@@ -364,7 +364,7 @@ void renderInputEvents()
 
         COORD c = { startPos.X, startPos.Y + i };
         g_Console.writeToBuffer(c, ss.str(), 0x17);
-    }
+    }*/
 
     // mouse events    
     // g_mouseEvent.mousePosition.X

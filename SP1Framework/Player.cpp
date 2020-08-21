@@ -1,12 +1,12 @@
 #include "Player.h"
 
+
 Player::Player() {
 	HP = 100;
 	renderColour = COLOURS::WHITE;
 }
 
 void Player::Attack(Entity* ptrEntity) {
-	
 }
 
 void Player::Defend() {

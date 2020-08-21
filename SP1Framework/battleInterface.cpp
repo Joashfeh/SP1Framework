@@ -21,8 +21,14 @@ void battleInterface(Console& g_Console) {
         outputCoord.X = 0;
     }
 
-    outputCoord.X = 1;
+    outputCoord.X = 5;
     outputCoord.Y = 26;
+    g_Console.writeToBuffer(outputCoord, "                              ");
+    outputCoord.Y++; g_Console.writeToBuffer(outputCoord, "                              ");
+    outputCoord.Y++; g_Console.writeToBuffer(outputCoord, "                              ");
+
+    outputCoord.X = 7;
+    outputCoord.Y = 27;
 
     g_Console.writeToBuffer(outputCoord, "What would you like to do?");
 
@@ -34,8 +40,8 @@ void battleInterface(Console& g_Console) {
     if (!defendStr)
         return;
 
-    outputCoord.X = 1;
-    outputCoord.Y = 28;
+    outputCoord.X = 5;
+    outputCoord.Y = 30;
     for (int row = 0; row < 8; row++) {
         std::string outputStr;
         std::getline(attackStr, outputStr);
@@ -45,8 +51,8 @@ void battleInterface(Console& g_Console) {
 
     }
 
-    outputCoord.X = 72;
-    outputCoord.Y = 28;
+    outputCoord.X = 67;
+    outputCoord.Y = 30;
     for (int row = 0; row < 8; row++) {
         std::string outputStr;
         std::getline(defendStr, outputStr);

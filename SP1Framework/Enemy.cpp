@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "renderCharacterDamage.h"
 
 using namespace std;
 
@@ -16,8 +17,8 @@ Enemy::Enemy() {
 	Defense = 0;
 }
 
-void Enemy::Attack(Entity* ptrEntity)
-{
+void Enemy::Attack(Entity* ptrEntity) {
+	triggerRenderPlayerDamage();
 }
 
 /*void Enemy::setenemystats(int get_a) //
