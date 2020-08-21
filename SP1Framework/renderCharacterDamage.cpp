@@ -15,10 +15,10 @@ void renderCharacterDamage(Console& console, Player& plr) {
 
 	switch (g_iDamageFrameNumber) {
 	case 0:
-		plr.renderColour = COLOURS::WHITE;
-		break;
-	case 4:
 		plr.renderColour = COLOURS::RED;
+		break;
+	case 5:
+		plr.renderColour = COLOURS::WHITE;
 		break;
 	default:
 		break;
@@ -34,8 +34,7 @@ void renderCharacterDamage(Console& console, Player& plr) {
 	}
 
 	g_iDamageCurrentFrame++;
-	++g_iDamageFrameNumber %= 8;
-
+	++g_iDamageFrameNumber %= 10;
 }
 
 void triggerRenderPlayerDamage() {
@@ -44,5 +43,5 @@ void triggerRenderPlayerDamage() {
 		return;
 
 	g_bIsRenderDamagePlayer = true;
-	g_iDamageMaxFrames = 16;
+	g_iDamageMaxFrames = 10;
 }

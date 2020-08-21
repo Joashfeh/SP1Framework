@@ -217,7 +217,7 @@ void updateGame()       // gameplay logic
 
         int enemyRow = enemies[i]->Pos.row;
         int enemyCol = enemies[i]->Pos.col;
-        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 5)
+        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3)
             enemies[i]->inRange = true;
         else enemies[i]->inRange = false;
     }
