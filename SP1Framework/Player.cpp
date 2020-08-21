@@ -1,11 +1,13 @@
 #include "Player.h"
-
+#include "renderEnemyDamage.h"
+#include "Framework/console.h"
 
 Player::Player() {
 	HP = 100;
 }
 
-void Player::Attack(Entity* ptrEntity) {
+void Player::Attack(Entity* ptrEntity, Console& g_Console) {
+	triggerRenderEnemyDamage();
 }
 
 void Player::Defend() {

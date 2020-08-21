@@ -20,7 +20,7 @@ Enemy::Enemy() {
 	Defense = 0;
 }
 
-void Enemy::Attack(Entity* ptrEntity) {
+void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 	triggerRenderPlayerDamage();
 }
 

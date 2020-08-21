@@ -14,7 +14,7 @@ public:
 	bool inRange;
 
 	Enemy();
-	void Attack(Entity* ptrEntity);
+	void Attack(Entity* ptrEntity, Console& g_Console);
 	//void setenemystats(int get_a); // Sets enemy stats based on level and enemy type.
 	Enemy loadEnemy(int level, int get_i); // Load current enemy for level.
 	//int return_enemy_count(); //Getter for enemycount

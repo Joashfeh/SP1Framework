@@ -93,6 +93,12 @@
     <ClCompile Include="renderEnemySprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderEnemyDamage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="battle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -165,6 +171,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderCharacterSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="battle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderEnemyDamage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

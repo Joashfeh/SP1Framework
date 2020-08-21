@@ -228,8 +228,10 @@ void updateGame()       // gameplay logic
 
     if (g_skKeyEvent[K_SPACE].keyDown)
     {
-        if (g_sChar.canBattle == true)
+        if (g_sChar.canBattle == true) {
             g_eGameState = S_BATTLE;
+            plr.Attack(enemies[0], g_Console);
+        }         
     }
 
     // check if player is on ladder

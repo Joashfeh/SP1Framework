@@ -2,6 +2,7 @@
 #include "keyEvents.h"
 #include "renderCharacterSprite.h"
 #include "renderCharacterDamage.h"
+#include "renderEnemyDamage.h"
 #include "Framework/console.h"
 #include "battleInterface.h"
 #include "Player.h"
