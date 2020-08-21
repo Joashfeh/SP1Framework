@@ -15,6 +15,7 @@
 #include <sstream>
 #include "Entity.h"
 #include "Enemy.h"
+#include "renderBattle.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -45,6 +46,8 @@ void init( void )
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
     g_sChar.m_bActive = true;
+    g_sChar.canBattle = false;
+    g_sChar.frameTimer = 0;
     // sets the width, height and the font name to use in the console
     g_Console.setConsoleFont(0, 16, L"Consolas");
 
@@ -209,19 +212,49 @@ void splashScreenWait()    // waits for time to pass in splash screen
 void updateGame()       // gameplay logic
 {
     for (int i = 0; i < 3; i++) {
+        int plrRow = plr.Pos.row;
+        int plrCol = plr.Pos.col;
+
         int enemyRow = enemies[i]->Pos.row;
         int enemyCol = enemies[i]->Pos.col;
-        if (enemyRow + plr.Pos.row < 2 && enemyCol + plr.Pos.col < 2)
+        if (pow((enemyRow - plrRow), 2) + pow((enemyCol - plrCol), 2) < 3)
             enemies[i]->inRange = true;
         else enemies[i]->inRange = false;
     }
 
-    if (enemies[0]->inRange || enemies[1]->inRange || enemies[0]->inRange)
+    if (enemies[0]->inRange || enemies[1]->inRange || enemies[2]->inRange)
+        g_sChar.canBattle = true;
+    else g_sChar.canBattle = false;
 
+    if (g_skKeyEvent[K_SPACE].keyDown)
+    {
+        if (g_sChar.canBattle == true)
+            g_eGameState = S_BATTLE;
+    }
+
+    // check if player is on ladder
+
+    int ladderPosX;
+    int ladderPoxY;
+
+    for (int row = 0; row < 96; row++) {
+        for (int col = 0; col < 192; col++) {
+            if (map.display[row][col] == 'L') {
+                ladderPosX = col;
+                ladderPoxY = row;
+            }
+        }
+    }
+
+    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row)
+        generateMap(map, plr, enemies, ++map.floor);
+
+    if (map.floor == 13)
+        g_eGameState = S_FINISH;
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
-    moveChar(g_sChar, plr, map);                    // sound can be played here too.
+    moveChar(g_sChar, plr, map, g_dDeltaTime);                    // sound can be played here too.
 }
 
 
@@ -249,6 +282,8 @@ void render()
     case S_GAME: renderGame();
         break;
     case S_SHOP: renderShop();
+        break;
+    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *enemies[0]);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
@@ -299,6 +334,11 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
+    ss.str("");
+    ss << "Floor: " << map.floor;
+    c.Y += 2;
+    g_Console.writeToBuffer(c, ss.str());
+
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 0;
     g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
@@ -322,7 +362,7 @@ void renderInputEvents()
     COORD startPos = {48, 2};
     std::ostringstream ss;
     std::string key;
-    for (int i = 0; i < K_COUNT; ++i)
+    /*for (int i = 0; i < K_COUNT; ++i)
     {
         ss.str("");
         switch (i)
@@ -348,7 +388,7 @@ void renderInputEvents()
 
         COORD c = { startPos.X, startPos.Y + i };
         g_Console.writeToBuffer(c, ss.str(), 0x17);
-    }
+    }*/
 
     // mouse events    
     // g_mouseEvent.mousePosition.X

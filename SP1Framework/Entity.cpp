@@ -1,7 +1,8 @@
 #include "Entity.h"
 
-Entity::Entity()
-{
+Entity::Entity() {
+	frameTimer = 0;
+	renderColour = COLOURS::WHITE;
 }
 
 Entity::~Entity()

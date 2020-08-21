@@ -1,6 +1,11 @@
 #include "generateMap.h"
 
 void spawnEnemies(Map& map, Enemy* arr[]) {
+
+    for (int i = 0; i < 3; i++) {
+        arr[i] = nullptr;
+    }
+
     for (int i = 0; i < 3; i++) {
         if (arr[i] == nullptr) {
             arr[i] = new Enemy;
@@ -17,7 +22,6 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
                 i--;
             }
             else {
-                Enemy::enemyCount++;
                 map.display[arr[i]->Pos.row][arr[i]->Pos.col] = '3';
             }
         }
