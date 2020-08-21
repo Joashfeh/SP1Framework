@@ -332,6 +332,11 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
+    ss.str("");
+    ss << "Floor: " << map.floor;
+    c.Y += 2;
+    g_Console.writeToBuffer(c, ss.str());
+
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 0;
     g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
