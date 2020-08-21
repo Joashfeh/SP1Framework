@@ -14,14 +14,12 @@ bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y) {
 		return false;
 }
 
-void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, Enemy& enemy, int turn) {
-	
+void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, Enemy& enemy, int& turn) {
 	if (activeAction)
 		return;
 
 	switch (turn) {
 	case 0: // Enemy Turn
-		turn++;
 		break;
 	case 1: // Player Turn
 		for (int row = 30; row < 38; row++) {
@@ -29,14 +27,13 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, En
 				if (checkMousePos(g_mouseEvent, col, row)) {
 					if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
 						plr.Attack(&enemy, g_Console);
+						turn++;
 					}
 				}
 			}
 		}
-		turn++;
 		break;
 	}
-
 }
 
 void triggerBattleAction() {

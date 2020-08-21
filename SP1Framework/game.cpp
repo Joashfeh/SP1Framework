@@ -136,6 +136,8 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
         break;
     case S_GAME: gameplayMouseHandler(mouseEvent); // handle gameplay mouse event
         break;
+    case S_BATTLE: gameplayMouseHandler(mouseEvent);
+        break;
     }
 }
 

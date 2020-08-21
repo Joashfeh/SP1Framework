@@ -6,5 +6,5 @@
 
 bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y);
 
-void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, Enemy& enemy, int turn);
+void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, Player& plr, Enemy& enemy, int& turn);
 void triggerBattleAction();
