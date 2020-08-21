@@ -16,6 +16,7 @@ enum EGAMESTATES
     S_SHOP,
     S_BATTLE,
     S_GAMEOVER,
+    S_FINISH,
     S_COUNT
 };
 
