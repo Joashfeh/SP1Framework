@@ -71,12 +71,16 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	string enemyDirHP = enemyDir;
 	enemyDirHP += "/health_data.txt";
 
+
+	// Open the file
 	std::ifstream enemyDataHP(enemyDirHP, std::ios::in);
 	if (!enemyDataHP)
 		return Enemy();
 
 	string enemyset;
 	int line_no = 0;
+
+	// Load data
 	while (line_no != get_i + 1 && getline(enemyDataHP, enemyset))
 	{
 		line_no++;
@@ -86,19 +90,21 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		}
 	}
 
-	// STOI: https://www.geeksforgeeks.org/converting-strings-numbers-cc/
-
-
 	// Set Damage
+
 	string enemyDirDamage = enemyDir;
 	enemyDirDamage += "/attack_data.txt";
 
+
+	// Open the file
 	std::ifstream enemyDataDamage(enemyDirDamage, std::ios::in);
 	if (!enemyDataDamage)
 		return Enemy();
 
 	enemyset = " "; // Clear enemyset
 	line_no = 0;
+
+	// Load the file
 	while (line_no != get_i + 1 && getline(enemyDataDamage, enemyset))
 	{
 		line_no++;
