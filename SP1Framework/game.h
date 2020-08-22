@@ -41,7 +41,5 @@ void getInput();
 void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent);
 void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent);
 void moveCharacter();       // moves the character, collision detection, physics, etc
-void renderShop();
-void updateShop();
 
 #endif // _GAME_H

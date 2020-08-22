@@ -9,7 +9,6 @@
 #include "renderMap.h"
 #include "generateMap.h"
 #include "keyEvents.h"
-#include "shopInterface.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -19,6 +18,8 @@
 #include "renderMainMenu.h"
 #include "updateMainMenu.h"
 #include "updateBattle.h"
+#include "renderShop.h"
+#include "updateShop.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -107,6 +108,8 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
         break;
     case S_BATTLE: gameplayMouseHandler(mouseEvent);
         break;
+    case S_SHOP: gameplayMouseHandler(mouseEvent);
+        break;
     }
 }
 
@@ -176,7 +179,7 @@ void update(double dt)
             break;
         case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
-        case S_SHOP: updateShop();
+        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState);
              break;
         case S_GAMEOVER:
             break;
@@ -282,7 +285,7 @@ void render()
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop();
+    case S_SHOP: renderShop(g_Console);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
@@ -469,16 +472,5 @@ void moveCharacter() {
     {
         g_sChar.moving.LEFT = false;
     }
-}
-
-void renderShop()
-{
-    renderShopinterface(g_Console);
-}
-
-void updateShop()
-{
-    processUserInput();
-
 }
 
