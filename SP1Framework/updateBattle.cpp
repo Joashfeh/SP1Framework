@@ -51,6 +51,20 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 				}
 			}
 		}
+
+		for (int row = 30; row < 38; row++) {
+			for (int col = 67; col < 115; col++) {
+				if (checkMousePos(g_mouseEvent, col, row)) {
+					if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
+						plr.Defend();
+						turn++;
+
+						triggerBattleAction();
+						break;
+					}
+				}
+			}
+		}
 		break;
 	}
 }

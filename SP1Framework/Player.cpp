@@ -17,6 +17,7 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 }
 
 void Player::Defend() {
+	Defense += 10;
 }
 
 void Player::spawn(Map* map) {
