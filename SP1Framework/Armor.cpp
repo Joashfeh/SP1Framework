@@ -2,6 +2,11 @@
 #include <string>
 #include <fstream>
 
+Armor::Armor(int id)
+{
+	loadArmor(id);
+}
+
 Armor::Armor(std::string name)
 {
 
@@ -13,7 +18,7 @@ Armor::~Armor()
 }
 void Armor::loadArmor(int id) {
 	std::string armorDir;
-	armorDir = "Weapon_data/weapon_0";
+	armorDir = "Armor_data/armor_0";
 
 	armorDir += std::to_string(id);
 	armorDir += ".txt";
@@ -31,10 +36,10 @@ void Armor::loadArmor(int id) {
 			name = a;
 			break;
 		case 1:
-			dmgReduc = stoi(a);
+			armorHealth = stoi(a);
 			break;
 		case 2:
-			armorHealth = stoi(a);
+			dmgReduc = stoi(a);
 			break;
 		case 3:
 			cost = stoi(a);

@@ -19,6 +19,7 @@
 #include "renderMainMenu.h"
 #include "updateMainMenu.h"
 #include "updateBattle.h"
+#include "renderShop.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -106,6 +107,8 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
     case S_GAME: gameplayMouseHandler(mouseEvent); // handle gameplay mouse event
         break;
     case S_BATTLE: gameplayMouseHandler(mouseEvent);
+        break;
+    case S_SHOP: gameplayMouseHandler(mouseEvent);
         break;
     }
 }
@@ -282,7 +285,7 @@ void render()
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop();
+    case S_SHOP: renderShop(g_Console);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
@@ -470,15 +473,45 @@ void moveCharacter() {
         g_sChar.moving.LEFT = false;
     }
 }
-
-void renderShop()
-{
-    renderShopinterface(g_Console);
-}
-
 void updateShop()
 {
-    processUserInput();
-
+    if (g_skKeyEvent[K_SHOP].keyDown)
+    {
+        g_eGameState = S_GAME;
+    }
+    if (ConfirmationBox::appear == true)
+        confirmationBox(g_Console);
 }
+
+void renderShopEvents()
+{
+    std::ostringstream ss;
+    ss.str("");
+    ss << "Player position (" << g_mouseEvent.mousePosition.X << ", " << g_mouseEvent.mousePosition.Y << ")";
+    g_Console.writeToBuffer(g_mouseEvent.mousePosition, ss.str(), 0x59);
+    checkBuyButton(g_mouseEvent, 47, 15);
+    checkBuyButton(g_mouseEvent, 47, 19);
+    checkBuyButton(g_mouseEvent, 47, 23);
+    checkBuyButton(g_mouseEvent, 47, 27);
+    checkBuyButton(g_mouseEvent, 47, 32);
+
+    checkBuyButton(g_mouseEvent, 108, 15);
+    checkBuyButton(g_mouseEvent, 108, 23);
+    checkBuyButton(g_mouseEvent, 108, 31);
+
+    if (ConfirmationBox::appear == true)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if ((g_mouseEvent.mousePosition.X == 64 + i) && (g_mouseEvent.mousePosition.Y == 21))
+            {
+                if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+                {
+                    ConfirmationBox::no = true;
+                }
+            }
+        }
+    }
+}
+
 

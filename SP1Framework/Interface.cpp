@@ -42,18 +42,18 @@ void mainDisplay(Console& g_Console)
 	COORD c;
 	c.Y = 0;
 	c.X = 0;
-	for (int row = 0; row < 24; row++)
+	for (int row = 0; row < 40; row++)
 	{
-		for (int col = 0; col < 65; col++)
+		for (int col = 0; col < 120; col++)
 		{
 			if (c.Y == 0)
 				g_Console.writeToBuffer(c, (char)219);
 
-			else if (c.Y == 23)
+			else if (c.Y == 39)
 				g_Console.writeToBuffer(c, (char)219);
 			else
 			{
-				if ((c.X == 0) || (c.X == 63))
+				if ((c.X == 0) || (c.X == 118))
 				{
 					g_Console.writeToBuffer(c, (char)219);
 					c.X++;

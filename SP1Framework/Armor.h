@@ -10,6 +10,7 @@ public:
     int armorHealth;
     int cost;
 
+    Armor(int id);
     Armor(std::string name);
     ~Armor();
 

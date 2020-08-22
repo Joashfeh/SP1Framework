@@ -3,7 +3,7 @@
 #include <string>
 
 Weapon::Weapon(int id) {
-
+	loadWeapon(id);
 }
 
 Weapon::~Weapon()
