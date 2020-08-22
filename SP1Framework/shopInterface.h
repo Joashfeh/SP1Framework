@@ -17,4 +17,3 @@ void insertWeapon(Console& g_Console, int x, int y, Weapon weapon);
 void insertArmour(Console& g_Console, int x, int y, Armor armor);
 void confirmationBox(Console& g_Console);
 void renderConfirmation(Console& g_Console);
-void checkBuyButton(SMouseEvent& g_mouseEvent, int x, int y);

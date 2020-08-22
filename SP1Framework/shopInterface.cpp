@@ -178,16 +178,3 @@ void renderConfirmation(Console& g_Console)
 
 }
 
-void checkBuyButton(SMouseEvent& g_mouseEvent, int x, int y)
-{
-    for (int i = 0; i < 3; i++)
-    {
-        if ((g_mouseEvent.mousePosition.X == x + i) && (g_mouseEvent.mousePosition.Y == y))
-        {
-            if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
-            {
-                ConfirmationBox::appear = true;
-            }
-        }
-    }
-}

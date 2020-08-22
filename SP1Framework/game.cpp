@@ -9,7 +9,6 @@
 #include "renderMap.h"
 #include "generateMap.h"
 #include "keyEvents.h"
-#include "shopInterface.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -20,6 +19,7 @@
 #include "updateMainMenu.h"
 #include "updateBattle.h"
 #include "renderShop.h"
+#include "updateShop.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -179,7 +179,7 @@ void update(double dt)
             break;
         case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
-        case S_SHOP: updateShop();
+        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState);
              break;
         case S_GAMEOVER:
             break;
@@ -473,45 +473,4 @@ void moveCharacter() {
         g_sChar.moving.LEFT = false;
     }
 }
-void updateShop()
-{
-    if (g_skKeyEvent[K_SHOP].keyDown)
-    {
-        g_eGameState = S_GAME;
-    }
-    if (ConfirmationBox::appear == true)
-        confirmationBox(g_Console);
-}
-
-void renderShopEvents()
-{
-    std::ostringstream ss;
-    ss.str("");
-    ss << "Player position (" << g_mouseEvent.mousePosition.X << ", " << g_mouseEvent.mousePosition.Y << ")";
-    g_Console.writeToBuffer(g_mouseEvent.mousePosition, ss.str(), 0x59);
-    checkBuyButton(g_mouseEvent, 47, 15);
-    checkBuyButton(g_mouseEvent, 47, 19);
-    checkBuyButton(g_mouseEvent, 47, 23);
-    checkBuyButton(g_mouseEvent, 47, 27);
-    checkBuyButton(g_mouseEvent, 47, 32);
-
-    checkBuyButton(g_mouseEvent, 108, 15);
-    checkBuyButton(g_mouseEvent, 108, 23);
-    checkBuyButton(g_mouseEvent, 108, 31);
-
-    if (ConfirmationBox::appear == true)
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            if ((g_mouseEvent.mousePosition.X == 64 + i) && (g_mouseEvent.mousePosition.Y == 21))
-            {
-                if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
-                {
-                    ConfirmationBox::no = true;
-                }
-            }
-        }
-    }
-}
-
 
