@@ -6,6 +6,7 @@
 bool ConfirmationBox::appear = false;
 bool ConfirmationBox::no = false;
 bool ConfirmationBox::yes = false;
+bool ConfirmationBox::itemToBuy[8] = { false, false, false, false, false, false, false, false };
 
 void renderShopinterface(Console& g_Console)
 {
@@ -161,6 +162,16 @@ void insertArmour(Console& g_Console, int x, int y, Armor armor)
 void confirmationBox(Console& g_Console)
 {
     displayBoxes(g_Console, 52, 16, 20, 7);
+    g_Console.writeToBuffer(55, 17, "Purchase");
+
+    for (int i = 0; i < 8; i++)
+    {
+        if (ConfirmationBox::itemToBuy[i] == true)
+        {
+            g_Console.writeToBuffer(55, 18, checkItem(i));
+        }
+    }
+
     g_Console.writeToBuffer(55, 19, "Are you sure?");
     g_Console.writeToBuffer(57, 21, "Yes");
     g_Console.writeToBuffer(64, 21, "No");
@@ -170,11 +181,30 @@ void renderConfirmation(Console& g_Console)
 {
     if (ConfirmationBox::appear == true)
         confirmationBox(g_Console);
-    if (ConfirmationBox::no == true)
-    {
-        ConfirmationBox::appear = false;
-        ConfirmationBox::no = false;
-    }
 
+}
+
+std::string checkItem(int id)
+{
+    std::string item = "";
+    switch (id)
+    {
+    case 0: return "Stick";
+        break;
+    case 1: return "Dagger";
+        break;
+    case 2: return "Battle Axe";
+        break;
+    case 3: return "Death Scythe";
+        break;
+    case 4: return "Excalibur";
+        break;
+    case 5: return "Light Armor";
+        break;
+    case 6: return "Heavy Armor";
+        break;
+    case 7: return "Juggernaught";
+        break;
+    }
 }
 

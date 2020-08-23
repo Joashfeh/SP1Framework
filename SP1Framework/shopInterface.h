@@ -9,6 +9,7 @@ public:
 	static bool appear;
 	static bool yes;
 	static bool no;
+	static bool itemToBuy[8];
 };
 
 
@@ -17,3 +18,4 @@ void insertWeapon(Console& g_Console, int x, int y, Weapon weapon);
 void insertArmour(Console& g_Console, int x, int y, Armor armor);
 void confirmationBox(Console& g_Console);
 void renderConfirmation(Console& g_Console);
+std::string checkItem(int id);
