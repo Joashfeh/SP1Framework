@@ -9,8 +9,10 @@ void checkBuyButton(SMouseEvent& g_mouseEvent, int x, int y, int itemID)
         if ((g_mouseEvent.mousePosition.X == x + i) && (g_mouseEvent.mousePosition.Y == y))
         {
             if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+            {
                 ConfirmationBox::appear = true;
-            ConfirmationBox::itemToBuy[itemID] = true;
+                ConfirmationBox::itemToBuy[itemID] = true;
+            }
         }
     }
 }
@@ -77,13 +79,17 @@ void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKe
     checkNoButton(g_mouseEvent);
     checkYesButton(g_mouseEvent);
 
-    checkBuyButton(g_mouseEvent, 47, 15, 0);
-    checkBuyButton(g_mouseEvent, 47, 19, 1);
-    checkBuyButton(g_mouseEvent, 47, 23, 2);
-    checkBuyButton(g_mouseEvent, 47, 27, 3);
-    checkBuyButton(g_mouseEvent, 47, 32, 4);
 
-    checkBuyButton(g_mouseEvent, 108, 15, 5);
-    checkBuyButton(g_mouseEvent, 108, 23, 6);
-    checkBuyButton(g_mouseEvent, 108, 31, 7);
+    if (ConfirmationBox::appear == false)
+    {
+        checkBuyButton(g_mouseEvent, 47, 15, 0);
+        checkBuyButton(g_mouseEvent, 47, 19, 1);
+        checkBuyButton(g_mouseEvent, 47, 23, 2);
+        checkBuyButton(g_mouseEvent, 47, 27, 3);
+        checkBuyButton(g_mouseEvent, 47, 31, 4);
+
+        checkBuyButton(g_mouseEvent, 108, 15, 5);
+        checkBuyButton(g_mouseEvent, 108, 23, 6);
+        checkBuyButton(g_mouseEvent, 108, 31, 7);
+    }
 }
