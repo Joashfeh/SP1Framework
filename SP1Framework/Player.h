@@ -7,6 +7,8 @@ class Player :
     public Entity {
 public:
 
+    int gold;
+
     Player();
     void Attack(Entity* ptrEntity, Console& g_Console);
     void Defend();

@@ -8,7 +8,8 @@ enum MAPTILE {
 	WALL = '1',
 	SPAWNPOINT = '2',
 	ENEMYSPAWN = '3',
-	LADDER = 'L',
+	CHEST = '5',
+	LADDER = 'L'
 };
 
 void renderMap(Console& g_Console, Player& plr, Map& map);           // renders the map to the buffer first
