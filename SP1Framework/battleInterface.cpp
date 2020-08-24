@@ -46,7 +46,7 @@ void battleInterface(Console& g_Console) {
         std::string outputStr;
         std::getline(attackStr, outputStr);
 
-        g_Console.writeToBuffer(outputCoord, outputStr, COLOURS::WHITE2);
+        g_Console.writeToBuffer(outputCoord, outputStr);
         outputCoord.Y++;
 
     }
