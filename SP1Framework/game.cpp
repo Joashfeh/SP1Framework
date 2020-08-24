@@ -1,4 +1,3 @@
-
 #include <cstring>
 #include "game.h"
 #include "Map.h"
