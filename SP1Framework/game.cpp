@@ -168,7 +168,7 @@ void update(double dt)
             break;
         case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
-        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState);
+        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState, plr);
              break;
         case S_GAMEOVER:
             break;

@@ -2,6 +2,13 @@
 #include <fstream>
 #include <string>
 
+Weapon::Weapon()
+{
+	dmg = 0;
+	crit = 0;
+	cost = 0;
+}
+
 Weapon::Weapon(int id) {
 	loadWeapon(id);
 }
