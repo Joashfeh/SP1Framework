@@ -80,12 +80,12 @@ void renderPlayerStats(Console& g_Console, Player& plr) {
 
     outputString.str("");
     outputCoord.Y += 2;
-    outputString << "Attack : " << plr.Damage;
+    outputString << "Attack : " << plr.Damage << "+" << plr.mainWeapon.dmg;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
     outputString.str("");
     outputCoord.Y += 2;
-    outputString << "Defense : " << plr.Defense;
+    outputString << "Defense : " << plr.Defense << "+" << plr.mainArmor.defence;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
 }

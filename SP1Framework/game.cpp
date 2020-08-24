@@ -1,4 +1,3 @@
-
 #include <cstring>
 #include "game.h"
 #include "Map.h"
@@ -32,6 +31,7 @@ Player plr;
 Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 
 Enemy* battleEnemy = nullptr;
+goldCrate* crate = nullptr;
 int battleTurn = 1;
 bool showMessage;
 
@@ -43,7 +43,8 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr, enemies, 4);
+    generateMap(map, plr, enemies, crate, 2);
+    spawnGoldCrate(map);
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
@@ -168,7 +169,7 @@ void update(double dt)
             break;
         case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
-        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState);
+        case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState, plr);
              break;
         case S_GAMEOVER:
             break;
@@ -220,8 +221,15 @@ void updateGame()       // gameplay logic
             }
         }
     }
-    
 
+    if (crate != nullptr) {
+        if (plr.Pos.row == crate->pos.row && plr.Pos.col == crate->pos.col) {
+            plr.gold += crate->gold;
+            map.display[crate->pos.row][crate->pos.col] = '0';
+            delete crate;
+            crate = nullptr;
+        }
+    }
 
     // check if player is on ladder
 
@@ -238,8 +246,13 @@ void updateGame()       // gameplay logic
     }
 
     if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row) {
-        if (Enemy::enemyCount == 0) {          
-            generateMap(map, plr, enemies, ++map.floor);
+        if (Enemy::enemyCount == 0) { 
+            if (crate != nullptr)
+                delete crate;
+            crate = nullptr;
+
+            generateMap(map, plr, enemies, crate, ++map.floor);
+            spawnGoldCrate(map);
             plr.HP = 100;
         }
 
@@ -476,3 +489,29 @@ void moveCharacter() {
     }
 }
 
+void spawnGoldCrate(Map& map) {
+    int chance = rand() % 100;
+
+    if (chance < 30) { // 30% chance
+        int x;
+        int y;
+
+        bool chestSpawned = false;
+
+        while (!chestSpawned) {
+
+            x = rand() % 192;
+            y = rand() % 96;
+
+            if (map.display[y][x] == '9') {
+                crate = new goldCrate;
+                crate->gold = rand() % 100 + 100;
+                crate->pos.row = y;
+                crate->pos.col = x;
+
+                map.display[y][x] = '5';
+                chestSpawned = true;
+            }
+        }
+    }
+}

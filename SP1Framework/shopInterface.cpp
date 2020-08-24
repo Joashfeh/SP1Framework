@@ -148,13 +148,13 @@ void insertArmour(Console& g_Console, int x, int y, Armor armor)
     ss.str("");
     ss << armor.armorHealth;
     g_Console.writeToBuffer(x, y + 1, ss.str());
-    g_Console.writeToBuffer(x + 5, y + 1, "Armour health");
+    g_Console.writeToBuffer(x + 5, y + 1, "Armor health");
 
     //getting damage reduction and displaying it
     ss.str("");
-    ss << armor.dmgReduc << "%";
+    ss << armor.defence;
     g_Console.writeToBuffer(x, y + 2, ss.str());
-    g_Console.writeToBuffer(x + 5, y + 2, "Armour Reduction");
+    g_Console.writeToBuffer(x + 5, y + 2, "Defence");
 
     g_Console.writeToBuffer(108, y, "BUY");
 }
@@ -189,22 +189,24 @@ std::string checkItem(int id)
     std::string item = "";
     switch (id)
     {
-    case 0: return "Stick";
+    case 0: item += "Stick";
         break;
-    case 1: return "Dagger";
+    case 1: item += "Dagger";
         break;
-    case 2: return "Battle Axe";
+    case 2: item += "Battle Axe";
         break;
-    case 3: return "Death Scythe";
+    case 3: item += "Death Scythe";
         break;
-    case 4: return "Excalibur";
+    case 4: item += "Excalibur";
         break;
-    case 5: return "Light Armor";
+    case 5: item += "Light Armor";
         break;
-    case 6: return "Heavy Armor";
+    case 6: item += "Heavy Armor";
         break;
-    case 7: return "Juggernaught";
+    case 7: item += "Juggernaught";
         break;
     }
+
+    return item;
 }
 
