@@ -22,15 +22,19 @@ void Map::generateDungeon(int floor, int floorType) {
 	}
 
 	if (floorType == 0) {
-		map[4][3] = new Area(0b0001, 2, 0);
-		map[3][3] = new Area(0b0101, 2, 0);
-		map[2][3] = new Area(0b0100, 2, 2);
+		map[4][4] = new Area(0b1000, 2, 0);
+		map[4][3] = new Area(0b0011, 2, 3);
+		map[3][3] = new Area(0b0101, 2, 3);
+		map[2][3] = new Area(0b0101, 2, 3);
+		map[1][3] = new Area(0b0100, 2, 2);
 	}
 
 	if (floorType == 2) {
-		map[1][1] = new Area(0b0010, 2, 0);
-		map[1][2] = new Area(0b1010, 2, 0);
-		map[1][3] = new Area(0b1000, 2, 2);
+		map[2][1] = new Area(0b0001, 2, 0);
+		map[1][1] = new Area(0b0110, 2, 3);
+		map[1][2] = new Area(0b1010, 2, 3);
+		map[1][3] = new Area(0b1010, 2, 3);
+		map[1][4] = new Area(0b1000, 2, 2);
 	}
 
 	if (floorType == 1) {
