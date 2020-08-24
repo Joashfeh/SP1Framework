@@ -1,6 +1,5 @@
-// This is the main file for the game logic and function
-//
-//
+
+#include <cstring>
 #include "game.h"
 #include "Map.h"
 #include "Framework\console.h"
@@ -34,6 +33,7 @@ Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 
 Enemy* battleEnemy = nullptr;
 int battleTurn = 1;
+bool showMessage;
 
 SGameChar   g_sChar;
 EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
@@ -49,6 +49,8 @@ void init( void )
 
     // sets the initial state for the game
     g_eGameState = S_MAINSCREEN;
+
+    showMessage = false;
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
@@ -148,20 +150,6 @@ void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
     g_mouseEvent.eventFlags = mouseEvent.dwEventFlags;
 }
 
-//--------------------------------------------------------------
-// Purpose  : Update function
-//            This is the update function
-//            double dt - This is the amount of time in seconds since the previous call was made
-//
-//            Game logic should be done here.
-//            Such as collision checks, determining the position of your game characters, status updates, etc
-//            If there are any calls to write to the console here, then you are doing it wrong.
-//
-//            If your game has multiple states, you should determine the current state, and call the relevant function here.
-//
-// Input    : dt = deltatime
-// Output   : void
-//--------------------------------------------------------------
 
 void update(double dt)
 {
@@ -248,8 +236,16 @@ void updateGame()       // gameplay logic
         }
     }
 
-    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row)
-        generateMap(map, plr, enemies, ++map.floor);
+    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row) {
+        if (Enemy::enemyCount == 0) {          
+            generateMap(map, plr, enemies, ++map.floor);
+            plr.HP = 100;
+        }
+
+        else
+            showMessage = true;
+    }
+    else showMessage = false;
 
     if (map.floor == 13)
         g_eGameState = S_FINISH;
@@ -323,8 +319,13 @@ void renderSplashScreen()  // renders the splash screen
 
 void renderGame()
 {
+    
     renderMap(g_Console, plr, map);        // renders the map to the buffer first
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
+
+    std::string message = "You have not defeated all the enemies!";
+    if (showMessage == true)
+        g_Console.writeToBuffer(g_Console.getConsoleSize().X / 2 - message.size() / 2, 3, message);
 }
 
 void renderFramerate()

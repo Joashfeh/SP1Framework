@@ -54,10 +54,13 @@ Area::Area(unsigned short flags, int doorSize, int roomType) {
 	}
 
 	if (doorSize == 2) {
-		if (flags & 0b0001) { for (int i = 1; i < 14; i++) { area[0][i] = '0'; } }; // top is open
-		if (flags & 0b0010) { for (int i = 1; i < 14; i++) { area[i][15] = '0'; } };  // right is open
-		if (flags & 0b0100) { for (int i = 1; i < 14; i++) { area[15][i] = '0'; } }; // bottom is open
-		if (flags & 0b1000) { for (int i = 1; i < 14; i++) { area[i][0] = '0'; } }; // left is open
+		if (flags & 0b0001) { for (int i = 1; i < 15; i++) { area[0][i] = '0'; } }; // top is open
+		if (flags & 0b0010) { for (int i = 1; i < 15; i++) { area[i][15] = '0'; } };  // right is open
+		if (flags & 0b0100) { for (int i = 1; i < 15; i++) { area[15][i] = '0'; } }; // bottom is open
+		if (flags & 0b1000) { for (int i = 1; i < 15; i++) { area[i][0] = '0'; } }; // left is open
+
+		area[7][7] = '9';
+
 	}
 
 	this->flags = flags;

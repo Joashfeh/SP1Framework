@@ -8,7 +8,7 @@ int g_iPlayerMaxFrames{ 0 };
 //Trigger
 bool g_bIsRenderDamagePlayer{ false };
 
-void renderCharacterDamage(Console& console, Player& plr) {
+void renderCharacterDamage(Console& console, Player& plr, int enemyDMG) {
 
 	if (!g_bIsRenderDamagePlayer)
 		return;
@@ -26,6 +26,8 @@ void renderCharacterDamage(Console& console, Player& plr) {
 	default:
 		break;
 	}
+
+	console.writeToBuffer(30, 10, std::to_string(enemyDMG));
 
 	// End of render
 	if (g_iPlayerCurrentFrame == g_iPlayerMaxFrames)

@@ -8,7 +8,7 @@ int g_iEnemyMaxFrames{ 0 };
 //Trigger
 bool g_bIsRenderDamageEnemy{ false };
 
-void renderEnemyDamage(Console& console, Enemy& enemy) {
+void renderEnemyDamage(Console& console, Enemy& enemy, int playerDMG) {
 
 	if (g_bIsRenderDamageEnemy == false)
 		return;
@@ -26,6 +26,8 @@ void renderEnemyDamage(Console& console, Enemy& enemy) {
 	default:
 		break;
 	}
+
+	console.writeToBuffer(60, 5, std::to_string(playerDMG));
 
 	// End of render
 	if (g_iEnemyCurrentFrame == g_iEnemyMaxFrames)

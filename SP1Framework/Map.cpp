@@ -33,7 +33,7 @@ void Map::generateDungeon(int floor, int floorType) {
 		map[1][3] = new Area(0b1000, 2, 2);
 	}
 
-	else {
+	if (floorType == 1) {
 
 		int row = 1;
 		int col = 1;

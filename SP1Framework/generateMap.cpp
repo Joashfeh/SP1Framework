@@ -29,7 +29,22 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
 }
 
 void generateMap(Map& map, Player& plr, Enemy* enemies[], int floor) {
-	map.generateDungeon(floor, 1);
+    int floorType;
+    
+    switch (floor) {
+    case 1: floorType = 0;
+        break;
+    case 4: floorType = 2;
+        break;
+    case 8: floorType = 2;
+        break;
+    case 12: floorType = 2;
+        break;
+    default: floorType = 1;
+        break;
+    }
+
+	map.generateDungeon(floor, floorType);
     spawnEnemies(map, enemies);
 	plr.spawn(&map);
 }
