@@ -9,7 +9,6 @@ public:
 	Area();
 	Area(unsigned short flags, int doorSize, int roomType);
 
-	void display();
 	void loadMap(int terrainNo);
 };
 

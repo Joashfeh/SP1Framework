@@ -44,8 +44,6 @@ void Map::generateDungeon(int floor, int floorType) {
 		int rbl = (int)(pow(2, rand() % 3 + 1));
 		int bl = (int)(pow(2, rand() % 2 + 2));
 
-		std::cout << row << col << std::endl;
-
 		if (col == 1) map[1][col] = new Area((rb & 0b0110), 1, 0); // possible doors: right, bottom
 		if (col == 2 || col == 3) map[1][col] = new Area((rbl & 0b1110), 1, 0); // possible doors: right, bottom, left
 		if (col == 4) map[1][col] = new Area((bl & 0b1100), 1, 0); // possible doors: bottom, left
@@ -139,13 +137,3 @@ void Map::generateDungeon(int floor, int floorType) {
 	}
 
 }
-
-void Map::displayMap() {
-	for (int i = 0; i < 96; i++) {
-		for (int k = 0; k < 96; k++) {
-			std::cout << fullMap[i][k];
-		}
-		std::cout << std::endl;
-	}
-}
-

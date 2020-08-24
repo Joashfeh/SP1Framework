@@ -63,15 +63,6 @@ Area::Area(unsigned short flags, int doorSize, int roomType) {
 	this->flags = flags;
 }
 
-void Area::display() {
-	for (int i = 0; i < 16; i++) {
-		for (int k = 0; k < 16; k++) {
-			std::cout << area[i][k];
-		}
-		std::cout << std::endl;
-	}
-}
-
 void Area::loadMap(int terrainNo) {
 	std::string snewMapFileName;
 	snewMapFileName = "Terrain_data/Terrain";

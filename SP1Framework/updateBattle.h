@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Framework/console.h"
 #include "keyEvents.h"
+#include "battleInterface.h"
 #include "game.h"
 
 bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y);
