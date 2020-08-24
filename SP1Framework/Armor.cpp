@@ -2,6 +2,13 @@
 #include <string>
 #include <fstream>
 
+Armor::Armor()
+{
+	defence = 0;
+	armorHealth = 0;
+	cost = 0;
+}
+
 Armor::Armor(int id)
 {
 	loadArmor(id);
@@ -39,7 +46,7 @@ void Armor::loadArmor(int id) {
 			armorHealth = stoi(a);
 			break;
 		case 2:
-			dmgReduc = stoi(a);
+			defence = stoi(a);
 			break;
 		case 3:
 			cost = stoi(a);

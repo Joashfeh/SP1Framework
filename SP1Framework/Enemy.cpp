@@ -147,11 +147,6 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	return Enemy();
 }
 
-/*int Enemy::return_enemy_count()
-{
-	return enemycount;
-}*/
-
 Enemy::~Enemy() {
 	enemyCount--;
 }

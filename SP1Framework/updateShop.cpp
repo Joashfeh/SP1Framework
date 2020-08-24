@@ -43,7 +43,7 @@ void checkNoButton(SMouseEvent& g_mouseEvent)
     }
 }
 
-void checkYesButton(SMouseEvent& g_mouseEvent)
+void checkYesButton(SMouseEvent& g_mouseEvent, Player& plr)
 {
     if (ConfirmationBox::appear == true)
     {
@@ -62,26 +62,46 @@ void checkYesButton(SMouseEvent& g_mouseEvent)
         for (int i = 0; i < 8; i++)
         {
             if (ConfirmationBox::itemToBuy[i] == true)
+            {
+                if (i < 5)
+                {//if weapon load weapon
+                    plr.mainWeapon.loadWeapon(i + 1);
+                }
+                else
+                {//if armor load armor
+                    plr.mainArmor.loadArmor(i-4);
+                }
                 ConfirmationBox::itemToBuy[i] = false;
+            }
         }
     }
 
 
 }
 
-void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKeyEvent,EGAMESTATES& g_eGameState)
+bool checkGold(Player& plr)
+{
+    //checks if player has enough gold
+    //nothing for now
+    return true;
+}
+
+void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKeyEvent,EGAMESTATES& g_eGameState, Player& plr)
 {
     if (g_skKeyEvent[K_SHOP].keyDown)
     {
+        ConfirmationBox::appear = false;
+        for (int i = 0; i < 8; i++)
+            ConfirmationBox::itemToBuy[i] = false;
         g_eGameState = S_GAME;
     }
 
     checkNoButton(g_mouseEvent);
-    checkYesButton(g_mouseEvent);
+    checkYesButton(g_mouseEvent, plr);
 
 
     if (ConfirmationBox::appear == false)
-    {
+    {//prevents buying of another item if player is in the middle of buying
         checkBuyButton(g_mouseEvent, 47, 15, 0);
         checkBuyButton(g_mouseEvent, 47, 19, 1);
         checkBuyButton(g_mouseEvent, 47, 23, 2);

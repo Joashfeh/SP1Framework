@@ -4,7 +4,7 @@
 #include "Weapon.h"
 #include "Armor.h"
 
-class ConfirmationBox {
+struct ConfirmationBox {
 public:
 	static bool appear;
 	static bool yes;
@@ -13,9 +13,9 @@ public:
 };
 
 
-void renderShopinterface(Console& g_Console);
-void insertWeapon(Console& g_Console, int x, int y, Weapon weapon);
-void insertArmour(Console& g_Console, int x, int y, Armor armor);
-void confirmationBox(Console& g_Console);
-void renderConfirmation(Console& g_Console);
-std::string checkItem(int id);
+void renderShopinterface(Console& g_Console);// renders the shop interface
+void insertWeapon(Console& g_Console, int x, int y, Weapon weapon);// puts the weapon information into the shop
+void insertArmour(Console& g_Console, int x, int y, Armor armor);// puts the armor information into the shop
+void confirmationBox(Console& g_Console);// confirms whether the user wants to buy the item
+void renderConfirmation(Console& g_Console);//renders the confirmation displpay
+std::string checkItem(int id);// checks item that player wants to buy

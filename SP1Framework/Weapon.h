@@ -12,6 +12,7 @@ public:
     int cost;
     int crit;
 
+    Weapon();
     Weapon(int id);
     ~Weapon();
 
