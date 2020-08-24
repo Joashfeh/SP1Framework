@@ -39,7 +39,7 @@ void Armor::loadArmor(int id) {
 			armorHealth = stoi(a);
 			break;
 		case 2:
-			dmgReduc = stoi(a);
+			defence = stoi(a);
 			break;
 		case 3:
 			cost = stoi(a);
