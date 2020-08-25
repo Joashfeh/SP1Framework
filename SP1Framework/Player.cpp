@@ -6,6 +6,7 @@ Player::Player() {
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
+	gold = 0;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
