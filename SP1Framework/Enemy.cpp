@@ -21,12 +21,22 @@ Enemy::Enemy() {
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
+
+	float damage = this->Damage;
+
+	if (((Player*)ptrEntity)->isDefend) {
+		damage = (float)damage;
+		damage *= 0.7;
+		damage = (int)damage;
+	}
+		
+
 	if (ptrEntity->Defense == 0)
-		ptrEntity->HP -= this->Damage;
+		ptrEntity->HP -= damage;
 
 	if (ptrEntity->Defense != 0) {
-		ptrEntity->HP -= this->Damage * 0.5;
-		ptrEntity->Defense -= this->Damage * 0.5;
+		ptrEntity->HP -= damage * 0.5;
+		ptrEntity->Defense -= damage * 0.5;
 	}
 
 	if (ptrEntity->Defense < 0)

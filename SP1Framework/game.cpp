@@ -18,6 +18,7 @@
 #include "updateBattle.h"
 #include "renderShop.h"
 #include "updateShop.h"
+#include "renderGameUI.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -336,6 +337,7 @@ void renderGame()
     
     renderMap(g_Console, plr, map);        // renders the map to the buffer first
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
+    renderGameUI(g_Console, plr, map);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)
@@ -353,18 +355,9 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
-    ss.str("");
-    ss << "Floor: " << map.floor;
-    c.Y += 2;
-    g_Console.writeToBuffer(c, ss.str());
-
     c.X = g_Console.getConsoleSize().X - 15;
     c.Y = 0;
     g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
-
-    //c.X = g_Console.getConsoleSize().X - 9;
-    //c.Y++;
-    // g_Console.writeToBuffer(c, g_sChar.dir);
 
     // displays the elapsed time
     ss.str("");

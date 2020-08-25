@@ -27,7 +27,11 @@ void renderCharacterDamage(Console& console, Player& plr, int enemyDMG) {
 		break;
 	}
 
-	console.writeToBuffer(25, 15, std::to_string(enemyDMG));
+	int damage = enemyDMG;
+	if (plr.isDefend)
+		damage *= 0.7;
+
+	console.writeToBuffer(25, 15, std::to_string(damage));
 
 	// End of render
 	if (g_iPlayerCurrentFrame == g_iPlayerMaxFrames)
@@ -36,6 +40,7 @@ void renderCharacterDamage(Console& console, Player& plr, int enemyDMG) {
 		g_iPlayerCurrentFrame = 0;
 		g_iPlayerFrameNumber = 0;
 		g_bIsRenderDamagePlayer = false;
+		plr.isDefend = false;
 	}
 
 	g_iPlayerCurrentFrame++;

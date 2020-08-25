@@ -38,7 +38,6 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 	case 0: // Enemy Turn
 		enemy.Attack(&plr, g_Console);
 		turn++;
-
 		triggerBattleAction();
 		break;
 	case 1: // Player Turn
@@ -71,6 +70,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 		}
 		break;
 	}
+
 }
 
 void triggerBattleAction() {

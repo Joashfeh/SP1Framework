@@ -6,6 +6,8 @@ Player::Player() {
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
+
+	isDefend = false;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
@@ -28,7 +30,7 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 }
 
 void Player::Defend() {
-	Defense += 10;
+	isDefend = true;
 }
 
 void Player::spawn(Map* map) {

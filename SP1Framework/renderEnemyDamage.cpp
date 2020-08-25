@@ -36,6 +36,7 @@ void renderEnemyDamage(Console& console, Enemy& enemy, int playerDMG) {
 		g_iEnemyCurrentFrame = 0;
 		g_iEnemyFrameNumber = 0;
 		g_bIsRenderDamageEnemy = false;
+
 	}
 
 	g_iEnemyCurrentFrame++;

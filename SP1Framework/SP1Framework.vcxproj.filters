@@ -111,6 +111,9 @@
     <ClCompile Include="updateShop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="renderGameUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\console.h">
@@ -201,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="updateShop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderGameUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
