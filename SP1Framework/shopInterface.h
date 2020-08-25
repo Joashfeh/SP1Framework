@@ -3,6 +3,7 @@
 #include "keyEvents.h"
 #include "Weapon.h"
 #include "Armor.h"
+#include "Player.h"
 
 struct ConfirmationBox {
 public:
@@ -13,7 +14,7 @@ public:
 };
 
 
-void renderShopinterface(Console& g_Console/*, int* gold_input*/);// renders the shop interface
+void renderShopinterface(Console& g_Console, Player& plr);// renders the shop interface
 void insertWeapon(Console& g_Console, int x, int y, Weapon weapon);// puts the weapon information into the shop
 void insertArmour(Console& g_Console, int x, int y, Armor armor);// puts the armor information into the shop
 void confirmationBox(Console& g_Console);// confirms whether the user wants to buy the item

@@ -9,7 +9,7 @@ bool ConfirmationBox::no = false;
 bool ConfirmationBox::yes = false;
 bool ConfirmationBox::itemToBuy[8] = { false, false, false, false, false, false, false, false };
 
-void renderShopinterface(Console& g_Console/*, int* gold_input*/)
+void renderShopinterface(Console& g_Console ,Player& plr)
 {
     mainDisplay(g_Console);//white border
     COORD shop;
@@ -106,10 +106,14 @@ void renderShopinterface(Console& g_Console/*, int* gold_input*/)
     insertArmour(g_Console, 72, 23, Armor2);
     insertArmour(g_Console, 72, 31, Armor3);
 
+    std::stringstream gold;
+    gold.str("");
+    gold << plr.gold;
+
     //display the player's gold
     displayBoxes(g_Console, 6, 2, 20, 4);
     g_Console.writeToBuffer(7, 3, "Gold:");
-    g_Console.writeToBuffer(7, 4, "Insert Gold no");
+    g_Console.writeToBuffer(7, 4, gold.str());
 
 }
 
