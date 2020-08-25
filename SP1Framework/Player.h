@@ -19,5 +19,6 @@ public:
     void Defend();
 
     void spawn(Map* map);
+    void reset();
 };
 
