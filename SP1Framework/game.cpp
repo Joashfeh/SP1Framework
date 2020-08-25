@@ -313,7 +313,7 @@ void render()
         break;
     case S_SHOP: renderShop(g_Console, plr);
         break;
-    case S_INVENTORY: renderInventory(g_Console);
+    case S_INVENTORY: renderInventory(g_Console, plr);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;

@@ -7,5 +7,5 @@
 
 
 void displaygold();
-void renderWeaponSprite(Console& g_Console, int id);
-void renderInventory(Console& g_Console);
+void renderWeaponSprite(Console& g_Console, Player& plr);
+void renderInventory(Console& g_Console, Player& plr);

@@ -6,7 +6,6 @@
 class Entity
 {
 public:
-	int gold;
 	COLOURS renderColour;
 
 	int HP, Damage, Defense;

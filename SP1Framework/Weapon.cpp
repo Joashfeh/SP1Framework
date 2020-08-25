@@ -11,6 +11,7 @@ Weapon::Weapon()
 
 Weapon::Weapon(int id) {
 	loadWeapon(id);
+	this->id = id;
 }
 
 Weapon::~Weapon()
@@ -48,7 +49,7 @@ void Weapon::loadWeapon(int id) {
 			break;
 		}	
 	}
-
+	this->id = id;
 	weaponData.close();
 
 }

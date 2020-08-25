@@ -1,13 +1,17 @@
 #include "Inventory.h"
 #include <fstream>
+#include <sstream>
 
 void displaygold()
 {
 }
 
-void renderWeaponSprite(Console& g_Console, int id)
+void renderWeaponSprite(Console& g_Console, Player& plr)
 {
-	std::string WeaponSpriteFile = "Sprite_data/Weapon_sprite/Weapon01.txt";
+	std::string WeaponSpriteFile = "Sprite_data/Weapon_sprite/Weapon0";
+	WeaponSpriteFile += std::to_string(plr.mainWeapon.id);
+	WeaponSpriteFile += ".txt";
+
 	std::ifstream WeaponSprite(WeaponSpriteFile, std::ios::in);
 	if (!WeaponSprite)
 		return;
@@ -44,9 +48,9 @@ void renderWeaponSprite(Console& g_Console, int id)
 	WeaponSprite.close();
 }
 
-void renderInventory(Console& g_Console)
+void renderInventory(Console& g_Console, Player& plr)
 {
 	mainDisplay(g_Console);
 	displayBoxes(g_Console, 5, 3, 20, 10);
-	renderWeaponSprite(g_Console, 0);
+	renderWeaponSprite(g_Console, plr);
 }
