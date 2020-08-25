@@ -40,7 +40,7 @@ int battleTurn = 1;
 bool showMessage;
 
 SGameChar   g_sChar;
-EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
+EGAMESTATES g_eGameState = S_MAINSCREEN;
 
 // Console object
 Console g_Console(120, 40, "SP1 Framework");
@@ -53,7 +53,7 @@ void init( void )
     g_dElapsedTime = 0.0;    
 
     // sets the initial state for the game
-    g_eGameState = S_GAMEOVER;
+    g_eGameState = S_MAINSCREEN;
 
     showMessage = false;
 
