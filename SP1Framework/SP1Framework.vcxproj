@@ -81,6 +81,7 @@
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Armor.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="renderGameOver.cpp" />
     <ClCompile Include="renderGameUI.cpp" />
     <ClCompile Include="renderShop.cpp" />
     <ClCompile Include="updateBattle.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="renderMainMenu.cpp" />
     <ClCompile Include="renderMap.cpp" />
     <ClCompile Include="shopInterface.cpp" />
+    <ClCompile Include="updateGameOver.cpp" />
     <ClCompile Include="updateInventory.cpp" />
     <ClCompile Include="updateMainMenu.cpp" />
     <ClCompile Include="updateShop.cpp" />
@@ -115,6 +117,7 @@
     <ClInclude Include="Area.h" />
     <ClInclude Include="Armor.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="renderGameOver.h" />
     <ClInclude Include="renderGameUI.h" />
     <ClInclude Include="renderShop.h" />
     <ClInclude Include="updateBattle.h" />
@@ -141,6 +144,7 @@
     <ClInclude Include="renderMainMenu.h" />
     <ClInclude Include="renderMap.h" />
     <ClInclude Include="shopInterface.h" />
+    <ClInclude Include="updateGameOver.h" />
     <ClInclude Include="updateInventory.h" />
     <ClInclude Include="updateMainMenu.h" />
     <ClInclude Include="updateShop.h" />

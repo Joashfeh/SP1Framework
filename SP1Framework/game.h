@@ -12,7 +12,6 @@ extern bool g_bQuitGame;
 // Enumeration for the different screen states
 enum EGAMESTATES
 {
-    S_SPLASHSCREEN,
     S_GAME,
     S_SHOP,
     S_INVENTORY,

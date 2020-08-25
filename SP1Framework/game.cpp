@@ -19,6 +19,8 @@
 #include "renderShop.h"
 #include "updateShop.h"
 #include "renderGameUI.h"
+#include "renderGameOver.h"
+#include "updateGameOver.h"
 #include "updateInventory.h"
 
 double  g_dElapsedTime;
@@ -45,14 +47,13 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr, enemies, crate, 3);
-    spawnGoldCrate(map);
+    generateMap(map, plr, enemies, crate, 1);
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
 
     // sets the initial state for the game
-    g_eGameState = S_MAINSCREEN;
+    g_eGameState = S_GAMEOVER;
 
     showMessage = false;
 
@@ -102,6 +103,8 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
     case S_MAINSCREEN: gameplayKBHandler(keyboardEvent);
         break;
     case S_INVENTORY: gameplayKBHandler(keyboardEvent);
+        break;
+    case S_GAMEOVER: gameplayKBHandler(keyboardEvent);
         break;
     }
 }
@@ -180,7 +183,7 @@ void update(double dt)
             break;
         case S_INVENTORY: updateInventory(g_Console, g_skKeyEvent, g_eGameState);
             break;
-        case S_GAMEOVER:
+        case S_GAMEOVER: updateGameOver(g_skKeyEvent, g_eGameState, plr);
             break;
     }
 }
@@ -261,10 +264,6 @@ void updateGame()       // gameplay logic
     if (ladderPosX != NULL && ladderPosY != NULL) {
         if (ladderPosX == plr.Pos.col && ladderPosY == plr.Pos.row) {
             if (Enemy::enemyCount == 0) {
-                if (crate != nullptr) {
-                    delete crate;
-                    crate = nullptr;
-                }
 
                 generateMap(map, plr, enemies, crate, ++map.floor);
                 spawnGoldCrate(map);
@@ -316,6 +315,8 @@ void render()
     case S_INVENTORY: renderInventory(g_Console, plr);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
+        break;
+    case S_GAMEOVER: renderGameOver(g_Console);
         break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
@@ -500,6 +501,12 @@ void moveCharacter() {
 }
 
 void spawnGoldCrate(Map& map) {
+
+    if (crate != nullptr) {
+        delete crate;
+        crate = nullptr;
+    }
+
     int chance = rand() % 100;
 
     if (chance < 30) { // 30% chance
