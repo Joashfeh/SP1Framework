@@ -305,7 +305,7 @@ void render()
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop(g_Console);
+    case S_SHOP: renderShop(g_Console, plr);
         break;
     case S_INVENTORY: renderInventory(g_Console);
         break;

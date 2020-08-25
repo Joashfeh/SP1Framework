@@ -1,9 +1,8 @@
 #include "renderShop.h"
 #include "Player.h"
 
-void renderShop(Console& g_Console)
+void renderShop(Console& g_Console, Player& ptr)
 {
-    //Player* gold_get;
-    renderShopinterface(g_Console/*, &gold_get->gold*/);
+    renderShopinterface(g_Console, ptr);
     renderConfirmation(g_Console);
 }
