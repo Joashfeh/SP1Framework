@@ -10,6 +10,7 @@ class Player :
 public:
     Weapon mainWeapon;
     Armor mainArmor;
+    int gold;
 
 
     Player();
