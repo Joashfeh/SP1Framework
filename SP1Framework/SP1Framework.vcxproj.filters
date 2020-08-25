@@ -69,9 +69,6 @@
     <ClCompile Include="generateMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="keyEvents.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

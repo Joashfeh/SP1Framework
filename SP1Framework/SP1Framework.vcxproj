@@ -96,7 +96,6 @@
     <ClCompile Include="renderCharacterSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="keyEvents.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="renderBattle.cpp" />

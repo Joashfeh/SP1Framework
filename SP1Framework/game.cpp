@@ -45,7 +45,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr, enemies, crate, 2);
+    generateMap(map, plr, enemies, crate, 12);
     spawnGoldCrate(map);
 
     // Set precision for floating point output
@@ -242,32 +242,35 @@ void updateGame()       // gameplay logic
 
     // check if player is on ladder
 
-    int ladderPosX;
-    int ladderPoxY;
+    int ladderPosX = NULL;
+    int ladderPosY = NULL;
 
     for (int row = 0; row < 96; row++) {
         for (int col = 0; col < 192; col++) {
             if (map.display[row][col] == 'L') {
                 ladderPosX = col;
-                ladderPoxY = row;
+                ladderPosY = row;
             }
         }
     }
+    
+    if (ladderPosX != NULL && ladderPosY != NULL) {
+        if (ladderPosX == plr.Pos.col && ladderPosY == plr.Pos.row) {
+            if (Enemy::enemyCount == 0) {
+                if (crate != nullptr)
+                    delete crate;
+                crate = nullptr;
 
-    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row) {
-        if (Enemy::enemyCount == 0) { 
-            if (crate != nullptr)
-                delete crate;
-            crate = nullptr;
+                generateMap(map, plr, enemies, crate, ++map.floor);
+                spawnGoldCrate(map);
+                plr.HP = 100;
+            }
 
-            generateMap(map, plr, enemies, crate, ++map.floor);
-            spawnGoldCrate(map);
-            plr.HP = 100;
+            else
+                showMessage = true;
         }
-
-        else
-            showMessage = true;
     }
+
     else showMessage = false;
 
     if (map.floor == 13)
