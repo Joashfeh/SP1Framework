@@ -6,7 +6,7 @@ class Armor :
 public:
 
     std::string name;
-    int dmgReduc;
+    int defence;
     int armorHealth;
     int cost;
 
