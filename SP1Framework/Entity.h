@@ -12,6 +12,7 @@ public:
 	int HP, Damage, Defense;
 	double frameTimer;
 	Position Pos;
+	int gold;
 
 	Entity();
 	~Entity();
