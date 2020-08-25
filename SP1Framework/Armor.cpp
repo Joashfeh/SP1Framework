@@ -53,7 +53,7 @@ void Armor::loadArmor(int id) {
 			break;
 		}
 	}
-
+	this->id = id;
 	armorData.close();
 
 }
