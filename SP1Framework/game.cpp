@@ -18,6 +18,7 @@
 #include "updateBattle.h"
 #include "renderShop.h"
 #include "updateShop.h"
+#include "updateInventory.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -99,6 +100,8 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
         break;
     case S_MAINSCREEN: gameplayKBHandler(keyboardEvent);
         break;
+    case S_INVENTORY: gameplayKBHandler(keyboardEvent);
+        break;
     }
 }
 
@@ -114,6 +117,8 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
         break;
     case S_SHOP: gameplayMouseHandler(mouseEvent);
         break;
+    case S_INVENTORY: gameplayMouseHandler(mouseEvent);
+        break;
     }
 }
 
@@ -128,6 +133,7 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     case VK_LEFT: key = K_LEFT; break; 
     case VK_RIGHT: key = K_RIGHT; break;
     case 0x43: key = K_SHOP; break;
+    case 0x46: key = K_INVENTORY; break;
     case VK_SPACE: key = K_SPACE; break;
     case VK_ESCAPE: key = K_ESCAPE; break; 
     }
@@ -170,7 +176,9 @@ void update(double dt)
         case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
             break;
         case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState, plr);
-             break;
+            break;
+        case S_INVENTORY: updateInventory(g_Console, g_skKeyEvent, g_eGameState);
+            break;
         case S_GAMEOVER:
             break;
     }
@@ -276,12 +284,10 @@ void processUserInput()
     if (g_skKeyEvent[K_ESCAPE].keyReleased)
         g_bQuitGame = true;
     if (g_skKeyEvent[K_SHOP].keyDown)
-    {
-        if (g_eGameState == S_GAME)
-            g_eGameState = S_SHOP;
-        else if (g_eGameState == S_SHOP)
-            g_eGameState = S_GAME;
-    }
+        g_eGameState = S_SHOP;
+    if (g_skKeyEvent[K_INVENTORY].keyDown)
+        g_eGameState = S_INVENTORY;
+    
 }
 
 void render()
@@ -296,6 +302,8 @@ void render()
     case S_GAME: renderGame();
         break;
     case S_SHOP: renderShop(g_Console);
+        break;
+    case S_INVENTORY: renderInventory(g_Console);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
