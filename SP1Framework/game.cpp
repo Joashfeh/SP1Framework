@@ -45,7 +45,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr, enemies, crate, 12);
+    generateMap(map, plr, enemies, crate, 3);
     spawnGoldCrate(map);
 
     // Set precision for floating point output
@@ -257,9 +257,10 @@ void updateGame()       // gameplay logic
     if (ladderPosX != NULL && ladderPosY != NULL) {
         if (ladderPosX == plr.Pos.col && ladderPosY == plr.Pos.row) {
             if (Enemy::enemyCount == 0) {
-                if (crate != nullptr)
+                if (crate != nullptr) {
                     delete crate;
-                crate = nullptr;
+                    crate = nullptr;
+                }
 
                 generateMap(map, plr, enemies, crate, ++map.floor);
                 spawnGoldCrate(map);
@@ -269,9 +270,10 @@ void updateGame()       // gameplay logic
             else
                 showMessage = true;
         }
+        else showMessage = false;
     }
 
-    else showMessage = false;
+   
 
     if (map.floor == 13)
         g_eGameState = S_FINISH;
