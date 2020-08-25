@@ -45,8 +45,8 @@ EGAMESTATES g_eGameState = S_MAINSCREEN;
 // Console object
 Console g_Console(120, 40, "SP1 Framework");
 
-void init( void )
-{
+void init( void ) {
+
     generateMap(map, plr, enemies, crate, 1);
 
     // Set precision for floating point output
@@ -73,8 +73,7 @@ void init( void )
 
 }
 
-void shutdown( void )
-{
+void shutdown( void ) {
 
     // Reset to white text on black background
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
@@ -82,20 +81,17 @@ void shutdown( void )
     g_Console.clearBuffer();
 }
 
-void getInput( void )
-{
+void getInput( void ) {
     // resets all the keyboard events
     memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
     g_Console.readConsoleInput();    
 }
 
-void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
-{    
+void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent) {   
+
     switch (g_eGameState)
     {
-    case S_SPLASHSCREEN: // don't handle anything for the splash screen
-        break;
     case S_GAME: gameplayKBHandler(keyboardEvent); // handle gameplay keyboard event 
         break;
     case S_SHOP: gameplayKBHandler(keyboardEvent);
@@ -109,12 +105,9 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
     }
 }
 
-void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
-{    
-    switch (g_eGameState)
-    {
-    case S_SPLASHSCREEN: // don't handle anything for the splash screen
-        break;
+void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent) {
+
+    switch (g_eGameState) {
     case S_GAME: gameplayMouseHandler(mouseEvent); // handle gameplay mouse event
         break;
     case S_BATTLE: gameplayMouseHandler(mouseEvent);
@@ -126,8 +119,8 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
     }
 }
 
-void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
-{
+void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent) {
+
     // here, we map the key to our enums
     EKEYS key = K_COUNT;
     switch (keyboardEvent.wVirtualKeyCode)
@@ -152,8 +145,8 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     }    
 }
 
-void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
-{
+void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent) {
+
     if (mouseEvent.dwEventFlags & MOUSE_MOVED) // update the mouse position if there are no events
     {
         g_mouseEvent.mousePosition = mouseEvent.dwMousePosition;
@@ -163,16 +156,13 @@ void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
 }
 
 
-void update(double dt)
-{
+void update(double dt) {
+
     // get the delta time
     g_dElapsedTime += dt;
     g_dDeltaTime = dt;
 
-    switch (g_eGameState)
-    {
-        case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
-            break;
+    switch (g_eGameState) {
         case S_MAINSCREEN: updateMainMenu(g_skKeyEvent, g_eGameState);
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
@@ -188,15 +178,7 @@ void update(double dt)
     }
 }
 
-
-void splashScreenWait()    // waits for time to pass in splash screen
-{
-    if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
-        g_eGameState = S_GAME;
-}
-
-void updateGame()       // gameplay logic
-{
+void updateGame() {
     for (int i = 0; i < 3; i++) {
         if (enemies[i] != nullptr) {
             int plrRow = plr.Pos.row;
@@ -304,8 +286,6 @@ void render()
     clearScreen();      // clears the current screen and draw from scratch 
     switch (g_eGameState)
     {
-    case S_SPLASHSCREEN: renderSplashScreen();
-        break;
     case S_MAINSCREEN: renderMainMenu(g_Console);
         break;
     case S_GAME: renderGame();
