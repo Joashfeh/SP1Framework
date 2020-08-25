@@ -127,6 +127,7 @@ void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKe
     if (g_skKeyEvent[K_SHOP].keyDown)
     {
         ConfirmationBox::appear = false;
+        ConfirmationBox::rejection = false;
         for (int i = 0; i < 8; i++)
             ConfirmationBox::itemToBuy[i] = false;
         g_eGameState = S_GAME;
@@ -134,7 +135,7 @@ void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKe
 
     checkNoButton(g_mouseEvent);
     checkYesButton(g_mouseEvent, plr);
-
+    checkOKButton(g_mouseEvent);
 
     if (ConfirmationBox::appear == false)
     {//prevents buying of another item if player is in the middle of buying
