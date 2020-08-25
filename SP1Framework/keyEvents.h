@@ -25,6 +25,7 @@ enum EKEYS
     K_LEFT,
     K_RIGHT,
     K_SHOP,
+    K_INVENTORY,
     K_ESCAPE,
     K_SPACE,
     K_COUNT
