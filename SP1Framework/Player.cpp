@@ -42,3 +42,4 @@ void Player::spawn(Map* map) {
 		}
 	}
 }
+
