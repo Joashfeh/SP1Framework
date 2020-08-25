@@ -45,7 +45,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void )
 {
-    generateMap(map, plr, enemies, crate, 12);
+    generateMap(map, plr, enemies, crate, 3);
     spawnGoldCrate(map);
 
     // Set precision for floating point output
@@ -129,10 +129,10 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     EKEYS key = K_COUNT;
     switch (keyboardEvent.wVirtualKeyCode)
     {
-    case VK_UP: key = K_UP; break;
-    case VK_DOWN: key = K_DOWN; break;
-    case VK_LEFT: key = K_LEFT; break; 
-    case VK_RIGHT: key = K_RIGHT; break;
+    case 0x57: key = K_UP; break;
+    case 0x53: key = K_DOWN; break;
+    case 0x41: key = K_LEFT; break; 
+    case 0x44: key = K_RIGHT; break;
     case 0x43: key = K_SHOP; break;
     case 0x46: key = K_INVENTORY; break;
     case VK_SPACE: key = K_SPACE; break;
@@ -224,6 +224,10 @@ void updateGame()       // gameplay logic
             if (g_skKeyEvent[K_SPACE].keyDown)
             {
                 if (g_sChar.canBattle[i] == true) {
+                    g_sChar.moving.UP = false;
+                    g_sChar.moving.DOWN = false;
+                    g_sChar.moving.LEFT = false;
+                    g_sChar.moving.RIGHT = false;
                     g_eGameState = S_BATTLE;
                     battleEnemy = enemies[i];
                 }
@@ -257,9 +261,10 @@ void updateGame()       // gameplay logic
     if (ladderPosX != NULL && ladderPosY != NULL) {
         if (ladderPosX == plr.Pos.col && ladderPosY == plr.Pos.row) {
             if (Enemy::enemyCount == 0) {
-                if (crate != nullptr)
+                if (crate != nullptr) {
                     delete crate;
-                crate = nullptr;
+                    crate = nullptr;
+                }
 
                 generateMap(map, plr, enemies, crate, ++map.floor);
                 spawnGoldCrate(map);
@@ -269,9 +274,10 @@ void updateGame()       // gameplay logic
             else
                 showMessage = true;
         }
+        else showMessage = false;
     }
 
-    else showMessage = false;
+   
 
     if (map.floor == 13)
         g_eGameState = S_FINISH;
@@ -366,9 +372,9 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
-    c.X = g_Console.getConsoleSize().X - 15;
-    c.Y = 0;
-    g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
+    //c.X = g_Console.getConsoleSize().X - 15;
+    //c.Y = 0;
+    //g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
 
     // displays the elapsed time
     ss.str("");
