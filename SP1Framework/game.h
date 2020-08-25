@@ -15,6 +15,7 @@ enum EGAMESTATES
     S_SPLASHSCREEN,
     S_GAME,
     S_SHOP,
+    S_INVENTORY,
     S_BATTLE,
     S_GAMEOVER,
     S_FINISH,

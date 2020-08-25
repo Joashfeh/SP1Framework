@@ -111,6 +111,12 @@
     <ClCompile Include="updateShop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="updateInventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="renderGameUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -204,6 +210,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="updateShop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="updateInventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="renderGameUI.h">
