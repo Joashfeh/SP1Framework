@@ -30,6 +30,10 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 		g_eGameState = S_GAME;
 	}
 
+	if (plr.HP == 0) {
+		g_eGameState = S_GAMEOVER;
+	}
+
 	switch (turn % 2) {
 	case 0: // Enemy Turn
 		enemy.Attack(&plr, g_Console);

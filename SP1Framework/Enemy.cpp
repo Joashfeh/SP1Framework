@@ -21,7 +21,17 @@ Enemy::Enemy() {
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
-	ptrEntity->HP -= this->Damage;
+	if (ptrEntity->Defense != 0) {
+		ptrEntity->HP -= this->Damage * 0.5;
+		ptrEntity->Defense -= this->Damage * 0.5;
+	}
+
+	if (ptrEntity->Defense == 0)
+		ptrEntity->HP -= this->Damage;
+
+	if (ptrEntity->Defense < 0)
+		ptrEntity->Defense = 0;
+
 	if (ptrEntity->HP < 0)
 		ptrEntity->HP = 0;
 
@@ -136,11 +146,6 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	enemyDataDefence.close();
 	return Enemy();
 }
-
-/*int Enemy::return_enemy_count()
-{
-	return enemycount;
-}*/
 
 Enemy::~Enemy() {
 	enemyCount--;

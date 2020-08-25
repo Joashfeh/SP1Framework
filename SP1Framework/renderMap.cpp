@@ -32,6 +32,10 @@ void renderMap(Console& g_Console, Player& plr, Map& map)
                 outputChar = 158;
                 colour = COLOURS::BLACKDARKGREY;
                 break;
+            case MAPTILE::CHEST:
+                outputChar = 254;
+                colour = COLOURS::LIGHTYELLOW;
+                break;
             case MAPTILE::LADDER:
                 outputChar = 206;
                 c.Y--; g_Console.writeToBuffer(c, outputChar, colour);

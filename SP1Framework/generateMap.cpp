@@ -62,7 +62,7 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
 
 }
 
-void generateMap(Map& map, Player& plr, Enemy* enemies[], int floor) {
+void generateMap(Map& map, Player& plr, Enemy* enemies[], goldCrate* crate, int floor) {
     int floorType;
     
     switch (floor) {

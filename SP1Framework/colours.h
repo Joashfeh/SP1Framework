@@ -20,6 +20,7 @@ enum COLOURS
 	RED = (short)0xCC,
 	PURPLE = (short)0xDD,
 	YELLOW = (short)0xEE,
+	LIGHTYELLOW = 14,
 	WHITE = (short)0xFF,
 	WHITE2 = 15,
 	WHITERED = (short)0xFC,

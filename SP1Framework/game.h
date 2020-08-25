@@ -4,6 +4,7 @@
 #include "Position.h"
 #include "Framework\timer.h"
 #include "Framework\console.h"
+#include "generateMap.h"
 
 extern CStopWatch g_swTimer;
 extern bool g_bQuitGame;
@@ -41,5 +42,6 @@ void getInput();
 void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent);
 void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent);
 void moveCharacter();       // moves the character, collision detection, physics, etc
+void spawnGoldCrate(Map& map);
 
 #endif // _GAME_H
