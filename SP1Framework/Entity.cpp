@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 Entity::Entity() {
+	gold = 0;
 	frameTimer = 0;
 	renderColour = COLOURS::WHITE;
 }
