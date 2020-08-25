@@ -129,10 +129,10 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     EKEYS key = K_COUNT;
     switch (keyboardEvent.wVirtualKeyCode)
     {
-    case VK_UP: key = K_UP; break;
-    case VK_DOWN: key = K_DOWN; break;
-    case VK_LEFT: key = K_LEFT; break; 
-    case VK_RIGHT: key = K_RIGHT; break;
+    case 0x57: key = K_UP; break;
+    case 0x53: key = K_DOWN; break;
+    case 0x41: key = K_LEFT; break; 
+    case 0x44: key = K_RIGHT; break;
     case 0x43: key = K_SHOP; break;
     case 0x46: key = K_INVENTORY; break;
     case VK_SPACE: key = K_SPACE; break;
@@ -224,6 +224,10 @@ void updateGame()       // gameplay logic
             if (g_skKeyEvent[K_SPACE].keyDown)
             {
                 if (g_sChar.canBattle[i] == true) {
+                    g_sChar.moving.UP = false;
+                    g_sChar.moving.DOWN = false;
+                    g_sChar.moving.LEFT = false;
+                    g_sChar.moving.RIGHT = false;
                     g_eGameState = S_BATTLE;
                     battleEnemy = enemies[i];
                 }
@@ -368,9 +372,9 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
-    c.X = g_Console.getConsoleSize().X - 15;
-    c.Y = 0;
-    g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
+    //c.X = g_Console.getConsoleSize().X - 15;
+    //c.Y = 0;
+    //g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
 
     // displays the elapsed time
     ss.str("");
