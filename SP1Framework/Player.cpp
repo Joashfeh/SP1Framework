@@ -6,24 +6,10 @@ Player::Player() {
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
-
-	gold = 0;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
-	if (ptrEntity->Defense != 0) {
-		ptrEntity->HP -= this->Damage * 0.5;
-		ptrEntity->Defense -= this->Damage * 0.5;
-	}
-
-	if (ptrEntity->Defense == 0)
-		ptrEntity->HP -= this->Damage;
-
-	if (ptrEntity->Defense < 0)
-		ptrEntity->Defense = 0;
-
-    // ptrEntity->HP -= this->Damage + mainWeapon.dmg;
-
+	ptrEntity->HP -= this->Damage + mainWeapon.dmg;
 	if (ptrEntity->HP < 0)
 		ptrEntity->HP = 0;
 
@@ -31,7 +17,7 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 }
 
 void Player::Defend() {
-	
+	Defense += 10;
 }
 
 void Player::spawn(Map* map) {

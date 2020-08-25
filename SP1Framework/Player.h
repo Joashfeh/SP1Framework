@@ -11,7 +11,6 @@ public:
     Weapon mainWeapon;
     Armor mainArmor;
 
-    int gold;
 
     Player();
     void Attack(Entity* ptrEntity, Console& g_Console);
