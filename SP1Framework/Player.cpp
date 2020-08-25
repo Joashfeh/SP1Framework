@@ -9,7 +9,6 @@ Player::Player() {
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
-<<<<<<< HEAD
 
 	if (ptrEntity->Defense == 0)
 		ptrEntity->HP -= this->Damage;
@@ -22,11 +21,6 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 	if (ptrEntity->Defense < 0)
 		ptrEntity->Defense = 0;
 
-    // ptrEntity->HP -= this->Damage + mainWeapon.dmg;
-
-=======
-	ptrEntity->HP -= this->Damage + mainWeapon.dmg;
->>>>>>> 33f10482944f3665a0c2632c19eaefdacc640753
 	if (ptrEntity->HP < 0)
 		ptrEntity->HP = 0;
 
