@@ -103,7 +103,10 @@ bool checkGold(int ID, Player& plr)
     {
         Armor toBuy(ID - 4);
         if (plr.gold >= toBuy.cost)
+        {
+            plr.gold -= toBuy.cost;
             return true;
+        }
         else
             return false;
     }
