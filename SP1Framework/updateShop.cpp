@@ -55,24 +55,31 @@ void checkYesButton(SMouseEvent& g_mouseEvent, Player& plr)
         }
     }
 
-    if (ConfirmationBox::yes == true)
-    {
+    if (ConfirmationBox::yes == true) {
         ConfirmationBox::appear = false;
         ConfirmationBox::yes = false;
-        for (int i = 0; i < 8; i++)
-        {
-            if (ConfirmationBox::itemToBuy[i] == true)
-            {
-                if (checkGold(i, plr) == true)
-                {
-                    if (i < 5)
-                    {//if weapon load weapon
+        for (int i = 0; i < 8; i++) {
+            if (ConfirmationBox::itemToBuy[i] == true) {
+                if (checkGold(i, plr) == true) {
+                    if (i < 5) {//if weapon load weapon
                         plr.mainWeapon.loadWeapon(i + 1);
                         ConfirmationBox::itemBought[0] = true;
                     }
                     else
                     {//if armor load armor
                         plr.mainArmor.loadArmor(i - 4);
+                        if (plr.HP <= 100) {
+                            plr.HP += plr.mainArmor.armorHealth;
+                        }
+                        else if (plr.HP > 100) {
+                            plr.HP = 100 + plr.mainArmor.armorHealth;
+                        }
+                        if (plr.Defense <= 30) {
+                            plr.Defense += plr.mainArmor.defence;
+                        }
+                        else if (plr.Defense > 30) {
+                            plr.Defense = 30 + plr.mainArmor.defence;
+                        }
                         ConfirmationBox::itemBought[1] = true;
                     }
                 }

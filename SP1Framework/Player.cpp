@@ -7,8 +7,9 @@ Player::Player() {
 	Damage = 10;
 	Defense = 30;
 
+
 	isDefend = false;
-	gold = 0;
+	gold = 1000;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
@@ -34,6 +35,12 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 
 void Player::Defend() {
 	isDefend = true;
+}
+
+void Player::equipArmor()
+{
+	maxHealth = 100 + mainArmor.armorHealth;
+	maxArmor = 30 + mainArmor.defence;
 }
 
 void Player::spawn(Map* map) {

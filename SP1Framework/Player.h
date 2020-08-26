@@ -19,6 +19,7 @@ public:
     Player();
     void Attack(Entity* ptrEntity, Console& g_Console);
     void Defend();
+    void equipArmor();
 
     void spawn(Map* map);
     void reset();

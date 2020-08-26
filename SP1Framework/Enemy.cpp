@@ -29,7 +29,6 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 		damage *= 0.7;
 		damage = (int)damage;
 	}
-		
 
 	if (ptrEntity->Defense == 0)
 		ptrEntity->HP -= damage;

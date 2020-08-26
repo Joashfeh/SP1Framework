@@ -14,7 +14,7 @@ void displayStats(Console& g_Console, Player& plr)
 	stats << "Health: " << plr.HP;
 	g_Console.writeToBuffer(7, 17, stats.str());
 	stats.str("");
-	stats << "Defence: " << plr.Defense << " + " << plr.mainArmor.defence;
+	stats << "Defence: " << plr.Defense;
 	g_Console.writeToBuffer(7, 19, stats.str());
 	stats.str("");
 	stats << "Damage: " << plr.Damage << " + " << plr.mainWeapon.dmg;
