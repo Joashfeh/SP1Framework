@@ -75,7 +75,7 @@ void renderPlayerStats(Console& g_Console, Player& plr) {
     outputCoord.Y = 2;
 
     std::ostringstream outputString; 
-    outputString << "Health : " << plr.HP << " / 100";
+    outputString << "Health : " << plr.HP << " / " << plr.maxHealth;
     g_Console.writeToBuffer(outputCoord,  outputString.str());
 
     outputString.str("");
@@ -85,7 +85,7 @@ void renderPlayerStats(Console& g_Console, Player& plr) {
 
     outputString.str("");
     outputCoord.Y += 2;
-    outputString << "Defense : " << plr.Defense << " + " << plr.mainArmor.defence;
+    outputString << "Defense : " << plr.Defense << " / " << plr.maxArmor;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
 }

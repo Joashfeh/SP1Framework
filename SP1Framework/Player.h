@@ -11,8 +11,10 @@ public:
     Weapon mainWeapon;
     Armor mainArmor;
     
-    bool isDefend;
+    int maxHealth = 100 + mainArmor.armorHealth;
+    int maxArmor = 30 + mainArmor.defence;  
 
+    bool isDefend;
 
     Player();
     void Attack(Entity* ptrEntity, Console& g_Console);

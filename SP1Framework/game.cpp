@@ -258,7 +258,10 @@ void updateGame() {
                 g_sChar.canMove = true;
                 generateMap(map, plr, enemies, crate, ++map.floor);
                 spawnGoldCrate(map);
-                plr.HP = 100;
+
+                plr.HP = plr.maxHealth;
+                plr.Defense = plr.maxArmor;
+
             }
         }
 
