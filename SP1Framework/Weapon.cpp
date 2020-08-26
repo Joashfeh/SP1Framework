@@ -7,11 +7,11 @@ Weapon::Weapon()
 	dmg = 0;
 	crit = 0;
 	cost = 0;
+	id = 0;
 }
 
 Weapon::Weapon(int id) {
 	loadWeapon(id);
-	this->id = id;
 }
 
 Weapon::~Weapon()
