@@ -326,7 +326,7 @@ void render()
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop(g_Console, plr);
+    case S_SHOP: renderShop(g_Console, plr, g_mouseEvent);
         break;
     case S_INVENTORY: renderInventory(g_Console, plr, g_dDeltaTime);
         break;
@@ -527,7 +527,7 @@ void spawnGoldCrate(Map& map) {
 
     int chance = rand() % 100;
 
-    if (chance < 300) { // 30% chance
+    if (chance < 30) { // 30% chance
         int x;
         int y;
 
@@ -540,7 +540,7 @@ void spawnGoldCrate(Map& map) {
 
             if (map.display[y][x] == '9') {
                 crate = new goldCrate;
-                crate->gold = rand() % 100 + 10000;
+                crate->gold = rand() % 100 + 100;
                 crate->pos.row = y;
                 crate->pos.col = x;
 
