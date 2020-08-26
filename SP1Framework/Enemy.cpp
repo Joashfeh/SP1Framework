@@ -4,13 +4,15 @@
 #include <fstream>
 #include <string>
 #include "renderCharacterDamage.h"
+#include "enemyAttackPatterns.h"
 
 using namespace std;
 
 
 int Enemy::enemyCount = 0;
 
-Enemy::Enemy() {
+Enemy::Enemy() 
+{
 	enemyCount++;
 
 	inRange = false;
@@ -23,6 +25,13 @@ Enemy::Enemy() {
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 
 	float damage = this->Damage;
+
+	// Pattern determinant switch
+	switch (pattern_selection)
+	{
+	default:
+		break;
+	}
 
 	if (((Player*)ptrEntity)->isDefend) {
 		damage = (float)damage;
@@ -150,6 +159,58 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		}
 	}
 
+	// Set Pattern_Selection //
+
+	string enemyDirPattern = enemyDir;
+	enemyDirPattern += "/pattern_data.txt";
+
+
+	// Open the file
+	std::ifstream enemyDataPattern(enemyDirPattern, std::ios::in);
+	if (!enemyDataPattern)
+		return Enemy();
+
+	enemyset = " "; // Clear enemyset
+	line_no = 0;
+
+	// Load the file
+	while (line_no != get_i + 1 && getline(enemyDataPattern, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			pattern_selection = stoi(enemyset);
+		}
+	}
+
+	// Set Ability_Selection //
+
+	string enemyDirAbility = enemyDir;
+	enemyDirAbility += "/defence_data.txt";
+
+
+	// Open the file
+	std::ifstream enemyDataAbility(enemyDirAbility, std::ios::in);
+	if (!enemyDataAbility)
+		return Enemy();
+
+	enemyset = " "; // Clear enemyset
+	line_no = 0;
+
+	// Load the file
+	while (line_no != get_i + 1 && getline(enemyDataAbility, enemyset))
+	{
+		line_no++;
+		if (line_no == get_i + 1)
+		{
+			ability_selection = stoi(enemyset);
+		}
+	}
+
+	total_stats_points = Damage + HP + Defense; // Sets total_stats_points
+
+	enemyDataAbility.close();
+	enemyDataPattern.close();
 	enemyDataHP.close();
 	enemyDataDamage.close();
 	enemyDataDefence.close();
