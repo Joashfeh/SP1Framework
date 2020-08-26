@@ -22,9 +22,12 @@
 #include "renderGameOver.h"
 #include "updateGameOver.h"
 #include "updateInventory.h"
+#include "renderLevelTransition.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
+
+double c_timer{ 0 };
 
 SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
@@ -59,7 +62,7 @@ void init( void ) {
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
-    g_sChar.m_bActive = true;
+    g_sChar.canMove = true;
     g_sChar.canBattle[0] = false;
     g_sChar.canBattle[1] = false;
     g_sChar.canBattle[2] = false;
@@ -231,8 +234,54 @@ void updateGame() {
 
     // check if player is on ladder
 
-    int ladderPosX = NULL;
-    int ladderPosY = NULL;
+    //int ladderPosX = NULL;
+    //int ladderPosY = NULL;
+
+    //for (int row = 0; row < 96; row++) {
+    //    for (int col = 0; col < 192; col++) {
+    //        if (map.display[row][col] == 'L') {
+    //            ladderPosX = col;
+    //            ladderPosY = row;
+    //        }
+    //    }
+    //}
+    
+    if (isOnLadder()) {
+        if (Enemy::enemyCount == 0) {
+
+            triggerLevelTransition();
+            g_sChar.canMove = false;
+            c_timer += g_dDeltaTime;
+
+            if (c_timer > 0.6667) {
+                c_timer = 0;
+                g_sChar.canMove = true;
+                generateMap(map, plr, enemies, crate, ++map.floor);
+                spawnGoldCrate(map);
+                plr.HP = 100;
+            }
+        }
+
+        else
+            showMessage = true;
+    }
+
+
+   
+    if (map.floor == 13)
+        g_eGameState = S_FINISH;
+
+    processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
+    moveCharacter();    // moves the character, collision detection, physics, etc
+    moveChar(g_sChar, plr, map, g_dDeltaTime);                    // sound can be played here too.
+}
+
+bool isOnLadder() {
+    int ladderPosX;
+    int ladderPosY;
+
+    int plrX = plr.Pos.col;
+    int plrY = plr.Pos.row;
 
     for (int row = 0; row < 96; row++) {
         for (int col = 0; col < 192; col++) {
@@ -242,32 +291,19 @@ void updateGame() {
             }
         }
     }
-    
-    if (ladderPosX != NULL && ladderPosY != NULL) {
-        if (ladderPosX == plr.Pos.col && ladderPosY == plr.Pos.row) {
-            if (Enemy::enemyCount == 0) {
 
-                generateMap(map, plr, enemies, crate, ++map.floor);
-                spawnGoldCrate(map);
-                plr.HP = 100;
-            }
-
-            else
-                showMessage = true;
-        }
-        else showMessage = false;
+    if (((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY)
+        || ((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY - 1)
+        || ((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY - 2)) {
+        return true;
     }
 
-   
+    else {
+        showMessage = false;
+        return false;
+    }
 
-    if (map.floor == 13)
-        g_eGameState = S_FINISH;
-
-    processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
-    moveCharacter();    // moves the character, collision detection, physics, etc
-    moveChar(g_sChar, plr, map, g_dDeltaTime);                    // sound can be played here too.
 }
-
 
 void processUserInput()
 {
@@ -298,6 +334,7 @@ void render()
         break;
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
+
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     renderInputEvents();    // renders status of input events
@@ -336,6 +373,7 @@ void renderGame()
     renderMap(g_Console, plr, map);        // renders the map to the buffer first
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
     renderGameUI(g_Console, plr, map);
+    renderLevelTransition(g_Console, g_eGameState, map);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)

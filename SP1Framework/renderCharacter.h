@@ -16,7 +16,7 @@ struct SGameChar
     COORD m_cLocation;
     DIRECTION moving;
     double frameTimer;
-    bool  m_bActive;
+    bool  canMove;
     bool  canBattle[3];
 };
 

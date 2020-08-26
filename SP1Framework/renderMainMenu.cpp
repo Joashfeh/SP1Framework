@@ -1,6 +1,7 @@
 #include "renderMainMenu.h"
 #include <fstream>
 #include <string>
+#include "renderLevelTransition.h"
 
 void renderMainMenu(Console& g_Console) {
 	std::string menuData = "MainMenu_data/Menu_screen.txt";

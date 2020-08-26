@@ -83,6 +83,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="renderGameOver.cpp" />
     <ClCompile Include="renderGameUI.cpp" />
+    <ClCompile Include="renderLevelTransition.cpp" />
     <ClCompile Include="renderShop.cpp" />
     <ClCompile Include="updateBattle.cpp" />
     <ClCompile Include="battleInterface.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="renderGameOver.h" />
     <ClInclude Include="renderGameUI.h" />
+    <ClInclude Include="renderLevelTransition.h" />
     <ClInclude Include="renderShop.h" />
     <ClInclude Include="updateBattle.h" />
     <ClInclude Include="battleInterface.h" />
