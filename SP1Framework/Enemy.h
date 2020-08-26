@@ -2,16 +2,21 @@
 #include <string>
 #include "Map.h"
 #include "Entity.h"
+#include "enemyAttackPatterns.h"
 
 class Enemy : public Entity
 {
 public:
 
 	std::string enemy_name;
+	enemyAttackPatterns selections;
 
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
 	bool inRange;
+	int pattern_selection;
+	int ability_selection;
+	int total_stats_points;
 
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console);
