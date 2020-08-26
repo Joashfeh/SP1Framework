@@ -37,9 +37,9 @@ void checkNoButton(SMouseEvent& g_mouseEvent)
         ConfirmationBox::no = false;
         for (int i = 0; i < 8; i++)
         {
-            if (ConfirmationBox::itemToBuy[i] == true)
-                ConfirmationBox::itemToBuy[i] = false;
+            ConfirmationBox::itemToBuy[i] = false;
         }
+
     }
 }
 
@@ -68,10 +68,12 @@ void checkYesButton(SMouseEvent& g_mouseEvent, Player& plr)
                     if (i < 5)
                     {//if weapon load weapon
                         plr.mainWeapon.loadWeapon(i + 1);
+                        ConfirmationBox::itemBought[0] = true;
                     }
                     else
                     {//if armor load armor
                         plr.mainArmor.loadArmor(i - 4);
+                        ConfirmationBox::itemBought[1] = true;
                     }
                 }
                 else
@@ -133,6 +135,8 @@ void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKe
         ConfirmationBox::rejection = false;
         for (int i = 0; i < 8; i++)
             ConfirmationBox::itemToBuy[i] = false;
+        ConfirmationBox::itemBought[1] = false;
+        ConfirmationBox::itemBought[0] = false;
         g_eGameState = S_GAME;
     }
 
@@ -140,7 +144,10 @@ void updateShop(Console& g_Console, SMouseEvent& g_mouseEvent, SKeyEvent* g_skKe
     checkYesButton(g_mouseEvent, plr);
     checkOKButton(g_mouseEvent);
 
-    if (ConfirmationBox::appear == false)
+    if ((ConfirmationBox::appear == false) 
+        && (ConfirmationBox::itemBought[0] == false)
+        && (ConfirmationBox::itemBought[1] == false))
+
     {//prevents buying of another item if player is in the middle of buying
         checkBuyButton(g_mouseEvent, 47, 15, 0);
         checkBuyButton(g_mouseEvent, 47, 19, 1);

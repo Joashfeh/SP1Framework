@@ -9,6 +9,7 @@ bool ConfirmationBox::no = false;
 bool ConfirmationBox::yes = false;
 bool ConfirmationBox::itemToBuy[8] = { false, false, false, false, false, false, false, false };
 bool ConfirmationBox::rejection = false;
+bool ConfirmationBox::itemBought[2] = { false, false };
 
 void renderShopinterface(Console& g_Console, Player& plr)
 {

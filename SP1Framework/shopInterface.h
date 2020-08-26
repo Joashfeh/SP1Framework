@@ -11,6 +11,7 @@ public:
 	static bool no;
 	static bool itemToBuy[8];
 	static bool rejection;
+	static bool itemBought[2];
 };
 
 

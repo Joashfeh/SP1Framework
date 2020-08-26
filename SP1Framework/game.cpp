@@ -290,7 +290,7 @@ void render()
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop(g_Console, plr);
+    case S_SHOP: renderShop(g_Console, plr, g_mouseEvent);
         break;
     case S_INVENTORY: renderInventory(g_Console, plr, g_dDeltaTime);
         break;
