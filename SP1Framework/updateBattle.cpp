@@ -1,5 +1,6 @@
 #include "updateBattle.h"
 #include "keyEvents.h"
+#include "enemyAttackPatterns.h"
 
 bool activeAction{ false };
 double battleFrame = 0;
@@ -12,8 +13,9 @@ bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y) {
 		return false;
 }
 
-void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_eGameState, Player& plr, Enemy& enemy, int& turn, double dt) {
+void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_eGameState, Player& plr, Enemy& enemy, int& turn, double dt, Map map) {
 
+	plr.equipArmor();
 	if (activeAction) {
 		battleFrame += dt;
 
@@ -27,6 +29,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 
 	if (enemy.HP == 0) {
 		turn = 1;
+		plr.gold += (5 * map.floor);
 		g_eGameState = S_GAME;
 	}
 
@@ -36,7 +39,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 
 	switch (turn % 2) {
 	case 0: // Enemy Turn
-		enemy.Attack(&plr, g_Console);
+		enemy.Attack(&plr, g_Console); //This function executes the enemy's attacks | Located in enemy.h and .cpp
 		turn++;
 		triggerBattleAction();
 		break;

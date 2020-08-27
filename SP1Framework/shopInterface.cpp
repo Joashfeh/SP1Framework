@@ -8,9 +8,10 @@ bool ConfirmationBox::appear = false;
 bool ConfirmationBox::no = false;
 bool ConfirmationBox::yes = false;
 bool ConfirmationBox::itemToBuy[8] = { false, false, false, false, false, false, false, false };
+bool ConfirmationBox::rejection = false;
+bool ConfirmationBox::itemBought[2] = { false, false };
 
-void renderShopinterface(Console& g_Console/*, int* gold_input*/)
-{
+void renderShopinterface(Console& g_Console, Player& plr) {
     mainDisplay(g_Console);//white border
     COORD shop;
     shop.X = 29;//setting coordinates for "The Shop!" to appear
@@ -107,14 +108,14 @@ void renderShopinterface(Console& g_Console/*, int* gold_input*/)
     insertArmour(g_Console, 72, 31, Armor3);
 
     //display the player's gold
+    std::string gold_output = std::to_string(plr.gold);
     displayBoxes(g_Console, 6, 2, 20, 4);
     g_Console.writeToBuffer(7, 3, "Gold:");
-    g_Console.writeToBuffer(7, 4, "Insert Gold no");
+    g_Console.writeToBuffer(7, 4, gold_output);
 
 }
 
-void insertWeapon(Console& g_Console, int x, int y, Weapon weapon)
-{
+void insertWeapon(Console& g_Console, int x, int y, Weapon weapon) {
     std::stringstream ss;
     ss.str("");
     ss << weapon.cost;//get cost of weapon
@@ -136,8 +137,7 @@ void insertWeapon(Console& g_Console, int x, int y, Weapon weapon)
     g_Console.writeToBuffer(47, y, "BUY");//indicating where to click if they want to buy it
 }
 
-void insertArmour(Console& g_Console, int x, int y, Armor armor)
-{
+void insertArmour(Console& g_Console, int x, int y, Armor armor) {
     std::stringstream ss;
     ss.str("");
     ss << armor.cost;
@@ -160,9 +160,8 @@ void insertArmour(Console& g_Console, int x, int y, Armor armor)
     g_Console.writeToBuffer(108, y, "BUY");
 }
 
-void confirmationBox(Console& g_Console)
-{
-    displayBoxes(g_Console, 52, 16, 20, 7);
+void confirmationBox(Console& g_Console) {
+    displayBoxes(g_Console, 52, 16, 20, 8);
     g_Console.writeToBuffer(55, 17, "Purchase");
 
     for (int i = 0; i < 8; i++)
@@ -178,15 +177,25 @@ void confirmationBox(Console& g_Console)
     g_Console.writeToBuffer(64, 21, "No");
 }
 
-void renderConfirmation(Console& g_Console)
+
+void rejectionBox(Console& g_Console)
 {
+    displayBoxes(g_Console, 52, 16, 20, 8);
+    g_Console.writeToBuffer(53, 17, "Insufficient money");
+    g_Console.writeToBuffer(53, 18, "Come back when you");
+    g_Console.writeToBuffer(53, 19, "have enough money.");
+    g_Console.writeToBuffer(61, 21, "OK");
+}
+
+void renderConfirmation(Console& g_Console) {
     if (ConfirmationBox::appear == true)
         confirmationBox(g_Console);
+    if (ConfirmationBox::rejection == true)
+        rejectionBox(g_Console);
 
 }
 
-std::string checkItem(int id)
-{
+std::string checkItem(int id) {
     std::string item = "";
     switch (id)
     {

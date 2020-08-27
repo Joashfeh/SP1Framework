@@ -20,10 +20,15 @@
 #include "renderShop.h"
 #include "updateShop.h"
 #include "renderGameUI.h"
+#include "renderGameOver.h"
+#include "updateGameOver.h"
 #include "updateInventory.h"
+#include "renderLevelTransition.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
+
+double c_timer{ 0 };
 
 SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
@@ -39,15 +44,14 @@ int battleTurn = 1;
 bool showMessage;
 
 SGameChar   g_sChar;
-EGAMESTATES g_eGameState = S_SPLASHSCREEN; // initial state
+EGAMESTATES g_eGameState = S_MAINSCREEN;
 
 // Console object
 Console g_Console(120, 40, "SP1 Framework");
 
-void init( void )
-{
-    generateMap(map, plr, enemies, crate, 2);
-    spawnGoldCrate(map);
+void init( void ) {
+
+    generateMap(map, plr, enemies, crate, 1);
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
@@ -59,7 +63,7 @@ void init( void )
 
     g_sChar.m_cLocation.X = g_Console.getConsoleSize().X / 2;
     g_sChar.m_cLocation.Y = g_Console.getConsoleSize().Y / 2;
-    g_sChar.m_bActive = true;
+    g_sChar.canMove = true;
     g_sChar.canBattle[0] = false;
     g_sChar.canBattle[1] = false;
     g_sChar.canBattle[2] = false;
@@ -73,8 +77,7 @@ void init( void )
 
 }
 
-void shutdown( void )
-{
+void shutdown( void ) {
 
     // Reset to white text on black background
     colour(FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED);
@@ -82,20 +85,17 @@ void shutdown( void )
     g_Console.clearBuffer();
 }
 
-void getInput( void )
-{
+void getInput( void ) {
     // resets all the keyboard events
     memset(g_skKeyEvent, 0, K_COUNT * sizeof(*g_skKeyEvent));
     // then call the console to detect input from user
     g_Console.readConsoleInput();    
 }
 
-void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
-{    
+void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent) {   
+
     switch (g_eGameState)
     {
-    case S_SPLASHSCREEN: // don't handle anything for the splash screen
-        break;
     case S_GAME: gameplayKBHandler(keyboardEvent); // handle gameplay keyboard event 
         break;
     case S_SHOP: gameplayKBHandler(keyboardEvent);
@@ -104,15 +104,14 @@ void keyboardHandler(const KEY_EVENT_RECORD& keyboardEvent)
         break;
     case S_INVENTORY: gameplayKBHandler(keyboardEvent);
         break;
+    case S_GAMEOVER: gameplayKBHandler(keyboardEvent);
+        break;
     }
 }
 
-void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
-{    
-    switch (g_eGameState)
-    {
-    case S_SPLASHSCREEN: // don't handle anything for the splash screen
-        break;
+void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent) {
+
+    switch (g_eGameState) {
     case S_GAME: gameplayMouseHandler(mouseEvent); // handle gameplay mouse event
         break;
     case S_BATTLE: gameplayMouseHandler(mouseEvent);
@@ -124,16 +123,16 @@ void mouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
     }
 }
 
-void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
-{
+void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent) {
+
     // here, we map the key to our enums
     EKEYS key = K_COUNT;
     switch (keyboardEvent.wVirtualKeyCode)
     {
-    case VK_UP: key = K_UP; break;
-    case VK_DOWN: key = K_DOWN; break;
-    case VK_LEFT: key = K_LEFT; break; 
-    case VK_RIGHT: key = K_RIGHT; break;
+    case 0x57: key = K_UP; break;
+    case 0x53: key = K_DOWN; break;
+    case 0x41: key = K_LEFT; break; 
+    case 0x44: key = K_RIGHT; break;
     case 0x43: key = K_SHOP; break;
     case 0x46: key = K_INVENTORY; break;
     case VK_SPACE: key = K_SPACE; break;
@@ -150,8 +149,8 @@ void gameplayKBHandler(const KEY_EVENT_RECORD& keyboardEvent)
     }    
 }
 
-void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
-{
+void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent) {
+
     if (mouseEvent.dwEventFlags & MOUSE_MOVED) // update the mouse position if there are no events
     {
         g_mouseEvent.mousePosition = mouseEvent.dwMousePosition;
@@ -161,40 +160,29 @@ void gameplayMouseHandler(const MOUSE_EVENT_RECORD& mouseEvent)
 }
 
 
-void update(double dt)
-{
+void update(double dt) {
+
     // get the delta time
     g_dElapsedTime += dt;
     g_dDeltaTime = dt;
 
-    switch (g_eGameState)
-    {
-        case S_SPLASHSCREEN : splashScreenWait(); // game logic for the splash screen
-            break;
+    switch (g_eGameState) {
         case S_MAINSCREEN: updateMainMenu(g_skKeyEvent, g_eGameState);
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
-        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
+        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime, map);
             break;
         case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState, plr);
             break;
         case S_INVENTORY: updateInventory(g_Console, g_skKeyEvent, g_eGameState);
             break;
-        case S_GAMEOVER:
+        case S_GAMEOVER: updateGameOver(g_skKeyEvent, g_eGameState, plr);
             break;
     }
 }
 
-
-void splashScreenWait()    // waits for time to pass in splash screen
-{
-    if (g_dElapsedTime > 3.0) // wait for 3 seconds to switch to game mode, else do nothing
-        g_eGameState = S_GAME;
-}
-
-void updateGame()       // gameplay logic
-{
+void updateGame() {
     for (int i = 0; i < 3; i++) {
         if (enemies[i] != nullptr) {
             int plrRow = plr.Pos.row;
@@ -227,6 +215,10 @@ void updateGame()       // gameplay logic
                 renderAnimation;
 
                 if (g_sChar.canBattle[i] == true) {
+                    g_sChar.moving.UP = false;
+                    g_sChar.moving.DOWN = false;
+                    g_sChar.moving.LEFT = false;
+                    g_sChar.moving.RIGHT = false;
                     g_eGameState = S_BATTLE;
                     battleEnemy = enemies[i];
                 }
@@ -245,34 +237,43 @@ void updateGame()       // gameplay logic
 
     // check if player is on ladder
 
-    int ladderPosX;
-    int ladderPoxY;
+    //int ladderPosX = NULL;
+    //int ladderPosY = NULL;
 
-    for (int row = 0; row < 96; row++) {
-        for (int col = 0; col < 192; col++) {
-            if (map.display[row][col] == 'L') {
-                ladderPosX = col;
-                ladderPoxY = row;
+    //for (int row = 0; row < 96; row++) {
+    //    for (int col = 0; col < 192; col++) {
+    //        if (map.display[row][col] == 'L') {
+    //            ladderPosX = col;
+    //            ladderPosY = row;
+    //        }
+    //    }
+    //}
+    
+    if (isOnLadder()) {
+        if (Enemy::enemyCount == 0) {
+
+            triggerLevelTransition();
+            g_sChar.canMove = false;
+            c_timer += g_dDeltaTime;
+
+            if (c_timer > 0.6667) {
+                c_timer = 0;
+                g_sChar.canMove = true;
+                generateMap(map, plr, enemies, crate, ++map.floor);
+                spawnGoldCrate(map);
+
+                plr.HP = plr.maxHealth;
+                plr.Defense = plr.maxArmor;
+
             }
-        }
-    }
-
-    if (ladderPosX == plr.Pos.col && ladderPoxY == plr.Pos.row) {
-        if (Enemy::enemyCount == 0) { 
-            if (crate != nullptr)
-                delete crate;
-            crate = nullptr;
-
-            generateMap(map, plr, enemies, crate, ++map.floor);
-            spawnGoldCrate(map);
-            plr.HP = 100;
         }
 
         else
             showMessage = true;
     }
-    else showMessage = false;
 
+
+   
     if (map.floor == 13)
         g_eGameState = S_FINISH;
 
@@ -281,6 +282,34 @@ void updateGame()       // gameplay logic
     moveChar(g_sChar, plr, map, g_dDeltaTime);                    // sound can be played here too.
 }
 
+bool isOnLadder() {
+    int ladderPosX;
+    int ladderPosY;
+
+    int plrX = plr.Pos.col;
+    int plrY = plr.Pos.row;
+
+    for (int row = 0; row < 96; row++) {
+        for (int col = 0; col < 192; col++) {
+            if (map.display[row][col] == 'L') {
+                ladderPosX = col;
+                ladderPosY = row;
+            }
+        }
+    }
+
+    if (((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY)
+        || ((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY - 1)
+        || ((plrX == ladderPosX || plrX == ladderPosX - 1) && plrY == ladderPosY - 2)) {
+        return true;
+    }
+
+    else {
+        showMessage = false;
+        return false;
+    }
+
+}
 
 void processUserInput()
 {
@@ -299,20 +328,24 @@ void render()
     clearScreen();      // clears the current screen and draw from scratch 
     switch (g_eGameState)
     {
-    case S_SPLASHSCREEN: renderSplashScreen();
-        break;
     case S_MAINSCREEN: renderMainMenu(g_Console);
         break;
     case S_GAME: renderGame();
         break;
-    case S_SHOP: renderShop(g_Console);
+    case S_SHOP: renderShop(g_Console, plr, g_mouseEvent);
         break;
-    case S_INVENTORY: renderInventory(g_Console);
+    case S_INVENTORY: renderInventory(g_Console, plr, g_dDeltaTime);
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
+<<<<<<< HEAD
     case S_ANIMATION: // renderAnimation();
         break;
+=======
+    case S_GAMEOVER: renderGameOver(g_Console);
+        break;
+
+>>>>>>> 4947856dafa875ee9cf1ef819dd08a36d648afd5
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     renderInputEvents();    // renders status of input events
@@ -354,6 +387,7 @@ void renderGame()
     renderMap(g_Console, plr, map);        // renders the map to the buffer first
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
     renderGameUI(g_Console, plr, map);
+    renderLevelTransition(g_Console, g_eGameState, map);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)
@@ -371,9 +405,9 @@ void renderFramerate()
     c.Y = 0;
     g_Console.writeToBuffer(c, ss.str());
 
-    c.X = g_Console.getConsoleSize().X - 15;
-    c.Y = 0;
-    g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
+    //c.X = g_Console.getConsoleSize().X - 15;
+    //c.Y = 0;
+    //g_Console.writeToBuffer(c, std::to_string(Enemy::enemyCount));
 
     // displays the elapsed time
     ss.str("");
@@ -499,6 +533,12 @@ void moveCharacter() {
 }
 
 void spawnGoldCrate(Map& map) {
+
+    if (crate != nullptr) {
+        delete crate;
+        crate = nullptr;
+    }
+
     int chance = rand() % 100;
 
     if (chance < 30) { // 30% chance

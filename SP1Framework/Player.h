@@ -10,15 +10,18 @@ class Player :
 public:
     Weapon mainWeapon;
     Armor mainArmor;
-    int gold;
     
-    bool isDefend;
+    int maxHealth = 100 + mainArmor.armorHealth;
+    int maxArmor = 30 + mainArmor.defence;  
 
+    bool isDefend;
 
     Player();
     void Attack(Entity* ptrEntity, Console& g_Console);
     void Defend();
+    void equipArmor();
 
     void spawn(Map* map);
+    void reset();
 };
 

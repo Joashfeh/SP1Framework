@@ -14,7 +14,10 @@ void moveChar(SGameChar& g_sChar, Player& plr, Map& map, double dt) {
 
     g_sChar.frameTimer += dt;
 
-    if (g_sChar.frameTimer < 0.075)
+    if (!g_sChar.canMove)
+        return;
+
+    if (g_sChar.frameTimer < 0.05)
         return;
 
     g_sChar.frameTimer = 0;

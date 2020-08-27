@@ -7,6 +7,7 @@ Armor::Armor()
 	defence = 0;
 	armorHealth = 0;
 	cost = 0;
+	id = 0;
 }
 
 Armor::Armor(int id)
@@ -53,7 +54,7 @@ void Armor::loadArmor(int id) {
 			break;
 		}
 	}
-
+	this->id = id;
 	armorData.close();
 
 }

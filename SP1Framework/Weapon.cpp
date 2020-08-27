@@ -7,6 +7,7 @@ Weapon::Weapon()
 	dmg = 0;
 	crit = 0;
 	cost = 0;
+	id = 0;
 }
 
 Weapon::Weapon(int id) {
@@ -48,7 +49,7 @@ void Weapon::loadWeapon(int id) {
 			break;
 		}	
 	}
-
+	this->id = id;
 	weaponData.close();
 
 }

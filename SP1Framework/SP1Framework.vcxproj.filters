@@ -69,9 +69,6 @@
     <ClCompile Include="generateMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="keyEvents.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,10 +117,17 @@
     <ClCompile Include="renderGameUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source1.cpp">
-      <Filter>Source Files\Framework</Filter>
+<<<<<<< Updated upstream
+    <ClCompile Include="renderGameOver.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="battleTransitionAnimation.cpp">
+    <ClCompile Include="updateGameOver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="renderLevelTransition.cpp">
+=======
+    <ClCompile Include="enemyAttackPatterns.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,7 +231,17 @@
     <ClInclude Include="renderGameUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="battleTransitionAnimation.h">
+<<<<<<< Updated upstream
+    <ClInclude Include="renderGameOver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="updateGameOver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="renderLevelTransition.h">
+=======
+    <ClInclude Include="enemyAttackPatterns.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -34,6 +34,9 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
         break;
 
     case 12:
+        arr[0]->setPos(24, 47);
+        arr[1]->setPos(24, 80);
+        arr[2]->setPos(24, 113);
         break;
 
     default:

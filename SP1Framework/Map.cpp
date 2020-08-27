@@ -135,6 +135,10 @@ void Map::generateDungeon(int floor, int floorType) {
 		for (int col = 0; col < 96; col++) {
 			display[row][displayCol] = fullMap[row][col];
 			display[row][displayCol + 1] = fullMap[row][col];
+
+			if (fullMap[row][col] == '9')
+				display[row][displayCol + 1] = '0';
+
 			displayCol += 2;
 		}
 		displayCol = 0;
