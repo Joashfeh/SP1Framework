@@ -68,5 +68,6 @@ void Player::reset() {
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
+	gold = 0;
 }
 
