@@ -170,7 +170,7 @@ void update(double dt) {
             break;
         case S_GAME: updateGame(); // gameplay logic when we are in the game
             break;
-        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime);
+        case S_BATTLE: updateBattle(g_Console, g_mouseEvent, g_eGameState, plr, *battleEnemy, battleTurn, g_dDeltaTime, map);
             break;
         case S_SHOP: updateShop(g_Console, g_mouseEvent, g_skKeyEvent, g_eGameState, plr);
             break;

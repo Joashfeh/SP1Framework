@@ -58,13 +58,16 @@ void Player::reset() {
 	mainWeapon.dmg = 0;
 	mainWeapon.crit = 0;
 	mainWeapon.cost = 0;
+	mainWeapon.id = 0;
 
 	mainArmor.armorHealth = 0;
 	mainArmor.defence = 0;
-	mainWeapon.cost = 0;
+	mainArmor.cost = 0;
+	mainArmor.id = 0;
 
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
+	gold = 0;
 }
 
