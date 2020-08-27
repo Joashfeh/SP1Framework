@@ -17,7 +17,7 @@ public:
     bool isDefend;
 
     Player();
-    void Attack(Entity* ptrEntity, Console& g_Console);
+    void Attack(Entity* ptrEntity, Console& g_Console, int turn);
     void Defend();
     void equipArmor();
 

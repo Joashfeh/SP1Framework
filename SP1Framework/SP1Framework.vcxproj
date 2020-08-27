@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="battleTransitionAnimation.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="renderGameOver.cpp" />
     <ClCompile Include="renderGameUI.cpp" />
@@ -117,9 +118,9 @@
   <ItemGroup>
     <ClInclude Include="Area.h" />
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="battleTransitionAnimation.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="renderGameOver.h" />
-    <ClInclude Include="renderGameUI.h" />
     <ClInclude Include="renderLevelTransition.h" />
     <ClInclude Include="renderShop.h" />
     <ClInclude Include="updateBattle.h" />

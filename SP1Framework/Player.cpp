@@ -12,7 +12,7 @@ Player::Player() {
 	gold = 0;
 }
 
-void Player::Attack(Entity* ptrEntity, Console& g_Console) {
+void Player::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 	int damage = this->Damage + mainWeapon.dmg;
 
