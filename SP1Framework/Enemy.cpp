@@ -104,9 +104,9 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 	case 6:
 		//attack 6 | If damage is over 100, will attack for every floor(damage / 100)
 		attack_6_every_turn = floor(Damage / 100);
-		if (turn % attack_6_every_turn == 0)
+		if (turn % attack_6_every_turn != 0)
 		{
-
+			attack_check = false;
 		}
 
 	default:
