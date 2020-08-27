@@ -9,7 +9,7 @@ Player::Player() {
 
 
 	isDefend = false;
-	gold = 1000;
+	gold = 0;
 }
 
 void Player::Attack(Entity* ptrEntity, Console& g_Console) {
