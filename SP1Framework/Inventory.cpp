@@ -42,7 +42,7 @@ void renderWeaponSprite(Console& g_Console, Player& plr)
 	weapon.X = 77;
 	weapon.Y = 6;
 
-	COLOURS outputColour;
+	COLOURS outputColour = COLOURS::WHITE;
 
 	for (int i = 0; i < 8; i++)
 	{

@@ -80,6 +80,7 @@ void checkYesButton(SMouseEvent& g_mouseEvent, Player& plr)
                         else if (plr.Defense > 30) {
                             plr.Defense = 30 + plr.mainArmor.defence;
                         }
+                        plr.equipArmor();
                         ConfirmationBox::itemBought[1] = true;
                     }
                 }
