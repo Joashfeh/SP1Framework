@@ -14,7 +14,6 @@ public:
 	bool inRange;
 	int pattern_selection;
 	int ability_selection;
-	int total_stats_points;
 
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console, int turn);

@@ -13,6 +13,9 @@ public:
 	Position Pos;
 	int gold;
 
+	int total_stats_points;
+	char special_defence; // For enemies only
+
 	Entity();
 	~Entity();
 	virtual void Attack(Entity* ptrEntity, Console& g_Console, int turn) = 0;
