@@ -177,7 +177,7 @@ void update(double dt) {
             break;
         case S_INVENTORY: updateInventory(g_Console, g_skKeyEvent, g_eGameState);
             break;
-        case S_GAMEOVER: updateGameOver(g_skKeyEvent, g_eGameState, plr);
+        case S_GAMEOVER: updateGameOver(g_skKeyEvent, g_eGameState, plr, enemies);
             break;
     }
 }
