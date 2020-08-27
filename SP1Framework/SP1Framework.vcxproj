@@ -80,7 +80,11 @@
   <ItemGroup>
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="battleTransitionAnimation.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="renderGameOver.cpp" />
+    <ClCompile Include="renderGameUI.cpp" />
+    <ClCompile Include="renderLevelTransition.cpp" />
     <ClCompile Include="renderShop.cpp" />
     <ClCompile Include="updateBattle.cpp" />
     <ClCompile Include="battleInterface.cpp" />
@@ -95,7 +99,6 @@
     <ClCompile Include="renderCharacterSprite.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="keyEvents.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="renderBattle.cpp" />
@@ -106,6 +109,7 @@
     <ClCompile Include="renderMainMenu.cpp" />
     <ClCompile Include="renderMap.cpp" />
     <ClCompile Include="shopInterface.cpp" />
+    <ClCompile Include="updateGameOver.cpp" />
     <ClCompile Include="updateInventory.cpp" />
     <ClCompile Include="updateMainMenu.cpp" />
     <ClCompile Include="updateShop.cpp" />
@@ -114,7 +118,10 @@
   <ItemGroup>
     <ClInclude Include="Area.h" />
     <ClInclude Include="Armor.h" />
+    <ClInclude Include="battleTransitionAnimation.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="renderGameOver.h" />
+    <ClInclude Include="renderLevelTransition.h" />
     <ClInclude Include="renderShop.h" />
     <ClInclude Include="updateBattle.h" />
     <ClInclude Include="battleInterface.h" />
@@ -140,6 +147,7 @@
     <ClInclude Include="renderMainMenu.h" />
     <ClInclude Include="renderMap.h" />
     <ClInclude Include="shopInterface.h" />
+    <ClInclude Include="updateGameOver.h" />
     <ClInclude Include="updateInventory.h" />
     <ClInclude Include="updateMainMenu.h" />
     <ClInclude Include="updateShop.h" />

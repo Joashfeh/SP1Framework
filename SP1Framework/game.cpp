@@ -256,7 +256,7 @@ void updateGame() {
             g_sChar.canMove = false;
             c_timer += g_dDeltaTime;
 
-            if (c_timer > 0.6667) {
+            if (c_timer > 1) {
                 c_timer = 0;
                 g_sChar.canMove = true;
                 generateMap(map, plr, enemies, crate, ++map.floor);
