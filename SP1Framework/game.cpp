@@ -215,11 +215,11 @@ void updateGame() {
                 renderAnimation;
 
                 if (g_sChar.canBattle[i] == true) {
+                    g_eGameState = S_BATTLE;
                     g_sChar.moving.UP = false;
                     g_sChar.moving.DOWN = false;
                     g_sChar.moving.LEFT = false;
                     g_sChar.moving.RIGHT = false;
-                    g_eGameState = S_BATTLE;
                     battleEnemy = enemies[i];
                 }
             }
