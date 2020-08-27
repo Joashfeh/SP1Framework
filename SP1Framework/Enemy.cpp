@@ -23,13 +23,16 @@ Enemy::Enemy()
 	Defense = 0;
 }
 
-void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
+void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 	float damage = this->Damage;
 	//### SWITCH CASES FOR PATTERNS AND ABILITIES ###
 
 	srand(time(0)); // Generate a random number less than MSP for deciding chance for every turn.
 	float chance = rand() % total_stats_points;
+
+	int damage_boost;
+	int chance_boost;
 
 	// Pattern determinant switch
 	switch (pattern_selection)
@@ -45,7 +48,7 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 		// Case 1 is left blank so that damage is unaltered
 		break;
 
-		//attack 2 | No attack
+		//attack 2 | No attack chance 
 	case 2:
 		if (chance < damage)
 		{
@@ -69,6 +72,27 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 			break;
 		}
 
+	case 4:
+		//attack 4 | Overcharge: Sacrifice some health to boost attack | Random amount from 1 to enemy's max damage.
+		damage_boost = rand() % Damage;
+		chance_boost = rand() % damage_boost;
+		if (chance_boost == damage_boost)
+		{
+			HP -= damage_boost;
+			damage += damage_boost;
+			break;
+		}
+
+	case 5:
+		//attack 5 | Independent Damage boost by doubling | Chance formula: 1 / Damage
+		damage_boost = Damage * 2;
+		chance_boost = rand() % Damage;
+		if (chance_boost == Damage)
+		{
+			damage = damage_boost;
+			break;
+		}
+
 	default:
 		break;
 	}
@@ -81,11 +105,15 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console) {
 		// No abilities
 		break;
 	case 1:
-		// Full block chance with formula: defence / total_stats_points
+		// Full block chance with chance formula: defence / total_stats_points
 
 	case 2:
+		// Regen lost health by 20% max health.
+		HP += HP * 0.2;
+		break;
 
 	case 3:
+		// Deflection
 
 	default:
 		break;

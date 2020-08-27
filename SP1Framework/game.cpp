@@ -338,14 +338,11 @@ void render()
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
-<<<<<<< HEAD
     case S_ANIMATION: // renderAnimation();
         break;
-=======
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
 
->>>>>>> 4947856dafa875ee9cf1ef819dd08a36d648afd5
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     renderInputEvents();    // renders status of input events

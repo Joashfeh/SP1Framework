@@ -1,6 +1,5 @@
 #include "updateBattle.h"
 #include "keyEvents.h"
-#include "enemyAttackPatterns.h"
 
 bool activeAction{ false };
 double battleFrame = 0;
@@ -39,7 +38,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 
 	switch (turn % 2) {
 	case 0: // Enemy Turn
-		enemy.Attack(&plr, g_Console); //This function executes the enemy's attacks | Located in enemy.h and .cpp
+		enemy.Attack(&plr, g_Console, turn); //This function executes the enemy's attacks | Located in enemy.h and .cpp
 		turn++;
 		triggerBattleAction();
 		break;
@@ -48,7 +47,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 			for (int col = 4; col < 50; col++) {
 				if (checkMousePos(g_mouseEvent, col, row)) {
 					if (g_mouseEvent.buttonState == FROM_LEFT_1ST_BUTTON_PRESSED) {
-						plr.Attack(&enemy, g_Console);
+						plr.Attack(&enemy, g_Console, turn);
 						turn++;
 
 						triggerBattleAction();

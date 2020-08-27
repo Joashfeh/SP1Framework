@@ -15,7 +15,7 @@ public:
 
 	Entity();
 	~Entity();
-	virtual void Attack(Entity* ptrEntity, Console& g_Console) = 0;
+	virtual void Attack(Entity* ptrEntity, Console& g_Console, int turn) = 0;
 	//virtual void Defend() = 0;
 	int getHP();
 	void setPos(int r, int c);
