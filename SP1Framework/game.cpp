@@ -10,6 +10,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <fstream>
 #include "Entity.h"
 #include "Enemy.h"
 #include "renderBattle.h"
@@ -223,6 +224,8 @@ void updateGame()       // gameplay logic
 
             if (g_skKeyEvent[K_SPACE].keyDown)
             {
+                renderAnimation;
+
                 if (g_sChar.canBattle[i] == true) {
                     g_eGameState = S_BATTLE;
                     battleEnemy = enemies[i];
@@ -308,6 +311,8 @@ void render()
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
+    case S_ANIMATION: // renderAnimation();
+        break;
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     renderInputEvents();    // renders status of input events
@@ -339,6 +344,9 @@ void renderSplashScreen()  // renders the splash screen
     c.X = g_Console.getConsoleSize().X / 2 - 9;
     g_Console.writeToBuffer(c, "Press 'Esc' to quit", 0x09);
 }
+
+
+
 
 void renderGame()
 {
