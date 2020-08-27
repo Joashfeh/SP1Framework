@@ -25,6 +25,7 @@ Enemy::Enemy()
 	ability_selection = 0;
 	total_stats_points = 0;
 	special_defence = ' ';
+	heal_rate = 1;
 
 }
 
@@ -141,6 +142,32 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 		// 25% if doubld digit defence, 50% if triple digit defence;
 		// Deflection special_defence char is 'D'
 		special_defence = 'D';
+		break;
+
+	case 4:
+		// Rechargeable shield
+		// Regen lost defence by amount of health left. | 50% chance of heal.
+		chance = rand() % 2;
+		if (chance == 1)
+		{
+			attack_check = false; // Does not attack and instead heals
+			Defense += HP;
+		}
+		break;
+
+	case 5:
+		// Passive doubling healing | Healing resets at max HP
+		chance = rand() % 2;
+		if (chance == 1)
+		{
+			attack_check = false; // Does not attack and instead heals
+			HP += heal_rate;
+			heal_rate *= 2;
+			if (heal_rate > HP)
+			{
+				heal_rate = 1; // Reset to 1
+			}
+		}
 		break;
 
 	default:

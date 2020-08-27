@@ -14,6 +14,7 @@ public:
 	bool inRange;
 	int pattern_selection;
 	int ability_selection;
+	int heal_rate; // Used for ability 5
 
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console, int turn);
