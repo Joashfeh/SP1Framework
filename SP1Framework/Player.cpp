@@ -20,8 +20,8 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console) {
 		ptrEntity->HP -= damage;
 
 	if (ptrEntity->Defense != 0) {
-		ptrEntity->HP -= damage * 0.5;
-		ptrEntity->Defense -= damage * 0.5;
+		ptrEntity->HP -= floor(damage / ptrEntity->Defense);
+		ptrEntity->Defense -= floor(damage / ptrEntity->Defense);
 	}
 
 	if (ptrEntity->Defense < 0)
