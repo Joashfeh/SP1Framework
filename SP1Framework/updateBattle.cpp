@@ -13,7 +13,7 @@ bool checkMousePos(SMouseEvent& g_mouseEvent, int x, int y) {
 		return false;
 }
 
-void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_eGameState, Player& plr, Enemy& enemy, int& turn, double dt) {
+void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_eGameState, Player& plr, Enemy& enemy, int& turn, double dt, Map map) {
 
 	plr.equipArmor();
 	if (activeAction) {
@@ -29,7 +29,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 
 	if (enemy.HP == 0) {
 		turn = 1;
-
+		plr.gold += (5 * map.floor);
 		g_eGameState = S_GAME;
 	}
 
