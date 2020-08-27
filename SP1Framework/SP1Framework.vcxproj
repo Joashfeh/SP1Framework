@@ -84,7 +84,6 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="renderGameUI.cpp" />
     <ClCompile Include="renderShop.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Source1.cpp" />
     <ClCompile Include="updateBattle.cpp" />
     <ClCompile Include="battleInterface.cpp" />

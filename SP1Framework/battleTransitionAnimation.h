@@ -2,7 +2,7 @@
 #include <iostream>
 class battleTransitionAnimation
 {
-	void battleTransition()
+
 
 };
 
