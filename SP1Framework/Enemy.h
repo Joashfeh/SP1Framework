@@ -2,14 +2,11 @@
 #include <string>
 #include "Map.h"
 #include "Entity.h"
-#include "enemyAttackPatterns.h"
-
 class Enemy : public Entity
 {
 public:
 
 	std::string enemy_name;
-	enemyAttackPatterns selections;
 
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
