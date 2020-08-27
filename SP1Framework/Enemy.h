@@ -2,10 +2,7 @@
 #include <string>
 #include "Map.h"
 #include "Entity.h"
-<<<<<<< HEAD
-=======
 
->>>>>>> d3f7966d33c75aac626fca97a53548a0bc1fd2c7
 class Enemy : public Entity
 {
 public:
