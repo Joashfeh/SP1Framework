@@ -21,9 +21,17 @@ Enemy::Enemy()
 	HP = 0;
 	Damage = 0;
 	Defense = 0;
+	pattern_selection = 1;
+	ability_selection = 0;
+	total_stats_points = 0;
+	special_defence = ' ';
+	heal_rate = 1;
+
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
+
+	bool attack_check = true;
 
 	float damage = this->Damage;
 	//### SWITCH CASES FOR PATTERNS AND ABILITIES ###
@@ -33,6 +41,7 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 	int damage_boost;
 	int chance_boost;
+	int attack_6_every_turn;
 
 	// Pattern determinant switch
 	switch (pattern_selection)
@@ -93,6 +102,14 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 			break;
 		}
 
+	case 6:
+		//attack 6 | If damage is over 100, will attack for every floor(damage / 100)
+		attack_6_every_turn = floor(Damage / 100);
+		if (turn % attack_6_every_turn != 0)
+		{
+			attack_check = false;
+		}
+
 	default:
 		break;
 	}
@@ -106,14 +123,52 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 		break;
 	case 1:
 		// Full block chance with chance formula: defence / total_stats_points
+		// Full block char to special_defence is 'F'
+		special_defence = 'F';
+		break;
 
 	case 2:
-		// Regen lost health by 20% max health.
-		HP += HP * 0.2;
+		// Regen lost health by amount of defence left. | 50% chance of heal.
+		chance = rand() % 2;
+		if (chance == 1)
+		{
+			attack_check = false; // Does not attack and instead heals
+			HP += Defense;
+		}
 		break;
 
 	case 3:
-		// Deflection
+		// Deflection deflects certain percentage of player damage back to player
+		// 25% if doubld digit defence, 50% if triple digit defence;
+		// Deflection special_defence char is 'D'
+		special_defence = 'D';
+		break;
+
+	case 4:
+		// Rechargeable shield
+		// Regen lost defence by amount of health left. | 50% chance of heal.
+		chance = rand() % 2;
+		if (chance == 1)
+		{
+			attack_check = false; // Does not attack and instead heals
+			Defense += HP;
+		}
+		break;
+
+	case 5:
+		// Passive doubling healing | Healing resets at max HP
+		chance = rand() % 2;
+		if (chance == 1)
+		{
+			attack_check = false; // Does not attack and instead heals
+			HP += heal_rate;
+			heal_rate *= 2;
+			if (heal_rate > HP)
+			{
+				heal_rate = 1; // Reset to 1
+			}
+		}
+		break;
 
 	default:
 		break;
@@ -121,28 +176,35 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 	//### END OF SWITCH CASES ###
 
+	if (attack_check)
+	{
+		if (((Player*)ptrEntity)->isDefend) {
+			damage = (float)damage;
+			damage *= 0.7;
+			damage = (int)damage;
+		}
 
-	if (((Player*)ptrEntity)->isDefend) {
-		damage = (float)damage;
-		damage *= 0.7;
-		damage = (int)damage;
+		if (ptrEntity->Defense == 0)
+			ptrEntity->HP -= damage;
+
+		if (ptrEntity->Defense != 0) {
+			//ptrEntity->HP -= floor(damage / ptrEntity->Defense);
+			ptrEntity->Defense -= damage;
+		}
+
+		if (ptrEntity->Defense < 0)
+			ptrEntity->Defense = 0;
+
+		if (ptrEntity->HP < 0)
+			ptrEntity->HP = 0;
+
+		triggerRenderPlayerDamage();
 	}
 
-	if (ptrEntity->Defense == 0)
-		ptrEntity->HP -= damage;
-
-	if (ptrEntity->Defense != 0) {
-		//ptrEntity->HP -= floor(damage / ptrEntity->Defense);
-		ptrEntity->Defense -= damage;
+	else
+	{
+		//NA
 	}
-
-	if (ptrEntity->Defense < 0)
-		ptrEntity->Defense = 0;
-
-	if (ptrEntity->HP < 0)
-		ptrEntity->HP = 0;
-
-	triggerRenderPlayerDamage();
 }
 
 Enemy Enemy::loadEnemy(int level, int get_i)
