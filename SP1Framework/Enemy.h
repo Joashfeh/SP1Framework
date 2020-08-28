@@ -18,6 +18,8 @@ public:
 	int enemy_no;
 	bool boss;
 
+	int enemyType;
+
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console, int turn);
 	Enemy loadEnemy(int level, int get_i); // Load current enemy for level.

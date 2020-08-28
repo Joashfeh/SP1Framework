@@ -25,18 +25,24 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
         arr[0]->setPos(24, 47);
         arr[1]->setPos(24, 80);
         arr[2]->setPos(24, 113);
+
+        arr[2]->enemyType = 2;
         break;
 
     case 8:
         arr[0]->setPos(24, 47);
         arr[1]->setPos(24, 80);
         arr[2]->setPos(24, 113);
+
+        arr[2]->enemyType = 2;
         break;
 
     case 12:
         arr[0]->setPos(24, 47);
         arr[1]->setPos(24, 80);
         arr[2]->setPos(24, 113);
+
+        arr[2]->enemyType = 3;
         break;
 
     default:
@@ -49,7 +55,7 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
             if (map.display[y][x] != '9') {
                 i--;
             }
-            else {
+            else if (map.display[y][x] == '9') {
                 arr[i]->Pos.row = y;
                 arr[i]->Pos.col = x;
             }

@@ -382,7 +382,9 @@ void renderGame()
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
     renderGameUI(g_Console, plr, map);
     renderLevelTransition(g_Console, g_eGameState, map);
-    battleTransitionAnimation(g_Console, g_dDeltaTime, g_eGameState);
+
+    if (battleEnemy != nullptr)
+        battleTransitionAnimation(g_Console, g_dDeltaTime, g_eGameState, battleEnemy->enemyType);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)
@@ -549,7 +551,7 @@ void spawnGoldCrate(Map& map) {
 
             if (map.display[y][x] == '9') {
                 crate = new goldCrate;
-                crate->gold = rand() % 100 + 100;
+                crate->gold = rand() % 50 + 50;
                 crate->pos.row = y;
                 crate->pos.col = x;
 

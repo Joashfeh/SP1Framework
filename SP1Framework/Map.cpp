@@ -8,7 +8,7 @@ Map::~Map() {
 	// do nothing for now
 }
 
-void Map::generateDungeon(int floor, int floorType) {
+const void Map::generateDungeon(int floor, int floorType) {
 
 	this->floor = floor;
 
