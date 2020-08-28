@@ -2,7 +2,7 @@
 #include <string>
 
 int TransitionFrame{ 0 }; 
-int maxFrames2{ 60 };
+int maxFrames2{ 55 };
 bool activeTransition{ false };
 
     
