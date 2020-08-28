@@ -12,7 +12,7 @@ Area::Area() {
 
 Area::Area(unsigned short flags, int doorSize, int roomType) {
 
-	int terrainNo = rand() % 11 + 1;
+	int terrainNo = rand() % 14 + 1;
 
 	for (int i = 0; i < 16; i++) {
 		for (int k = 0; k < 16; k++) {

@@ -27,6 +27,8 @@ Enemy::Enemy()
 	heal_rate = 1;
 	enemyType = 1;
 
+	boss = false;
+
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
@@ -103,11 +105,27 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 		}
 
 	case 6:
-		//attack 6 | If damage is over 100, will attack for every floor(damage / 100)
-		attack_6_every_turn = floor(Damage / 100);
-		if (turn % attack_6_every_turn != 0)
+		//attack 6 | If damage is over 100, will attack for every floor(damage / 100) | Skip if damage < 100
+		if (Damage < 100)
 		{
-			attack_check = false;
+			//Attack every other turn
+			if (turn % 3 == 0)
+			{
+				attack_check = false;
+			}
+			else
+			{
+				// true
+			}
+		}
+
+		else 
+		{
+			attack_6_every_turn = floor(Damage / 100);
+			if (turn % attack_6_every_turn != 0)
+			{
+				attack_check = false;
+			}
 		}
 
 	default:
@@ -373,6 +391,11 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	}
 
 	total_stats_points = Damage + HP + Defense; // Sets total_stats_points
+
+	if (get_i == 2 && floor(level / 4) == 0)
+	{
+		boss = true;
+	}
 
 	enemyDataAbility.close();
 	enemyDataPattern.close();

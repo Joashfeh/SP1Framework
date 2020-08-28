@@ -13,6 +13,7 @@ public:
     
     int maxHealth = 100 + mainArmor.armorHealth;
     int maxArmor = 30 + mainArmor.defence;  
+    int skulls; // Player gets a skull upon killing a boss | Can be used to buy Scythe, Excilibr and Juggernaut armor.
 
     bool isDefend;
 
