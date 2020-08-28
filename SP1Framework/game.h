@@ -20,7 +20,8 @@ enum EGAMESTATES
     S_FINISH,
     S_COUNT,
     S_MAINSCREEN,
-    S_ANIMATION
+    S_ANIMATION,
+    S_TUTORIAL
 };
 
 void init        ( void );      // initialize your variables, allocate memory, etc
