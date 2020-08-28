@@ -15,6 +15,7 @@ public:
 	int pattern_selection;
 	int ability_selection;
 	int heal_rate; // Used for ability 5
+	int enemy_no;
 
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console, int turn);

@@ -215,6 +215,7 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	enemyDir = "Enemy_Data/level_";
 	enemyDir += to_string(level);
 
+	enemy_no = get_i + 1;
 
 	// Set Health //
 	string enemyDirHP = enemyDir;
