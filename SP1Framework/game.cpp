@@ -382,7 +382,9 @@ void renderGame()
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
     renderGameUI(g_Console, plr, map);
     renderLevelTransition(g_Console, g_eGameState, map);
-    battleTransitionAnimation(g_Console, g_dDeltaTime, g_eGameState);
+
+    if (battleEnemy != nullptr)
+        battleTransitionAnimation(g_Console, g_dDeltaTime, g_eGameState, battleEnemy->enemyType);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)

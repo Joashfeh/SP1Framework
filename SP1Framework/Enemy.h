@@ -16,6 +16,8 @@ public:
 	int ability_selection;
 	int heal_rate; // Used for ability 5
 
+	int enemyType;
+
 	Enemy();
 	void Attack(Entity* ptrEntity, Console& g_Console, int turn);
 	Enemy loadEnemy(int level, int get_i); // Load current enemy for level.

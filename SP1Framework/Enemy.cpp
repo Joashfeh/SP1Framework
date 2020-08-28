@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 int Enemy::enemyCount = 0;
 
 Enemy::Enemy() 
@@ -26,6 +25,7 @@ Enemy::Enemy()
 	total_stats_points = 0;
 	special_defence = ' ';
 	heal_rate = 1;
+	enemyType = 1;
 
 }
 
