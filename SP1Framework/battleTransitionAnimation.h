@@ -1,8 +1,12 @@
 #pragma once
 #include <iostream>
-class battleTransitionAnimation
-{
+#include "Framework/console.h"
+#include "game.h"
+#include "colours.h"
+
+void battleTransitionAnimation(Console &g_Console, double dt, EGAMESTATES& g_eGameState);
+void triggerBattleAnimation();
 
 
-};
+
 

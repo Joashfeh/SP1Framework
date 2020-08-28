@@ -24,6 +24,7 @@
 #include "updateGameOver.h"
 #include "updateInventory.h"
 #include "renderLevelTransition.h"
+#include "battleTransitionAnimation.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -210,12 +211,10 @@ void updateGame() {
             else if (!enemies[i]->inRange)
                 g_sChar.canBattle[i] = false;
 
-            if (g_skKeyEvent[K_SPACE].keyDown)
-            {
-                renderAnimation;
+            if (g_skKeyEvent[K_SPACE].keyDown) {
 
                 if (g_sChar.canBattle[i] == true) {
-                    g_eGameState = S_BATTLE;
+                    triggerBattleAnimation();
                     g_sChar.moving.UP = false;
                     g_sChar.moving.DOWN = false;
                     g_sChar.moving.LEFT = false;
@@ -338,8 +337,6 @@ void render()
         break;
     case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
         break;
-    case S_ANIMATION: // renderAnimation();
-        break;
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
 
@@ -385,6 +382,7 @@ void renderGame()
     renderCharacter(g_sChar, g_Console);  // renders the character into the buffer
     renderGameUI(g_Console, plr, map);
     renderLevelTransition(g_Console, g_eGameState, map);
+    battleTransitionAnimation(g_Console, g_dDeltaTime, g_eGameState);
 
     std::string message = "You have not defeated all the enemies!";
     if (showMessage == true)
