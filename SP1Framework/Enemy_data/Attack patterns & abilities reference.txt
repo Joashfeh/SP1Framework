@@ -7,13 +7,16 @@ Patterns (Attack AI)
 	attack points / total stats points
 
 3 | Chance of crit | Formula same as chance of attack
+4 | Overcharge: Sacrifice some health to boost attack | Random amount from 1 to enemy's max damage.
+5 | Independent Damage boost by doubling | Chance formula: 1 / Damage
 
 Abilities (Unique abiities AI can use in battle):
-1 | Damage | Crit (Chance of Double damage at certain percentage)
-2 | Defence | Block (Chance of Blocking out all damage at certain percentage)
-3 | Health | Regen Health (Healing)
+-1 | Damage | Crit (Chance of Double damage at certain percentage)
++2 | Defence | Block (Chance of Blocking out all damage at certain percentage)
++3 | Health | Regen Health (Healing)
 4 | Damage | Fire damage (Gives player fire effect that drains fixed amount of health for some turns)
 5 | Defence | Rechargeable Shield
-6 | Defence/Damage | Deflective Shield
++6 | Defence/Damage | Deflective Shield: Deflects half of damage player dishes out back to player.
 7 | Defence | Dodge chance. Dodge chance = Defence / Total stats points.
+8 | Attack | Overcharge: Sacrifice some health for extra damage.
 */
