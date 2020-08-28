@@ -335,7 +335,7 @@ void render()
         break;
     case S_INVENTORY: renderInventory(g_Console, plr, g_dDeltaTime);
         break;
-    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy);
+    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy, map.floor);
         break;
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
@@ -551,7 +551,7 @@ void spawnGoldCrate(Map& map) {
 
             if (map.display[y][x] == '9') {
                 crate = new goldCrate;
-                crate->gold = rand() % 100 + 100;
+                crate->gold = rand() % 50 + 50;
                 crate->pos.row = y;
                 crate->pos.col = x;
 

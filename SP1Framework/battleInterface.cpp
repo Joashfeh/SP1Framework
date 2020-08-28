@@ -79,25 +79,30 @@ void renderPlayerStats(Console& g_Console, Player& plr) {
     g_Console.writeToBuffer(outputCoord,  outputString.str());
 
     outputString.str("");
-    outputCoord.Y += 2;
+    outputCoord.Y += 1;
     outputString << "Attack : " << plr.Damage << " + " << plr.mainWeapon.dmg;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
     outputString.str("");
-    outputCoord.Y += 2;
+    outputCoord.Y += 1;
     outputString << "Defense : " << plr.Defense << " / " << plr.maxArmor;
+    g_Console.writeToBuffer(outputCoord, outputString.str());
+
+    outputString.str("");
+    outputCoord.Y += 2;
+    outputString << "Player";
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
 }
 
 void renderEnemyStats(Console& g_Console, Enemy& enemy) {
     COORD outputCoord;
-    outputCoord.X = 95;
+    outputCoord.X = 95 - 5;
     outputCoord.Y = 1;
 
-    displayBoxes(g_Console, outputCoord, 23, 7);
+    displayBoxes(g_Console, outputCoord, 23 + 5, 7);
 
-    outputCoord.X = 97;
+    outputCoord.X = 97 - 5;
     outputCoord.Y = 2;
 
     std::ostringstream outputString;
@@ -105,13 +110,18 @@ void renderEnemyStats(Console& g_Console, Enemy& enemy) {
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
     outputString.str("");
-    outputCoord.Y += 2;
+    outputCoord.Y += 1;
     outputString << "Attack : " << enemy.Damage;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
     outputString.str("");
-    outputCoord.Y += 2;
+    outputCoord.Y += 1;
     outputString << "Defense : " << enemy.Defense;
+    g_Console.writeToBuffer(outputCoord, outputString.str());
+
+    outputString.str("");
+    outputCoord.Y += 2;
+    outputString << "Name:" << enemy.enemy_name;
     g_Console.writeToBuffer(outputCoord, outputString.str());
 
 }

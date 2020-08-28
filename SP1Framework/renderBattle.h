@@ -8,4 +8,4 @@
 #include "Player.h"
 #include "renderEnemySprite.h"
 
-void renderBattle(double& g_dElapsedTime, Console& g_Console, Player& plr, Enemy& Enemy);
+void renderBattle(double& g_dElapsedTime, Console& g_Console, Player& plr, Enemy& Enemy, int level_here);
