@@ -2,20 +2,25 @@
 #include <fstream>
 #include "colours.h"
 
-void renderEnemySprite(Console& console, short x, short y, Enemy& enemy) {
+void renderEnemySprite(Console& console, short x, short y, Enemy& enemy, int turn_input) {
 	COORD c;
 	c.X = x;
 	c.Y = y;
 
-	renderEnemySprite(console, c, enemy);
+	renderEnemySprite(console, c, enemy, turn_input);
 }
 
-void renderEnemySprite(Console& console, COORD c, Enemy& enemy) {
+void renderEnemySprite(Console& console, COORD c, Enemy& enemy, int current_turn) {
 
 	int x = c.X;
 	int y = c.Y;
 
-	std::string spriteNo = "Sprite_data/Enemy2.txt";
+	//std::string spriteNo = "Sprite_data/Enemy2.txt";
+	std::string spriteNo = "Enemy_data/level_";
+	spriteNo += std::to_string(current_turn);
+	spriteNo += "/sprite_data/enemy_";
+	spriteNo += std::to_string(enemy.enemy_no);
+	spriteNo += ".txt";
 
 	std::ifstream spriteData(spriteNo, std::ios::in);
 	if (!spriteData)
