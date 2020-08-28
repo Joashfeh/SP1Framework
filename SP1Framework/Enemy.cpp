@@ -27,6 +27,8 @@ Enemy::Enemy()
 	special_defence = ' ';
 	heal_rate = 1;
 
+	boss = false;
+
 }
 
 void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
@@ -373,6 +375,11 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	}
 
 	total_stats_points = Damage + HP + Defense; // Sets total_stats_points
+
+	if (get_i == 2 && floor(level / 4) == 0)
+	{
+		boss = true;
+	}
 
 	enemyDataAbility.close();
 	enemyDataPattern.close();

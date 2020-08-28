@@ -18,6 +18,8 @@ void displayStats(Console& g_Console, Player& plr)
 	g_Console.writeToBuffer(7, 19, stats.str());
 	stats.str("");
 	stats << "Damage: " << plr.Damage << " + " << plr.mainWeapon.dmg;
+	stats.str("");
+	stats << "Skulls: " << plr.skulls;
 	g_Console.writeToBuffer(7, 21, stats.str());
 }
 

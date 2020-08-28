@@ -8,7 +8,7 @@ Player::Player() {
 	HP = 100;
 	Damage = 10;
 	Defense = 30;
-
+	skulls = 0;
 
 	isDefend = false;
 	gold = 0;
