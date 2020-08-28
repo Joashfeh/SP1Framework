@@ -16,9 +16,9 @@ void renderEnemySprite(Console& console, COORD c, Enemy& enemy, int current_leve
 	int y = c.Y;
 
 	//std::string spriteNo = "Sprite_data/Enemy2.txt";
-	std::string spriteNo = "Enemy_data/level_";
+	std::string spriteNo = "Sprite_Data/Enemy_Sprites/level_";
 	spriteNo += std::to_string(current_level);
-	spriteNo += "/sprite_data/enemy_";
+	spriteNo += "/enemy_";
 	spriteNo += std::to_string(enemy.enemy_no);
 	spriteNo += ".txt";
 
