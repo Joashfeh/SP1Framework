@@ -335,7 +335,7 @@ void render()
         break;
     case S_INVENTORY: renderInventory(g_Console, plr, g_dDeltaTime);
         break;
-    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy, battleTurn);
+    case S_BATTLE: renderBattle(g_dDeltaTime, g_Console, plr, *battleEnemy, map.floor);
         break;
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
