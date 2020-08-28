@@ -209,6 +209,8 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 Enemy Enemy::loadEnemy(int level, int get_i)
 {
+	srand(time(0)); // Generate a random number less than MSP for deciding chance for every turn.
+
 	string enemyDir;
 	enemyDir = "Enemy_Data/level_";
 	enemyDir += to_string(level);
@@ -330,14 +332,21 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		line_no++;
 		if (line_no == get_i + 1)
 		{
-			pattern_selection = stoi(enemyset);
+			if (enemyset == "random")
+			{
+				pattern_selection = rand() % 6;
+			}
+			else
+			{
+				pattern_selection = stoi(enemyset);
+			}
 		}
 	}
 
 	// Set Ability_Selection //
 
 	string enemyDirAbility = enemyDir;
-	enemyDirAbility += "/defence_data.txt";
+	enemyDirAbility += "/ability_data.txt";
 
 
 	// Open the file
@@ -352,7 +361,11 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 	while (line_no != get_i + 1 && getline(enemyDataAbility, enemyset))
 	{
 		line_no++;
-		if (line_no == get_i + 1)
+		if (enemyset == "random")
+		{
+			ability_selection = rand() % 5;
+		}
+		else
 		{
 			ability_selection = stoi(enemyset);
 		}
