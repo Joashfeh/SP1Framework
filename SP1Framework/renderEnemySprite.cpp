@@ -15,7 +15,7 @@ void renderEnemySprite(Console& console, COORD c, Enemy& enemy) {
 	int x = c.X;
 	int y = c.Y;
 
-	std::string spriteNo = "Sprite_data/Enemy.txt";
+	std::string spriteNo = "Sprite_data/Enemy2.txt";
 
 	std::ifstream spriteData(spriteNo, std::ios::in);
 	if (!spriteData)
@@ -23,11 +23,11 @@ void renderEnemySprite(Console& console, COORD c, Enemy& enemy) {
 
 	COLOURS outputColour = enemy.renderColour;
 
-	for (int row = 7; row >= 0; row--) {
+	for (int row = 15; row >= 0; row--) {
 		std::string outputString;
 		std::getline(spriteData, outputString);
 
-		for (int col = 7; col >= 0; col--) {
+		for (int col = 15; col >= 0; col--) {
 
 			switch (outputString[col]) {
 			case '0':
