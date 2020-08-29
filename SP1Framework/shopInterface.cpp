@@ -195,9 +195,9 @@ void confirmationBox(Console& g_Console) {
 void rejectionBox(Console& g_Console)
 {
     displayBoxes(g_Console, 52, 16, 20, 8);
-    g_Console.writeToBuffer(53, 17, "Insufficient money");
+    g_Console.writeToBuffer(53, 17, "Insufficient costs");
     g_Console.writeToBuffer(53, 18, "Come back when you");
-    g_Console.writeToBuffer(53, 19, "have enough money.");
+    g_Console.writeToBuffer(53, 19, "have enough.");
     g_Console.writeToBuffer(61, 21, "OK");
 }
 
