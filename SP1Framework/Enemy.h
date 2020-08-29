@@ -16,7 +16,6 @@ public:
 	int ability_selection;
 	int heal_rate; // Used for ability 5
 	int enemy_no;
-	bool boss;
 
 	int enemyType;
 

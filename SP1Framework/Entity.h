@@ -16,6 +16,10 @@ public:
 	int      total_stats_points;
 	char     special_defence; // For enemies only
 
+	int total_stats_points;
+	bool boss;
+	char special_defence; // For enemies only
+
 	Entity();
 	~Entity();
 	virtual void Attack(Entity* ptrEntity, Console& g_Console, int turn) = 0;
