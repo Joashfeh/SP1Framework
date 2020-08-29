@@ -38,7 +38,7 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 	float damage = this->Damage;
 	//### SWITCH CASES FOR PATTERNS AND ABILITIES ###
 
-	srand(time(0)); // Generate a random number less than MSP for deciding chance for every turn.
+	//srand(time(0)); // Generate a random number less than MSP for deciding chance for every turn.
 	float chance = rand() % total_stats_points;
 
 	int damage_boost;
@@ -392,9 +392,19 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 
 	total_stats_points = Damage + HP + Defense; // Sets total_stats_points
 
-	if (get_i == 2 && floor(level / 4) == 0)
+	if (get_i == 2)
 	{
-		boss = true;
+		switch (level)
+		{
+		case 4:
+			boss = true;
+		case 8:
+			boss = true;
+		case 12:
+			boss = true;
+		default:
+			boss = false;
+		}
 	}
 
 	enemyDataAbility.close();
