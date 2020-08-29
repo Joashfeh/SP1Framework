@@ -3,7 +3,7 @@
 #include <string>
 
 void renderVictoryScreen(Console& g_Console) {
-	std::string VictoryData = "renderVictory_data/Victory_screen.txt";
+	std::string VictoryData = "VictoryScreen_data/Victory_screen.txt";
 
 	// Open file
 	std::ifstream VictoryScreen(VictoryData, std::ios::in);
