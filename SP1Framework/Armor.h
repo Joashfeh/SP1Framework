@@ -9,6 +9,7 @@ public:
     int defence;
     int armorHealth;
     int cost;
+    int skull_cost;
 
     Armor();
     Armor(int id);

@@ -109,9 +109,21 @@ void renderShopinterface(Console& g_Console, Player& plr) {
 
     //display the player's gold
     std::string gold_output = std::to_string(plr.gold);
-    displayBoxes(g_Console, 6, 2, 20, 4);
+    std::string skull_output = std::to_string(plr.skulls);
+    displayBoxes(g_Console, 6, 2, 20, 6);
     g_Console.writeToBuffer(7, 3, "Gold:");
     g_Console.writeToBuffer(7, 4, gold_output);
+    g_Console.writeToBuffer(7, 5, "Skulls:");
+    g_Console.writeToBuffer(7, 6, skull_output);
+
+    //display note for skull usage
+    displayBoxes(g_Console, 94, 1, 23, 8);
+    g_Console.writeToBuffer(95, 2, "Note: The second ");
+    g_Console.writeToBuffer(95, 3, "to last and ");
+    g_Console.writeToBuffer(95, 4, "last weapon and armor");
+    g_Console.writeToBuffer(95, 5, "requires one skull");
+    g_Console.writeToBuffer(95, 6, "and two skulls.");
+    g_Console.writeToBuffer(95, 7, "respectively.");
 
 }
 

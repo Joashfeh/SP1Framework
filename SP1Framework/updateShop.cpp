@@ -60,29 +60,35 @@ void checkYesButton(SMouseEvent& g_mouseEvent, Player& plr)
         ConfirmationBox::yes = false;
         for (int i = 0; i < 8; i++) {
             if (ConfirmationBox::itemToBuy[i] == true) {
-                if (checkGold(i, plr) == true) {
-                    if (i < 5) {//if weapon load weapon
-                        plr.mainWeapon.loadWeapon(i + 1);
-                        ConfirmationBox::itemBought[0] = true;
+                if (checkSkulls(i, plr) == true)
+                {
+                    if (checkGold(i, plr) == true)
+                    {
+                        if (i < 5) {//if weapon load weapon
+                            plr.mainWeapon.loadWeapon(i + 1);
+                            ConfirmationBox::itemBought[0] = true;
+                        }
+                        else
+                        {//if armor load armor
+                            plr.mainArmor.loadArmor(i - 4);
+                            if (plr.HP <= 100) {
+                                plr.HP += plr.mainArmor.armorHealth;
+                            }
+                            else if (plr.HP > 100) {
+                                plr.HP = 100 + plr.mainArmor.armorHealth;
+                            }
+                            if (plr.Defense <= 30) {
+                                plr.Defense += plr.mainArmor.defence;
+                            }
+                            else if (plr.Defense > 30) {
+                                plr.Defense = 30 + plr.mainArmor.defence;
+                            }
+                            plr.equipArmor();
+                            ConfirmationBox::itemBought[1] = true;
+                        }
                     }
                     else
-                    {//if armor load armor
-                        plr.mainArmor.loadArmor(i - 4);
-                        if (plr.HP <= 100) {
-                            plr.HP += plr.mainArmor.armorHealth;
-                        }
-                        else if (plr.HP > 100) {
-                            plr.HP = 100 + plr.mainArmor.armorHealth;
-                        }
-                        if (plr.Defense <= 30) {
-                            plr.Defense += plr.mainArmor.defence;
-                        }
-                        else if (plr.Defense > 30) {
-                            plr.Defense = 30 + plr.mainArmor.defence;
-                        }
-                        plr.equipArmor();
-                        ConfirmationBox::itemBought[1] = true;
-                    }
+                        ConfirmationBox::rejection = true;
                 }
                 else
                     ConfirmationBox::rejection = true;
@@ -115,6 +121,33 @@ bool checkGold(int ID, Player& plr)
         if (plr.gold >= toBuy.cost)
         {
             plr.gold -= toBuy.cost;
+            return true;
+        }
+        else
+            return false;
+    }
+}
+
+bool checkSkulls(int ID, Player& plr)
+{
+    if (ID < 5)
+    {
+        Weapon toBuy(ID + 1);
+        if (plr.skulls >= toBuy.skull_cost)
+        {
+            plr.skulls -= toBuy.skull_cost;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    else
+    {
+        Armor toBuy(ID - 4);
+        if (plr.skulls >= toBuy.skull_cost)
+        {
+            plr.skulls -= toBuy.skull_cost;
             return true;
         }
         else

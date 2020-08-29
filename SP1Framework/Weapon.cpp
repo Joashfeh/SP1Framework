@@ -8,6 +8,7 @@ Weapon::Weapon()
 	crit = 0;
 	cost = 0;
 	id = 0;
+	skull_cost = 0;
 }
 
 Weapon::Weapon(int id) {
@@ -46,6 +47,9 @@ void Weapon::loadWeapon(int id) {
 			break;
 		case 3:
 			crit = stoi(a);
+			break;
+		case 4:
+			skull_cost = stoi(a);
 			break;
 		}	
 	}

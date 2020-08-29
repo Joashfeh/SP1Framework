@@ -11,6 +11,7 @@ public:
     int dmg;
     int cost;
     int crit;
+    int skull_cost;
 
     Weapon();
     Weapon(int id);

@@ -2,3 +2,4 @@ Heavy Armor
 75
 25
 150
+1

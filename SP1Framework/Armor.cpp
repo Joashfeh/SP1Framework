@@ -8,6 +8,7 @@ Armor::Armor()
 	armorHealth = 0;
 	cost = 0;
 	id = 0;
+	skull_cost = 0;
 }
 
 Armor::Armor(int id)
@@ -51,6 +52,9 @@ void Armor::loadArmor(int id) {
 			break;
 		case 3:
 			cost = stoi(a);
+			break;
+		case 4:
+			skull_cost = stoi(a);
 			break;
 		}
 	}
