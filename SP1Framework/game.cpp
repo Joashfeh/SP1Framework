@@ -25,6 +25,7 @@
 #include "updateInventory.h"
 #include "renderLevelTransition.h"
 #include "battleTransitionAnimation.h"
+#include "RenderVictoryScreen.h"
 
 double  g_dElapsedTime;
 double  g_dDeltaTime;
@@ -274,7 +275,7 @@ void updateGame() {
 
    
     if (map.floor == 13)
-        g_eGameState = S_FINISH;
+        g_eGameState = S_VICTORY;
 
     processUserInput(); // checks if you should change states or do something else with the game, e.g. pause, exit
     moveCharacter();    // moves the character, collision detection, physics, etc
@@ -339,6 +340,7 @@ void render()
         break;
     case S_GAMEOVER: renderGameOver(g_Console);
         break;
+    case S_VICTORY: renderVictoryScreen(g_Console);
 
     }
     renderFramerate();      // renders debug information, frame rate, elapsed time, etc

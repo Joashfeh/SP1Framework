@@ -87,6 +87,7 @@
     <ClCompile Include="renderGameUI.cpp" />
     <ClCompile Include="renderLevelTransition.cpp" />
     <ClCompile Include="renderShop.cpp" />
+    <ClCompile Include="RenderVictoryScreen.cpp" />
     <ClCompile Include="updateBattle.cpp" />
     <ClCompile Include="battleInterface.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="renderGameOver.h" />
     <ClInclude Include="renderLevelTransition.h" />
     <ClInclude Include="renderShop.h" />
+    <ClInclude Include="RenderVictoryScreen.h" />
     <ClInclude Include="updateBattle.h" />
     <ClInclude Include="battleInterface.h" />
     <ClInclude Include="colours.h" />
