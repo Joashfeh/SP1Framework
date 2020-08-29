@@ -54,7 +54,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void ) {
 
-    generateMap(map, plr, enemies, crate, 1);
+    generateMap(map, plr, enemies, crate, 12);
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
