@@ -18,58 +18,14 @@ void Player::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 
 	int damage = this->Damage + mainWeapon.dmg;
 
-	srand(time(0));
-
 	int chance;
 
 	if (ptrEntity->Defense == 0)
 		ptrEntity->HP -= damage;
 
 	if (ptrEntity->Defense != 0) {
-		switch (ptrEntity->special_defence)
-		{
-		case 'F': // Full block
-			chance = floor(rand() % ptrEntity->total_stats_points);
-			if (chance <= ptrEntity->Defense)
-			{
-				ptrEntity->HP -= 0;
-				ptrEntity->Defense -= damage * 0.5;
-			}
-			else
-			{
-				// Block did not occur
-				ptrEntity->HP -= damage * 0.5;
-				ptrEntity->Defense -= damage * 0.5;
-			}
-			break;
-		case 'D': // Deflective block
-			if (ptrEntity->Defense >= 10 && ptrEntity->Defense < 100) // 25% deflect
-			{
-				ptrEntity->HP -= damage * 0.5;
-				ptrEntity->Defense -= damage * 0.5;
-
-				HP -= floor(damage * (1 / 4));
-			}
-
-			else if (ptrEntity->Defense >= 100 && ptrEntity->Defense < 1000) // 50% deflect | Update: Nerfed to 33% for balance
-			{
-				ptrEntity->HP -= damage * 0.5;
-				ptrEntity->Defense -= damage * 0.5;
-
-				HP -= floor(damage * (1 / 3));
-			}
-
-			else
-			{
-				// 'D' block not applied when out of range.
-				ptrEntity->HP -= damage * 0.5;
-				ptrEntity->Defense -= damage * 0.5;
-			}
-		default:
-			ptrEntity->HP -= damage * 0.5;
-			ptrEntity->Defense -= damage * 0.5;
-			break;
-		}
+		ptrEntity->HP -= damage * 0.5;
+		ptrEntity->Defense -= damage * 0.5;
 	}
 
 	if (ptrEntity->Defense < 0)

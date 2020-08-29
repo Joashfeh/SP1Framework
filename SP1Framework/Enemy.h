@@ -12,11 +12,7 @@ public:
 	//const int enemycount = 3; // Max 3 mobs per level <- should be static
 	static int enemyCount;
 	bool inRange;
-	int pattern_selection;
-	int ability_selection;
-	int heal_rate; // Used for ability 5
 	int enemy_no;
-
 	int enemyType;
 
 	Enemy();
