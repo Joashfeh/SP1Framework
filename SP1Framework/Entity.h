@@ -15,7 +15,9 @@ public:
 
 	int      total_stats_points;
 	char     special_defence; // For enemies only
+
 	bool     boss;
+
 
 	Entity();
 	~Entity();
