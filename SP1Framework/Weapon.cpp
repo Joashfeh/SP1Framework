@@ -31,7 +31,7 @@ void Weapon::loadWeapon(int id) {
 	if (!weaponData)
 		return;
 
-	for (int i = 0; i < 4; i++) { 
+	for (int i = 0; i < 5; i++) { 
 		std::string a;
 		std::getline(weaponData, a);
 

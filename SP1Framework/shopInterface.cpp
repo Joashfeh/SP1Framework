@@ -116,14 +116,6 @@ void renderShopinterface(Console& g_Console, Player& plr) {
     g_Console.writeToBuffer(7, 5, "Skulls:");
     g_Console.writeToBuffer(7, 6, skull_output);
 
-    //display note for skull usage
-    displayBoxes(g_Console, 94, 1, 23, 8);
-    g_Console.writeToBuffer(95, 2, "Note: The second ");
-    g_Console.writeToBuffer(95, 3, "to last and ");
-    g_Console.writeToBuffer(95, 4, "last weapon and armor");
-    g_Console.writeToBuffer(95, 5, "requires one skull");
-    g_Console.writeToBuffer(95, 6, "and two skulls.");
-    g_Console.writeToBuffer(95, 7, "respectively.");
 
 }
 
@@ -134,6 +126,11 @@ void insertWeapon(Console& g_Console, int x, int y, Weapon weapon) {
     g_Console.writeToBuffer(x, y, weapon.name);//put name of weapon
     g_Console.writeToBuffer(34, y, ss.str());//put cost beside it
     g_Console.writeToBuffer(39, y, "Gold");//put "Gold" as currency
+
+    ss.str("");
+    ss << weapon.skull_cost;
+    g_Console.writeToBuffer(34, y + 1, ss.str());
+    g_Console.writeToBuffer(39, y + 1, "Skulls");
 
     //getting damage and displaying it
     ss.str("");
