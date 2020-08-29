@@ -412,12 +412,16 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		{
 		case 4:
 			boss = true;
+			break;
 		case 8:
 			boss = true;
+			break;
 		case 12:
 			boss = true;
+			break;
 		default:
 			boss = false;
+			break;
 		}
 	}
 
