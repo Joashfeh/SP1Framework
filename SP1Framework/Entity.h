@@ -14,6 +14,7 @@ public:
 	int gold;
 
 	int total_stats_points;
+	bool boss;
 	char special_defence; // For enemies only
 
 	Entity();
