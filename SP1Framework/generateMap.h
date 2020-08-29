@@ -5,8 +5,10 @@
 #include "Position.h"
 
 struct goldCrate {
+
 	Position pos;
-	int gold;
+	int      gold;
+
 };
 
 void generateMap(Map& map, Player& plr, Enemy* enemies[], goldCrate* crate, int floor); // init map for level, player spawnpoint on the map

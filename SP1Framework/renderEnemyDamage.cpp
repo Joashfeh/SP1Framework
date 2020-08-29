@@ -1,9 +1,9 @@
 #pragma once
 #include "renderEnemyDamage.h"
 
-int g_iEnemyCurrentFrame{ 0 };
+int        g_iEnemyCurrentFrame{ 0 };
 static int g_iEnemyFrameNumber{ 0 };
-int g_iEnemyMaxFrames{ 0 };
+int        g_iEnemyMaxFrames{ 0 };
 
 //Trigger
 bool g_bIsRenderDamageEnemy{ false };

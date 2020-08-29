@@ -6,12 +6,15 @@
 class Entity
 {
 public:
-	COLOURS renderColour;
-
-	int HP, Damage, Defense;
-	double frameTimer;
+	COLOURS  renderColour;
 	Position Pos;
-	int gold;
+
+	int      HP, Damage, Defense;
+	int      gold;
+	double   frameTimer;
+
+	int      total_stats_points;
+	char     special_defence; // For enemies only
 
 	int total_stats_points;
 	bool boss;

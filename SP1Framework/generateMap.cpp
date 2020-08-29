@@ -58,14 +58,11 @@ void spawnEnemies(Map& map, Enemy* arr[]) {
             else if (map.display[y][x] == '9') {
                 arr[i]->Pos.row = y;
                 arr[i]->Pos.col = x;
+                map.display[y][x] = '3';
             }
         }
         break;
     
-    }
-
-    for (int i = 0; i < 3; i++) {
-        map.display[arr[i]->Pos.row][arr[i]->Pos.col] = '3';
     }
     
 
@@ -89,5 +86,10 @@ void generateMap(Map& map, Player& plr, Enemy* enemies[], goldCrate* crate, int 
 
 	map.generateDungeon(floor, floorType);
     spawnEnemies(map, enemies);
+
+    for (int i = 0; i < 3; i++) {
+        map.display[enemies[i]->Pos.row][enemies[i]->Pos.col] = '3';
+    }
+
 	plr.spawn(&map);
 }

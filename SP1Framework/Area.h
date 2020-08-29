@@ -3,8 +3,8 @@
 
 class Area {
 public:
-	char area[16][16];
 	unsigned short flags;
+	char           area[16][16];
 
 	Area();
 	Area(unsigned short flags, int doorSize, int roomType);
