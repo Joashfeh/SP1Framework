@@ -36,13 +36,15 @@ SKeyEvent g_skKeyEvent[K_COUNT];
 SMouseEvent g_mouseEvent;
 
 // Game specific variables here
-Map map;
+Map    map;
 Player plr;
-Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 
+Enemy* enemies[3] = { nullptr, nullptr, nullptr };
 Enemy* battleEnemy = nullptr;
+
 goldCrate* crate = nullptr;
-int battleTurn = 1;
+
+int  battleTurn = 1;
 bool showMessage;
 
 SGameChar   g_sChar;
@@ -53,7 +55,7 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void ) {
 
-    generateMap(map, plr, enemies, crate, 1);
+    generateMap(map, plr, enemies, crate, 12);
 
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    

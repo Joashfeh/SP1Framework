@@ -206,36 +206,35 @@ void Enemy::Attack(Entity* ptrEntity, Console& g_Console, int turn) {
 		}
 
 		//### END OF SWITCH CASES ###
-
-		if (attack_check)
-		{
-			if (((Player*)ptrEntity)->isDefend) {
-				damage = (float)damage;
-				damage *= 0.7;
-				damage = (int)damage;
-			}
-
-			if (ptrEntity->Defense == 0)
-				ptrEntity->HP -= damage;
-
-			if (ptrEntity->Defense != 0) {
-				//ptrEntity->HP -= floor(damage / ptrEntity->Defense);
-				ptrEntity->Defense -= damage;
-			}
-
-			if (ptrEntity->Defense < 0)
-				ptrEntity->Defense = 0;
-
-			if (ptrEntity->HP < 0)
-				ptrEntity->HP = 0;
-
-			triggerRenderPlayerDamage();
+	}
+	if (attack_check)
+	{
+		if (((Player*)ptrEntity)->isDefend) {
+			damage = (float)damage;
+			damage *= 0.7;
+			damage = (int)damage;
 		}
 
-		else
-		{
-			//NA
+		if (ptrEntity->Defense == 0)
+			ptrEntity->HP -= damage;
+
+		if (ptrEntity->Defense != 0) {
+			//ptrEntity->HP -= floor(damage / ptrEntity->Defense);
+			ptrEntity->Defense -= damage;
 		}
+
+		if (ptrEntity->Defense < 0)
+			ptrEntity->Defense = 0;
+
+		if (ptrEntity->HP < 0)
+			ptrEntity->HP = 0;
+
+		triggerRenderPlayerDamage();
+	}
+
+	else
+	{
+		//NA
 	}
 
 }
@@ -413,12 +412,16 @@ Enemy Enemy::loadEnemy(int level, int get_i)
 		{
 		case 4:
 			boss = true;
+			break;
 		case 8:
 			boss = true;
+			break;
 		case 12:
 			boss = true;
+			break;
 		default:
 			boss = false;
+			break;
 		}
 	}
 

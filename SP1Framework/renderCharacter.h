@@ -13,11 +13,11 @@ struct DIRECTION {
 // struct for the game character
 struct SGameChar
 {
-    COORD m_cLocation;
+    COORD     m_cLocation;
     DIRECTION moving;
-    double frameTimer;
-    bool  canMove;
-    bool  canBattle[3];
+    double    frameTimer;
+    bool      canMove;
+    bool      canBattle[3];
 };
 
 void renderCharacter(SGameChar& g_sChar, Console& g_Console);     // renders the character into the buffer
