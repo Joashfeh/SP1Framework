@@ -154,6 +154,11 @@ void insertArmour(Console& g_Console, int x, int y, Armor armor) {
     g_Console.writeToBuffer(95, y, ss.str());
     g_Console.writeToBuffer(100, y, "Gold");
 
+    ss.str("");
+    ss << armor.skull_cost;
+    g_Console.writeToBuffer(95, y + 1, ss.str());
+    g_Console.writeToBuffer(100, y + 1, "Skulls");
+
     //getting armour health and displaying it
     ss.str("");
     ss << armor.armorHealth;

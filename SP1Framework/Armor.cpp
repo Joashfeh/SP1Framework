@@ -36,7 +36,7 @@ void Armor::loadArmor(int id) {
 	if (!armorData)
 		return;
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		std::string a;
 		std::getline(armorData, a);
 
