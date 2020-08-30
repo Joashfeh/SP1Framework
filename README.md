@@ -1,4 +1,4 @@
-Calender
+Calendar
 ============
 done by Team 16
 
