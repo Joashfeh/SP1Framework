@@ -56,11 +56,9 @@ Console g_Console(120, 40, "SP1 Framework");
 
 void init( void ) {
 
-    generateMap(map, plr, enemies, crate, 12);
+    generateMap(map, plr, enemies, crate, 1);
     // Set precision for floating point output
     g_dElapsedTime = 0.0;    
-    plr.gold = 10000;
-    plr.skulls = 100;
 
     // sets the initial state for the game
     g_eGameState = S_MAINSCREEN;
@@ -347,7 +345,7 @@ void render()
     case S_VICTORY: renderVictoryScreen(g_Console);
 
     }
-    renderFramerate();      // renders debug information, frame rate, elapsed time, etc
+    // renderFramerate();      // renders debug information, frame rate, elapsed time, etc
     // renderInputEvents();    // renders status of input events
     renderToScreen();       // dump the contents of the buffer to the screen, one frame worth of game
 }
