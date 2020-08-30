@@ -29,7 +29,7 @@ void updateBattle(Console& g_Console, SMouseEvent& g_mouseEvent, EGAMESTATES& g_
 	if (enemy.HP == 0) {
 		turn = 1;
 		plr.gold += (5 * map.floor);
-		if (enemy.boss) { plr.skulls += 1; }
+		if (enemy.boss) { plr.skulls += 2; }
 		g_eGameState = S_GAME;
 	}
 
