@@ -63,7 +63,7 @@ void init( void ) {
     plr.skulls = 100;
 
     // sets the initial state for the game
-    g_eGameState = S_VICTORY;
+    g_eGameState = S_MAINSCREEN;
 
     showMessage = false;
 
